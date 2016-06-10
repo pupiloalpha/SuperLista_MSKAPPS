@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings basicas do Aplicativo -->
+
+    <string name="app_name">Super List</string>
+    <string name="icon">icone</string>
+    <string name="boas_vindas">Create e share by e-mail or message your lists of supermarket, presents, school objects, tasks and priorities!</string>
+
+    <!-- Strings de botoes do Aplicativo -->
+
+    <string name="cria_lista">ADD LIST</string>
+    <string name="minha_lista">MIY LIST</string>
+    <string name="item_altera">SAVE </string>
+    <string name="item_falta">Done</string>
+    <string name="item_peguei">Undone</string>
+    <string name="dica_salvar">EDIT </string>
+    <string name="dica_cancela">CANCEL</string>
+
+    <!-- Strings de alarmes do Aplicativo -->
+
+    <string name="dica_calendario">Add to calendar</string>
+    <string name="dica_repetir">Repeat remind</string>
+    <string name="intervalo_alarme">Interval</string>
+    <string name="dica_dia_alarme">%1$s/%2$s/%3$s</string>
+    <string name="dica_horario_alarme">%1$s:%2$s</string>
+    <string name="dica_intervalo_alarme">00</string>
+
+    <!-- Strings de preenchimento do Aplicativo -->
+
+    <string name="nome_lista">Name of List</string>
+    <string name="listas">My Lists</string>
+    <string name="dica_cria_lista">Create List</string>
+    <string name="dica_edita_item">Edit Item</string>
+    <string name="dica_exclui_item">Delete Item</string>
+    <string name="item">New item of list</string>
+    <string name="dica">Choose a category</string>
+    <string name="quantidade">Quantity</string>
+    <string name="info">Details of item</string>
+    <string name="valor">Value in $</string>
+    <string name="dica_lista">List of Items:</string>
+    <string name="dica_zero">$ 0.00</string>
+    <string name="dica_unid">01 unit</string>
+    <string name="outro_item">Enter name of item</string>
+    <string name="descricao_item">Enter details of item</string>
+    <string name="lista">Enter name of List</string>
+    <string name="sem_lista">None list created</string>
+    <string name="sem_itens">None item added</string>
+    <string name="cesta_vazia">None item in list</string>
+    <string name="categoria">New Category</string>
+
+    <!-- Strings de orientacao do Aplicativo -->
+
+    <string name="itens_adicionados">Items added to your list</string>
+    <string name="dica_item_novo">Item %1$s add to list.</string>
+    <string name="dica_item_existente">Item %1$s was added to list.</string>
+    <string name="dica_item_removido">Item %1$s removed of list.</string>
+    <string name="dica_item_modificado">Item %1$s modified.</string>
+    <string name="dica_item_na_cesta">Item %1$s put in basket.</string>
+    <string name="dica_item_fora_cesta">Item %1$s put out of cesta.</string>
+    <string name="dica_lista_removida">Lista %1$s was removed.</string>
+    <string name="info_item">Details of %1$s</string>
+    <string name="info_valor_item">Total to pay: R$ %1$s</string>
+    <string name="dica_valor_lista">$ %1$s</string>
+
+    <!-- Strings de dialogos no Aplicativo -->
+
+    <string name="titulo_edita_nome">Edit name of list?</string>
+    <string name="texto_edita_nome">Enter name of list</string>
+    <string name="titulo_nome_item">Edit name of item?</string>
+    <string name="texto_edita_item">Enter name of item</string>
+    <string name="titulo_recupera_lista">Refresh list?</string>
+    <string name="texto_recupera_lista">Get back used items in list again?</string>
+    <string name="ok">OK</string>
+    <string name="compartilhar">Enviar lista %1$s via:</string>
+    <string name="texto_sobre">The Super List application was created to make easy the development list of shopping, gifts, tasks and priorities. All lists are created and saved in the device for editing and sending at any time. Do not waste your good ideas, keep everything in the cell and organize your day. You can use the phone or send to anyone you want. Your lists will be sent by email or text message. Share your lists with anyone. Back up the lists on the SD Card. Create and edit all kinds of list.\n\nSupport all Android versions.\n\nFeatures:\n Allows you to create lists with all kinds of content and purpose;\n- Items organized into categories for ease of use;\n- Edit the list and the items at any time,\n- Deleting all lists at once;\n- Backup of lists in SD card;\n- Navigation menu;\n- Learn the value of items you\'ve picked up on time;\n- Choose to keep or delete a list after use;\n- Place the list item in mobile calendar;\n- translated into Spanish and English;\n- Edit the list while you are using;\n- Create copies of the lists already created earlier;\n- Modify your list when you need to without having to give many taps on the screen;\n- Keep the list or pressed item and open a new menu options.\n\nIdealizedo by Flavia Borges Mesquita and developed by Paulo ES Mesquita\n\nBased in tutorials from the internet and other such applications\nVersion:%1$s\nContato: mskapps.brazil@gmail.com</string>
+    <string name="titulo_apaga_tudo">Delete all lists?</string>
+    <string name="texto_apaga_tudo">You want delete all created lists?</string>
+    <string name="cancelar">Cancelar</string>
+
+
+    <!-- Strings do Menu do Aplicativo -->
+
+    <string name="menu_ajustes">Settings</string>
+    <string name="menu_sobre">About</string>
+    <string name="menu_ajuda">Learn to use</string>
+    <string name="menu_sair">Finish</string>
+    <string name="menu_editar">Edit list</string>
+    <string name="menu_enviar">Send list</string>
+    <string name="menu_excluir">Delete list</string>
+    <string name="menu_copiar">Make copy</string>
+    <string name="menu_lembrete">Add remind</string>
+    <string name="menu_novo">Add item</string>
+    <string name="menu_refazer">Refresh list</string>
+    <string name="menu_renomear">Rename list</string>
+
+    <!-- Strings de Notificacoes do Aplicativo -->
+
+    <string name="dica_copia_bd">Cópia realizada com sucesso!</string>
+    <string name="dica_exclusao_bd">All lists was deteled!</string>
+    <string name="dica_restaura_bd">Restoration successfully made!</string>
+
+    <!-- Strings do Menu de Ajustes -->
+
+
+    <!-- Ajustes Gerais -->
+
+    <string name="pref_categoria_geral_key">geral</string>
+    <string name="pref_titulo_geral">General settings</string>
+    <string name="pref_titulo_cesta">Delete list after use</string>
+    <string name="pref_descricao_cesta">Delete the list after get all items</string>
+    <string name="pref_descricao_lista">Keep the list after get all items</string>
+    <string name="pref_key_cesta">cesta</string>
+
+    <!-- Ajustes BackUp -->
+
+    <string name="pref_categoria_bkup_restaura_key">bkuprest</string>
+    <string name="pref_titulo_bkup_restaura">Backup e Restoration</string>
+    <string name="pref_titulo_auto_bkup">Automatic Backup </string>
+    <string name="pref_descricao_auto_bkup_sim">Make backup of lists always then close app</string>
+    <string name="pref_descricao_auto_bkup_nao">Make backup of lists when close</string>
+    <string name="pref_key_auto_bkup">autobackup</string>
+    <string name="pref_titulo_bkup">Make backup of lists</string>
+    <string name="pref_descricao_bkup">Backup of lists in SD card</string>
+    <string name="pref_key_bkup">backup</string>
+    <string name="pref_titulo_restaura">Restore saved lists</string>
+    <string name="pref_descricao_restaura">Restore backup from SD card</string>
+    <string name="pref_key_restaura">restaura</string>
+
+    <!-- Ajustes APAGATUDO -->
+
+    <string name="pref_categoria_apagatudo_key">apagatudomesmo</string>
+    <string name="pref_titulo_apagatudo">Delete all lists</string>
+    <string name="pref_descricao_apagatudo">Delete all created lists in app</string>
+    <string name="pref_key_apagatudo">apagatudo</string>
+
+    <!-- Ajustes Informacoes do Aplicativo -->
+
+    <string name="pref_categoria_info_key">info</string>
+    <string name="pref_titulo_categoria_info">About the app</string>
+    <string name="pref_titulo_autor">Developer</string>
+    <string name="pref_descricao_autor">Paulo E S Mesquita</string>
+    <string name="pref_key_autor">dev</string>
+    <string name="pref_titulo_versao">App version</string>
+    <string name="pref_descricao_versao">Version: %1$s</string>
+    <string name="pref_key_versao">versao</string>
+
+
+</resources>

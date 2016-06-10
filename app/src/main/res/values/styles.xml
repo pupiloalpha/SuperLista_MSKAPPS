@@ -1,0 +1,58 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- Tema das caixas de diálogos -->
+    <style name="TemaDialogo" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+    </style>
+
+    <!-- Tema das telas do aplicativo -->
+    <style name="TemaNovo" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/azul_escuro</item>
+        <item name="colorPrimaryDark">@color/preto</item>
+        <item name="colorAccent">@color/azul_escuro</item>
+    </style>
+
+    <!-- Tema das telas do aplicativo -->
+    <style name="TemaTabs" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/azul_escuro</item>
+        <item name="colorPrimaryDark">@color/preto</item>
+        <item name="colorAccent">@color/branco</item>
+        <item name="actionBarTabStyle">@style/ActionBarTab</item>
+        <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
+    </style>
+    <!-- ActionBar tabs styles -->
+    <style name="ActionBarTab" parent="@style/Widget.AppCompat.ActionBar.TabView">
+        <!-- tab background -->
+        <item name="colorAccent">@color/branco</item>
+    </style>
+
+    <!-- Actionbat tab text size -->
+    <style name="ActionBarTabText" parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_color_tab</item>
+
+    </style>
+
+    <!-- Tema da splash screen -->
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
+</resources>

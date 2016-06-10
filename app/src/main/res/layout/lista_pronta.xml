@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="5.0dip">
+
+        <TextView
+            android:id="@+id/tvcategoria"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center_horizontal"
+            android:text="@string/dica"
+            android:textAppearance="?android:attr/textAppearance" />
+
+        <Spinner
+            android:id="@+id/spCategorias"
+            android:layout_width="fill_parent"
+            android:layout_height="54dp"
+            android:entries="@array/ListaCategoria"
+            android:prompt="@string/dica" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="1.0dp"
+            android:background="@color/azul" />
+
+        <ListView
+            android:id="@+id/lvItensLista"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

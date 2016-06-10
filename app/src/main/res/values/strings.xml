@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings basicas do Aplicativo -->
+
+    <string name="app_name">Super Lista</string>
+    <string name="icon">icone</string>
+    <string name="boas_vindas">Crie e compartilhe por e-mail ou mensagem suas listas de supermercado, presentes, material escolar, tarefas e prioridades!</string>
+
+    <!-- Strings de botoes do Aplicativo -->
+
+    <string name="cria_lista">CRIAR LISTA</string>
+    <string name="minha_lista">MINHAS LISTAS</string>
+    <string name="item_altera">SALVAR </string>
+    <string name="item_falta">Falta Pegar</string>
+    <string name="item_peguei">Já Peguei</string>
+    <string name="dica_salvar">ALTERAR </string>
+    <string name="dica_cancela">CANCELAR</string>
+
+    <!-- Strings de alarmes do Aplicativo -->
+
+    <string name="dica_calendario">Adicionar ao calendário</string>
+    <string name="dica_repetir">Repetir lembrete</string>
+    <string name="intervalo_alarme">Intervalo</string>
+    <string name="dica_dia_alarme">%1$s/%2$s/%3$s</string>
+    <string name="dica_horario_alarme">%1$s:%2$s</string>
+    <string name="dica_intervalo_alarme">00</string>
+
+    <!-- Strings de preenchimento do Aplicativo -->
+
+    <string name="nome_lista">Nome da Lista</string>
+    <string name="listas">Minhas Listas</string>
+    <string name="dica_cria_lista">Criar Lista</string>
+    <string name="dica_edita_item">Alterar Item</string>
+    <string name="dica_exclui_item">Excluir Item</string>
+    <string name="item">Novo item da lista</string>
+    <string name="dica">Escolha uma Categoria</string>
+    <string name="quantidade">Quantidade</string>
+    <string name="info">Detalhes do item</string>
+    <string name="valor">Valor em R$</string>
+    <string name="dica_lista">Lista de Itens:</string>
+    <string name="dica_zero">R$ 0,00</string>
+    <string name="dica_unid">01 unid</string>
+    <string name="outro_item">Digite o nome do item</string>
+    <string name="descricao_item">Digite os detalhes do item</string>
+    <string name="lista">Digite o nome da Lista</string>
+    <string name="sem_lista">Nenhuma lista criada</string>
+    <string name="sem_itens">Nenhum item adicionado</string>
+    <string name="cesta_vazia">Nenhum item na lista</string>
+    <string name="categoria">Nova Categoria</string>
+
+    <!-- Strings de orientacao do Aplicativo -->
+
+    <string name="itens_adicionados">Itens adicionados à sua lista</string>
+    <string name="dica_item_novo">Item %1$s adicionado à lista.</string>
+    <string name="dica_item_existente">Item %1$s já foi adicionado à lista.</string>
+    <string name="dica_item_removido">Item %1$s removido da lista.</string>
+    <string name="dica_item_modificado">Item %1$s modificado.</string>
+    <string name="dica_item_na_cesta">Item %1$s colocado na cesta.</string>
+    <string name="dica_item_fora_cesta">Item %1$s fora da cesta.</string>
+    <string name="dica_lista_removida">Lista %1$s foi removida.</string>
+    <string name="info_item">Detalhes de %1$s</string>
+    <string name="info_valor_item">Total a pagar: R$ %1$s</string>
+    <string name="dica_valor_lista">R$ %1$s</string>
+
+    <!-- Strings de dialogos no Aplicativo -->
+
+    <string name="titulo_edita_nome">Alterar nome da lista?</string>
+    <string name="texto_edita_nome">Digite o nome da lista</string>
+    <string name="titulo_nome_item">Alterar nome do item?</string>
+    <string name="texto_edita_item">Digite o nome do item</string>
+    <string name="titulo_recupera_lista">Restaurar lista?</string>
+    <string name="texto_recupera_lista">Colocar os itens que você já pegou de volta na lista para usar novamente?</string>
+    <string name="ok">OK</string>
+    <string name="compartilhar">Enviar lista %1$s via:</string>
+    <string name="texto_sobre">O aplicativo Super Lista foi criado para facilitar a elaboração de listas de compras, presentes, tarefas e prioridades. Todas as listas são criadas e salvas no celular para edição e envio a qualquer momento. Não perca mais suas boas ideias, guarde tudo no celular e organize seu dia. Você pode utilizar no celular ou enviar para quem você quiser. Suas listas serão enviadas por e-mail ou mensagem de texto. Compartilhe suas listas com qualquer pessoa. Faça o backup das listas no Cartão SD. Crie e edite todo tipo de lista.\n\nSuporta versões 2.1 a 5.1 Android.\n\nFuncionalidades:\n- Permite criar listas com todo o tipo de conteúdo e objetivo;\n- Itens organizados por categorias para facilitar o uso;\n- Edição da lista e dos itens a qualquer momento;\n- Exclusão de todas as listas ao mesmo tempo;\n- Backup das listas no cartão SD;\n- Navegação por menu;\n- Saiba o valor dos itens que você já pegou, na hora;\n- Escolha manter ou excluir uma lista após utilizar;\n- Coloque o item da lista no calendário do celular;\n- Traduzido para o espanhol;\n- Edite a lista enquanto você está usando;\n- Crie cópias das listas já criadas anteriormente;\n- Modifique sua lista quando precisar sem ter que dar muitos toques na tela;\n- Mantenha a lista ou o item pressionados e abra um novo menu de opções.\n\nIdealizado por Flávia Borges Mesquita e desenvolvido por Paulo E S Mesquita.\n\nBaseado em tutoriais da internet e outros aplicativos do gênero.\nVersão: %1$s\nContato: mskapps.brazil@gmail.com</string>
+    <string name="titulo_apaga_tudo">Apagar todas as listas?</string>
+    <string name="texto_apaga_tudo">Você deseja excluir todas as listas criadas?</string>
+    <string name="cancelar">Cancelar</string>
+
+
+    <!-- Strings do Menu do Aplicativo -->
+
+    <string name="menu_ajustes">Configurações</string>
+    <string name="menu_sobre">Sobre</string>
+    <string name="menu_ajuda">Saiba como usar</string>
+    <string name="menu_sair">Sair</string>
+    <string name="menu_editar">Editar lista</string>
+    <string name="menu_enviar">Enviar lista</string>
+    <string name="menu_excluir">Excluir lista</string>
+    <string name="menu_copiar">Fazer cópia</string>
+    <string name="menu_lembrete">Adicionar lembrete</string>
+    <string name="menu_novo">Adicionar item</string>
+    <string name="menu_refazer">Refazer lista</string>
+    <string name="menu_renomear">Renomear lista</string>
+
+    <!-- Strings de Notificacoes do Aplicativo -->
+
+    <string name="dica_copia_bd">Cópia realizada com sucesso!</string>
+    <string name="dica_exclusao_bd">Todas as listas foram excluídas!</string>
+    <string name="dica_restaura_bd">Restauração realizada com sucesso!</string>
+
+    <!-- Strings do Menu de Ajustes -->
+
+
+    <!-- Ajustes Gerais -->
+
+    <string name="pref_categoria_geral_key">geral</string>
+    <string name="pref_titulo_geral">Ajuste Geral</string>
+    <string name="pref_titulo_cesta">Excluir lista após uso</string>
+    <string name="pref_descricao_cesta">Excluir a lista após pegar todos os itens</string>
+    <string name="pref_descricao_lista">Manter a lista após pegar todos os itens</string>
+    <string name="pref_key_cesta">cesta</string>
+
+    <!-- Ajustes BackUp -->
+
+    <string name="pref_categoria_bkup_restaura_key">bkuprest</string>
+    <string name="pref_titulo_bkup_restaura">Backup e Restauração</string>
+    <string name="pref_titulo_auto_bkup">Backup Automático</string>
+    <string name="pref_descricao_auto_bkup_sim">Fazer backup das listas sempre que fechar aplicativo</string>
+    <string name="pref_descricao_auto_bkup_nao">Fazer backup das listas quando usuário solicitar</string>
+    <string name="pref_key_auto_bkup">autobackup</string>
+    <string name="pref_titulo_bkup">Fazer backup das listas</string>
+    <string name="pref_descricao_bkup">Salva uma cópia das listas no cartão SD</string>
+    <string name="pref_key_bkup">backup</string>
+    <string name="pref_titulo_restaura">Restaurar listas salvas</string>
+    <string name="pref_descricao_restaura">Recupera uma cópia das listas salvas no cartão SD</string>
+    <string name="pref_key_restaura">restaura</string>
+
+    <!-- Ajustes APAGATUDO -->
+
+    <string name="pref_categoria_apagatudo_key">apagatudomesmo</string>
+    <string name="pref_titulo_apagatudo">Apagar todas as listas</string>
+    <string name="pref_descricao_apagatudo">Apaga todas as listas criadas no aplicativo</string>
+    <string name="pref_key_apagatudo">apagatudo</string>
+
+    <!-- Ajustes Informacoes do Aplicativo -->
+
+    <string name="pref_categoria_info_key">info</string>
+    <string name="pref_titulo_categoria_info">Sobre o aplicativo</string>
+    <string name="pref_titulo_autor">Desenvolvedor</string>
+    <string name="pref_descricao_autor">Paulo E S Mesquita</string>
+    <string name="pref_key_autor">dev</string>
+    <string name="pref_titulo_versao">Versão do Aplicativo</string>
+    <string name="pref_descricao_versao">Versão: %1$s</string>
+    <string name="pref_key_versao">versao</string>
+
+
+</resources>

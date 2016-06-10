@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mskapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/botao_edita_lista"
+        android:orderInCategory="1"
+        android:title="@string/menu_editar"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_exclui_lista"
+        android:orderInCategory="2"
+        android:title="@string/menu_excluir"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_renomeia_lista"
+        android:orderInCategory="3"
+        android:title="@string/menu_renomear"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_copia_lista"
+        android:orderInCategory="4"
+        android:title="@string/menu_copiar"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_envia_lista"
+        android:orderInCategory="5"
+        android:title="@string/menu_enviar"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_lembrete_lista"
+        android:orderInCategory="6"
+        android:title="@string/menu_lembrete"
+        mskapp:showAsAction="never" />
+
+</menu>

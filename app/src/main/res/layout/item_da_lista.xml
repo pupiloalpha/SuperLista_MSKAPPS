@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <ImageButton
+        android:id="@+id/ibExcluiItemEscolhido"
+        android:layout_width="42dp"
+        android:layout_height="54dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="5dp"
+        android:background="@color/icone_fundo"
+        android:contentDescription="@string/icon"
+        android:src="@drawable/ic_delete_grey"
+        android:tint="@color/cinza" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/infoItem"
+        android:layout_toRightOf="@+id/ibExcluiItemEscolhido"
+        android:orientation="vertical"
+        android:paddingLeft="5.0dip"
+        android:paddingRight="5.0dip"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@+id/tvItemEscolhido"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/item"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/preto" />
+
+        <TextView
+            android:id="@+id/tvDescricaoItemEscolhido"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/info"
+            android:textColor="@color/cinza" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoItem"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@+id/tvUnidade"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:text="@string/dica_unid" />
+
+        <TextView
+            android:id="@+id/tvValor"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:text="@string/dica_zero" />
+
+    </LinearLayout>
+
+</RelativeLayout>

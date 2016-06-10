@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mskapp="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/botao_busca_item"
+        android:icon="@drawable/ic_search_white"
+        android:orderInCategory="1"
+        android:title="@string/menu_novo"
+        mskapp:showAsAction="always" />
+    <item
+        android:id="@+id/botao_envia_lista"
+        android:icon="@drawable/ic_share_white"
+        android:orderInCategory="2"
+        android:title="@string/menu_enviar"
+        mskapp:showAsAction="always" />
+    <item
+        android:id="@+id/botao_lembrete_lista"
+        android:orderInCategory="100"
+        android:title="@string/menu_lembrete"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/ajustes"
+        android:orderInCategory="100"
+        android:title="@string/menu_ajustes"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/sobre"
+        android:orderInCategory="100"
+        android:title="@string/menu_sobre"
+        mskapp:showAsAction="never" />
+
+</menu>

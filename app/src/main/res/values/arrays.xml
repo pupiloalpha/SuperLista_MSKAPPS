@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ListaIntervalos">
+        <item>Horas</item>
+        <item>Dias</item>
+    </string-array>
+    <string-array name="ListaUnidades">
+        <item>Unidade</item>
+        <item>Caixa</item>
+        <item>Quilograma</item>
+        <item>Litro</item>
+        <item>Grama</item>
+        <item>Mililitro</item>
+        <item>Peça / pedaço</item>
+    </string-array>
+    <string-array name="ListaCategoria">
+        <item>Mantimentos e Condimentos</item>
+        <item>Carnes/Laticínios/Congelados</item>
+        <item>Feira (Horti-fruti / Ovos)</item>
+        <item>Limpeza e Higiene Pessoal</item>
+        <item>Bebidas e Guloseimas</item>
+        <item>Material Escolar</item>
+        <item>Presentes</item>
+        <item>Diversos</item>
+    </string-array>
+    <string-array name="ListaMantimentos">
+        <item>Açúcar</item>
+        <item>Adoçante</item>
+        <item>Amido de Milho</item>
+        <item>Arroz</item>
+        <item>Atum em Lata</item>
+        <item>Aveia</item>
+        <item>Azeite</item>
+        <item>Café</item>
+        <item>Caldo de Carne/Legume</item>
+        <item>Creme de Leite</item>
+        <item>Ervilha em Lata</item>
+        <item>Extrato / Molho de Tomate</item>
+        <item>Farinha de Trigo</item>
+        <item>Farinha de Mandioca</item>
+        <item>Farinha de Milho</item>
+        <item>Feijão</item>
+        <item>Fermento</item>
+        <item>Fubá</item>
+        <item>Ketchup</item>
+        <item>Leite em Pó</item>
+        <item>Macarrão</item>
+        <item>Maionese</item>
+        <item>Milho de Pipoca</item>
+        <item>Milho em Lata</item>
+        <item>Mistura para Bolo</item>
+        <item>Molho de Pimenta</item>
+        <item>Molho Inglês</item>
+        <item>Molho de Soja</item>
+        <item>Mostarda</item>
+        <item>Óleo</item>
+        <item>Pão de Forma</item>
+        <item>Pão</item>
+        <item>Queijo Ralado</item>
+        <item>Sal</item>
+        <item>Sardinha em Lata</item>
+        <item>Seleta de Legumes</item>
+        <item>Sopa</item>
+        <item>Tempero Pronto</item>
+        <item>Vinagre</item>
+    </string-array>
+    <string-array name="ListaCarnes">
+        <item>Acém</item>
+        <item>Alcatra</item>
+        <item>Asa de Frango</item>
+        <item>Bacon</item>
+        <item>Camarão</item>
+        <item>Carne Moída</item>
+        <item>Coxa / Sobrecoxa de Frango</item>
+        <item>Costela</item>
+        <item>Empanados</item>
+        <item>Filé / Contra Filé</item>
+        <item>Filé de Merluza</item>
+        <item>Frango Inteiro</item>
+        <item>Hambúrguer</item>
+        <item>Iogurte</item>
+        <item>Leite</item>
+        <item>Linguiça</item>
+        <item>Lombo</item>
+        <item>Manteiga</item>
+        <item>Margarina</item>
+        <item>Miúdos de Frango</item>
+        <item>Mortadela</item>
+        <item>Músculo</item>
+        <item>Peito de Frango</item>
+        <item>Pernil</item>
+        <item>Picanha</item>
+        <item>Pizza</item>
+        <item>Presunto</item>
+        <item>Queijo</item>
+        <item>Requeijão</item>
+        <item>Salame</item>
+        <item>Salmão</item>
+        <item>Salsicha</item>
+        <item>Sorvete</item>
+        <item>Tilápia</item>
+    </string-array>
+    <string-array name="ListaFeira">
+        <item>Abacate</item>
+        <item>Abacaxi</item>
+        <item>Abóbora</item>
+        <item>Acelga</item>
+        <item>Acerola</item>
+        <item>Agrião</item>
+        <item>Alecrim</item>
+        <item>Alface</item>
+        <item>Alho</item>
+        <item>Ameixa</item>
+        <item>Banana</item>
+        <item>Batata Doce</item>
+        <item>Batata Inglesa</item>
+        <item>Berinjela</item>
+        <item>Beterraba</item>
+        <item>Bócrolis</item>
+        <item>Cebola</item>
+        <item>Cebolinha</item>
+        <item>Cenoura</item>
+        <item>Chuchu</item>
+        <item>Coentro</item>
+        <item>Couve</item>
+        <item>Couve-flor</item>
+        <item>Espinafre</item>
+        <item>Goiaba</item>
+        <item>Hortelã</item>
+        <item>Inhame</item>
+        <item>Jiló</item>
+        <item>Kiwi</item>
+        <item>Laranja</item>
+        <item>Limão</item>
+        <item>Louro</item>
+        <item>Maçã</item>
+        <item>Mamão</item>
+        <item>Mandioca</item>
+        <item>Manga</item>
+        <item>Manjericão</item>
+        <item>Maracujá</item>
+        <item>Melancia</item>
+        <item>Melão</item>
+        <item>Mexerica</item>
+        <item>Morango</item>
+        <item>Nectarina</item>
+        <item>Orégano</item>
+        <item>Ovos de Codorna</item>
+        <item>Ovos de Galinha</item>
+        <item>Pepino</item>
+        <item>Pêra</item>
+        <item>Pêssego</item>
+        <item>Pimenta</item>
+        <item>Pimentão</item>
+        <item>Quiabo</item>
+        <item>Repolho</item>
+        <item>Rúcula</item>
+        <item>Salsinha</item>
+        <item>Tomate</item>
+        <item>Uva</item>
+        <item>Vajem</item>
+    </string-array>
+    <string-array name="ListaHigiene">
+        <item>Absorvente</item>
+        <item>Agua Sanitária</item>
+        <item>Álcool</item>
+        <item>Algodão</item>
+        <item>Amaciante</item>
+        <item>Barbeador</item>
+        <item>Camisinha</item>
+        <item>Condicionador</item>
+        <item>Cotonete</item>
+        <item>Creme de Barbear</item>
+        <item>Creme Dental</item>
+        <item>Desengordurante</item>
+        <item>Desentupidor</item>
+        <item>Desinfetante</item>
+        <item>Desodorante</item>
+        <item>Detergente</item>
+        <item>Enxaguante Bucal</item>
+        <item>Escova de Dentes</item>
+        <item>Esponja de Aço</item>
+        <item>Esponja de Banho</item>
+        <item>Esponja Dupla-face</item>
+        <item>Fio Dental</item>
+        <item>Flanela</item>
+        <item>Fralda Descartável</item>
+        <item>Hidratante</item>
+        <item>Lenço Umedecido</item>
+        <item>Loção Pós-barba</item>
+        <item>Pano de Chão</item>
+        <item>Pano de Limpeza</item>
+        <item>Papel Higiênico</item>
+        <item>Protetor Solar</item>
+        <item>Protetor Labial</item>
+        <item>Rodo</item>
+        <item>Sabonete</item>
+        <item>Sabão em Barra</item>
+        <item>Sabão em Pó</item>
+        <item>Saco de Lixo</item>
+        <item>Soro Fisiológico</item>
+        <item>Talco</item>
+        <item>Vassoura</item>
+        <item>Xampu</item>
+    </string-array>
+    <string-array name="ListaBebidas">
+        <item>Achocolatado</item>
+        <item>Água Mineral</item>
+        <item>Aguardente</item>
+        <item>Barra de Cereal</item>
+        <item>Biscoito</item>
+        <item>Bombom</item>
+        <item>Bolo Pronto</item>
+        <item>Cerveja</item>
+        <item>Chá em Pó</item>
+        <item>Chocolate</item>
+        <item>Gelatina</item>
+        <item>Leite Condensado</item>
+        <item>Licor</item>
+        <item>Pizza</item>
+        <item>Refresco em Pó</item>
+        <item>Refrigerante</item>
+        <item>Suco</item>
+        <item>Torta</item>
+        <item>Vinho</item>
+        <item>Whisky</item>
+    </string-array>
+    <string-array name="ListaPapelaria">
+        <item>Agenda</item>
+        <item>Apontador</item>
+        <item>Borracha</item>
+        <item>Caderno de Desenho</item>
+        <item>Caderno com Pauta</item>
+        <item>Calculadora</item>
+        <item>Caneta Esferográfica</item>
+        <item>Caneta Hidrocor</item>
+        <item>Caneta Marca-texto</item>
+        <item>Clips</item>
+        <item>Cola Branca</item>
+        <item>Cola Bastão</item>
+        <item>Compasso</item>
+        <item>Corretivo</item>
+        <item>Envelope</item>
+        <item>Esquadro</item>
+        <item>Estojo</item>
+        <item>Estilete</item>
+        <item>Etiqueta Adesiva</item>
+        <item>Fita Adesiva</item>
+        <item>Giz de Cera</item>
+        <item>Grampeador</item>
+        <item>Grampo</item>
+        <item>Isopor</item>
+        <item>Lápis Colorido</item>
+        <item>Lápis Preto</item>
+        <item>Massa para Moldar</item>
+        <item>Mochila</item>
+        <item>Papel A4</item>
+        <item>Papel Celofane</item>
+        <item>Papel Ofício</item>
+        <item>Porta-objetos</item>
+        <item>Régua</item>
+        <item>Tesoura</item>
+        <item>Tinta Guache</item>
+        <item>Transferidor</item>
+    </string-array>
+    <string-array name="ListaDiversos">
+        <item>Copo Descartável</item>
+        <item>Filme PVC</item>
+        <item>Filtro de Papel</item>
+        <item>Fita Adesiva</item>
+        <item>Fósforo</item>
+        <item>Guardanapo</item>
+        <item>Lâmpada</item>
+        <item>Palito de Dente</item>
+        <item>Papel Alumínio</item>
+        <item>Papel Toalha</item>
+        <item>Prato Descartável</item>
+        <item>Talher Descartável</item>
+        <item>Vela</item>
+    </string-array>
+    <string-array name="ListaComTudo">
+        <item>Abacate</item>
+        <item>Abacaxi</item>
+        <item>Abóbora</item>
+        <item>Absorvente</item>
+        <item>Acelga</item>
+        <item>Acerola</item>
+        <item>Acém</item>
+        <item>Achocolatado</item>
+        <item>Açúcar</item>
+        <item>Adoçante</item>
+        <item>Agua Sanitária</item>
+        <item>Água Mineral</item>
+        <item>Aguardente</item>
+        <item>Agrião</item>
+        <item>Agenda</item>
+        <item>Alcatra</item>
+        <item>Alecrim</item>
+        <item>Alface</item>
+        <item>Alho</item>
+        <item>Álcool</item>
+        <item>Algodão</item>
+        <item>Amaciante</item>
+        <item>Ameixa</item>
+        <item>Amido de Milho</item>
+        <item>Apontador</item>
+        <item>Arroz</item>
+        <item>Asa de Frango</item>
+        <item>Atum em Lata</item>
+        <item>Aveia</item>
+        <item>Azeite</item>
+        <item>Bacon</item>
+        <item>Banana</item>
+        <item>Barbeador</item>
+        <item>Barra de Cereal</item>
+        <item>Batata Doce</item>
+        <item>Batata Inglesa</item>
+        <item>Berinjela</item>
+        <item>Beterraba</item>
+        <item>Bermuda</item>
+        <item>Bicho de Pelúcia</item>
+        <item>Biscoito</item>
+        <item>Bola</item>
+        <item>Boneca</item>
+        <item>Boné</item>
+        <item>Borracha</item>
+        <item>Bolo Pronto</item>
+        <item>Bombom</item>
+        <item>Bócrolis</item>
+        <item>Blusa</item>
+        <item>Brinco</item>
+        <item>Camarão</item>
+        <item>Camisinha</item>
+        <item>Carne Moída</item>
+        <item>Cebola</item>
+        <item>Cebolinha</item>
+        <item>Cenoura</item>
+        <item>Chuchu</item>
+        <item>Coxa / Sobrecoxa de Frango</item>
+        <item>Costela</item>
+        <item>Condicionador</item>
+        <item>Cotonete</item>
+        <item>Coentro</item>
+        <item>Couve</item>
+        <item>Couve-flor</item>
+        <item>Café</item>
+        <item>Caldo de Carne/Legume</item>
+        <item>Creme de Leite</item>
+        <item>Caderno de Desenho</item>
+        <item>Caderno com Pauta</item>
+        <item>Calculadora</item>
+        <item>Carrinho</item>
+        <item>Camisa</item>
+        <item>Camiseta</item>
+        <item>Caneca</item>
+        <item>Canivete Suíço</item>
+        <item>Carteira</item>
+        <item>Caneta Esferográfica</item>
+        <item>Caneta Hidrocor</item>
+        <item>Caneta Marca-texto</item>
+        <item>Cerveja</item>
+        <item>Celular</item>
+        <item>Cesta de Café da Manhã</item>
+        <item>CD</item>
+        <item>Chá em Pó</item>
+        <item>Chaveiro</item>
+        <item>Chocolate</item>
+        <item>Chinelo</item>
+        <item>Cinto</item>
+        <item>Clips</item>
+        <item>Cola Branca</item>
+        <item>Cola Bastão</item>
+        <item>Compasso</item>
+        <item>Copo Descartável</item>
+        <item>Computador</item>
+        <item>Colar</item>
+        <item>Corretivo</item>
+        <item>Creme de Barbear</item>
+        <item>Creme Dental</item>
+        <item>Desodorante</item>
+        <item>Despertador</item>
+        <item>Desengordurante</item>
+        <item>Desentupidor</item>
+        <item>Desinfetante</item>
+        <item>Desodorante</item>
+        <item>Detergente</item>
+        <item>Enxaguante Bucal</item>
+        <item>Escova de Dentes</item>
+        <item>Esponja de Aço</item>
+        <item>Esponja de Banho</item>
+        <item>Esponja Dupla-face</item>
+        <item>Ervilha em Lata</item>
+        <item>Extrato / Molho de Tomate</item>
+        <item>Empanados</item>
+        <item>Espinafre</item>
+        <item>Envelope</item>
+        <item>Esquadro</item>
+        <item>Estojo</item>
+        <item>Estilete</item>
+        <item>Etiqueta Adesiva</item>
+        <item>Farinha de Trigo</item>
+        <item>Farinha de Mandioca</item>
+        <item>Farinha de Milho</item>
+        <item>Feijão</item>
+        <item>Fermento</item>
+        <item>Filme PVC</item>
+        <item>Filtro de Papel</item>
+        <item>Fita Adesiva</item>
+        <item>Fio Dental</item>
+        <item>Filé / Contra Filé</item>
+        <item>Filé de Merluza</item>
+        <item>Frango Inteiro</item>
+        <item>Flanela</item>
+        <item>Fralda Descartável</item>
+        <item>Fósforo</item>
+        <item>Fubá</item>
+        <item>Fita Adesiva</item>
+        <item>Fogão</item>
+        <item>Geladeira</item>
+        <item>GPS</item>
+        <item>Gravata</item>
+        <item>Giz de Cera</item>
+        <item>Grampeador</item>
+        <item>Grampo</item>
+        <item>Gelatina</item>
+        <item>Goiaba</item>
+        <item>Guardanapo</item>
+        <item>Hidratante</item>
+        <item>Hortelã</item>
+        <item>Hambúrguer</item>
+        <item>Iogurte</item>
+        <item>Inhame</item>
+        <item>Isopor</item>
+        <item>Jiló</item>
+        <item>Jogo de Tabuleiro</item>
+        <item>Kit Pintura</item>
+        <item>Kiwi</item>
+        <item>Ketchup</item>
+        <item>Lâmpada</item>
+        <item>Leite Condensado</item>
+        <item>Leite em Pó</item>
+        <item>Leite</item>
+        <item>Licor</item>
+        <item>Linguiça</item>
+        <item>Lombo</item>
+        <item>Laranja</item>
+        <item>Lenço Umedecido</item>
+        <item>Loção Pós-barba</item>
+        <item>Limão</item>
+        <item>Louro</item>
+        <item>Lápis Colorido</item>
+        <item>Lápis Preto</item>
+        <item>Livro</item>
+        <item>Lápis de Cor</item>
+        <item>Loção Corporal</item>
+        <item>Maquiagem</item>
+        <item>Máquina de Lavar</item>
+        <item>Microondas</item>
+        <item>Massa para Moldar</item>
+        <item>Mochila</item>
+        <item>Maçã</item>
+        <item>Mamão</item>
+        <item>Mandioca</item>
+        <item>Manga</item>
+        <item>Manjericão</item>
+        <item>Maracujá</item>
+        <item>Melancia</item>
+        <item>Melão</item>
+        <item>Mexerica</item>
+        <item>Morango</item>
+        <item>Manteiga</item>
+        <item>Margarina</item>
+        <item>Miúdos de Frango</item>
+        <item>Mortadela</item>
+        <item>Músculo</item>
+        <item>Macarrão</item>
+        <item>Maionese</item>
+        <item>Milho de Pipoca</item>
+        <item>Milho em Lata</item>
+        <item>Mistura para Bolo</item>
+        <item>Molho de Pimenta</item>
+        <item>Molho Inglês</item>
+        <item>Molho de Soja</item>
+        <item>Mostarda</item>
+        <item>Nectarina</item>
+        <item>Necessaire</item>
+        <item>NoteBook</item>
+        <item>Orégano</item>
+        <item>Ovos de Codorna</item>
+        <item>Ovos de Galinha</item>
+        <item>Óleo</item>
+        <item>Pão de Forma</item>
+        <item>Pão</item>
+        <item>Pizza</item>
+        <item>Perfume</item>
+        <item>Porta-retrato</item>
+        <item>Pulseira</item>
+        <item>Pepino</item>
+        <item>Pêra</item>
+        <item>Pêssego</item>
+        <item>Pimenta</item>
+        <item>Pimentão</item>
+        <item>Peito de Frango</item>
+        <item>Pernil</item>
+        <item>Picanha</item>
+        <item>Pizza</item>
+        <item>Pano de Chão</item>
+        <item>Pano de Limpeza</item>
+        <item>Papel Higiênico</item>
+        <item>Protetor Solar</item>
+        <item>Protetor Labial</item>
+        <item>Papel A4</item>
+        <item>Papel Celofane</item>
+        <item>Papel Ofício</item>
+        <item>Porta-objetos</item>
+        <item>Presunto</item>
+        <item>Prato Descartável</item>
+        <item>Palito de Dente</item>
+        <item>Papel Alumínio</item>
+        <item>Papel Toalha</item>
+        <item>Queijo</item>
+        <item>Quiabo</item>
+        <item>Queijo Ralado</item>
+        <item>Requeijão</item>
+        <item>Repolho</item>
+        <item>Rúcula</item>
+        <item>Rodo</item>
+        <item>Refresco em Pó</item>
+        <item>Refrigerante</item>
+        <item>Régua</item>
+        <item>Relógio</item>
+        <item>Sabonete</item>
+        <item>Sandália</item>
+        <item>Sapato</item>
+        <item>Short</item>
+        <item>Suco</item>
+        <item>Sabonete</item>
+        <item>Sabão em Barra</item>
+        <item>Sabão em Pó</item>
+        <item>Saco de Lixo</item>
+        <item>Salsinha</item>
+        <item>Salame</item>
+        <item>Salmão</item>
+        <item>Salsicha</item>
+        <item>Soro Fisiológico</item>
+        <item>Sorvete</item>
+        <item>Sal</item>
+        <item>Sardinha em Lata</item>
+        <item>Seleta de Legumes</item>
+        <item>Sopa</item>
+        <item>Talher Descartável</item>
+        <item>Tempero Pronto</item>
+        <item>Torta</item>
+        <item>Tesoura</item>
+        <item>Tinta Guache</item>
+        <item>Transferidor</item>
+        <item>Tilápia</item>
+        <item>Tomate</item>
+        <item>Talco</item>
+        <item>Tablet</item>
+        <item>Televisão</item>
+        <item>Uva</item>
+        <item>Vestido</item>
+        <item>Video Game</item>
+        <item>Vajem</item>
+        <item>Vela</item>
+        <item>Vassoura</item>
+        <item>Vinho</item>
+        <item>Vinagre</item>
+        <item>Whisky</item>
+        <item>Xampu</item>
+    </string-array>
+    <string-array name="ListaPresente">
+        <item>Bicho de Pelúcia</item>
+        <item>Bermuda</item>
+        <item>Bola</item>
+        <item>Boneca</item>
+        <item>Boné</item>
+        <item>Blusa</item>
+        <item>Brinco</item>
+        <item>Carrinho</item>
+        <item>Camisa</item>
+        <item>Camiseta</item>
+        <item>Caneca</item>
+        <item>Caneta</item>
+        <item>Canivete Suíço</item>
+        <item>Carteira</item>
+        <item>CD</item>
+        <item>Celular</item>
+        <item>Cesta de Café da Manhã</item>
+        <item>Computador</item>
+        <item>Cinto</item>
+        <item>Chaveiro</item>
+        <item>Chinelo</item>
+        <item>Colar</item>
+        <item>Desodorante</item>
+        <item>Despertador</item>
+        <item>Fogão</item>
+        <item>Geladeira</item>
+        <item>GPS</item>
+        <item>Gravata</item>
+        <item>Jogo de Tabuleiro</item>
+        <item>Kit Pintura</item>
+        <item>Livro</item>
+        <item>Lápis de Cor</item>
+        <item>Loção Corporal</item>
+        <item>Maquiagem</item>
+        <item>Máquina de Lavar</item>
+        <item>Microondas</item>
+        <item>Necessaire</item>
+        <item>NoteBook</item>
+        <item>Perfume</item>
+        <item>Porta-retrato</item>
+        <item>Pulseira</item>
+        <item>Relógio</item>
+        <item>Sabonete</item>
+        <item>Sandália</item>
+        <item>Sapato</item>
+        <item>Short</item>
+        <item>Tablet</item>
+        <item>Televisão</item>
+        <item>Vestido</item>
+        <item>Video Game</item>
+    </string-array>
+</resources>

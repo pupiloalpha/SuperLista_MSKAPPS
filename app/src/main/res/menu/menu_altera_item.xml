@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mskapp="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/botao_edita_item"
+        android:orderInCategory="1"
+        android:title="@string/dica_edita_item"
+        mskapp:showAsAction="never" />
+    <item
+        android:id="@+id/botao_exclui_item"
+        android:orderInCategory="2"
+        android:title="@string/dica_exclui_item"
+        mskapp:showAsAction="never" />
+
+</menu>

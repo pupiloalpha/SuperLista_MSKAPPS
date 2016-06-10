@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <LinearLayout
+        android:id="@+id/lvItem"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/infoItem"
+        android:orientation="vertical"
+        android:paddingLeft="5.0dip"
+        android:paddingRight="5.0dip"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@+id/tvItemCesta"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/item"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/preto" />
+
+        <TextView
+            android:id="@+id/tvDescricaoItemCesta"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="@string/info"
+            android:textColor="@color/cinza" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoItem"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:weightSum="2.0"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tvUnid"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:text="@string/dica_unid" />
+
+        <TextView
+            android:id="@+id/tvPreco"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="end|center_vertical"
+            android:text="@string/dica_zero" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivMenuItem"
+        android:layout_width="42dp"
+        android:layout_height="54dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/icon"
+        android:src="@drawable/ic_menu_grey"
+        android:paddingLeft="20dp"
+        android:paddingBottom="24dp" />
+
+</RelativeLayout>

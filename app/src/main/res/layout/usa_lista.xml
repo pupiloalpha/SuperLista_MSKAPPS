@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".UsaListas">
+
+    <LinearLayout
+        android:id="@+id/listaDeItens"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="50"
+        android:orientation="vertical"
+        android:padding="5.0dip">
+
+        <ListView
+            android:id="@+id/lvCestaVazia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollingCache="false" />
+
+        <ListView
+            android:id="@+id/lvCestaCheia"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollingCache="false" />
+
+        <TextView
+            android:id="@+id/tvCestaSemItem"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/cesta_vazia"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvValorLista"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/azul_escuro"
+        android:gravity="center"
+        android:paddingBottom="5.0dip"
+        android:text="@string/info_valor_item"
+        android:textColor="@color/branco"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

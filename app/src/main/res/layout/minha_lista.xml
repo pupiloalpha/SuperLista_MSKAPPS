@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:paddingBottom="5.0dip"
+        android:paddingTop="5.0dip"
+        android:weightSum="100.0">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="100">
+        <android.support.v7.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/etItem"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5.0dip"
+            android:ems="10"
+            android:hint="@string/outro_item"
+            android:imeOptions="actionDone"
+            android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine"
+            android:paddingLeft="5.0dip" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/ibAdicionaItens"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="20"
+            android:background="@color/icone_fundo"
+            android:contentDescription="@string/icon"
+            android:src="@drawable/ic_add_circle"
+            android:tint="@color/cinza" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="360"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/lvListaCriada"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:scrollingCache="false"
+            tools:listitem="@layout/item_da_lista" />
+
+        <TextView
+            android:id="@+id/tvSemItem"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="@string/sem_itens"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>
