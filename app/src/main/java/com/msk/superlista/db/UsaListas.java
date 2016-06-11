@@ -420,6 +420,9 @@ public class UsaListas extends AppCompatActivity {
                 CestaCheia();
                 CestaVazia();
                 dbListaCriada.close();
+
+                actionBar.setSelectedNavigationItem(0);
+
                 break;
             case R.id.ajustes:
                 startActivity(new Intent("com.msk.superlista.AJUSTES"));
