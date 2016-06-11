@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="12dp"
-    android:textSize="18dp"
+    android:text="@string/dica_item_existente"
     android:textColor="@color/cinza"
-    android:text="@string/dica_item_existente">
-</TextView>
+    android:textSize="18dp"></TextView>

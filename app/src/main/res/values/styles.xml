@@ -19,8 +19,7 @@
 
 
     <!-- Tema das caixas de diálogos -->
-    <style name="TemaDialogo" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
-    </style>
+    <style name="TemaDialogo" parent="@style/Theme.AppCompat.Light.Dialog.Alert"></style>
 
     <!-- Tema das telas do aplicativo -->
     <style name="TemaNovo" parent="@style/Theme.AppCompat.Light.DarkActionBar">

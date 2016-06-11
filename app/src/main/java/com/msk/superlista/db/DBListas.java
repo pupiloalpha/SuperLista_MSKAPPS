@@ -24,8 +24,6 @@ public class DBListas {
     public static final String COLUNA_NOME_ITEM_CESTA = "item_cesta";
     public static final String COLUNA_NOME_ITEM_LISTA = "item_lista";
     public static final String COLUNA_ID_LISTA = "_id";
-    // Titulos das colunas das Tabelas do Banco de Dados
-    static String[] colunas_listas = {COLUNA_ID_LISTA, COLUNA_NOME_LISTA};
     public static final String COLUNA_ID_ITEM_CESTA = "_id";
     public static final String COLUNA_ID_ITEM_LISTA = "_id";
     // Novas colunas criadas sobre a descricao dos itens
@@ -34,13 +32,7 @@ public class DBListas {
     public static final String COLUNA_PRECO_ITEM_CESTA = "preco_item_cesta";
     public static final String COLUNA_PRECO_ITEM_LISTA = "preco_item_lista";
     public static final String COLUNA_QUANTIDADE_ITEM_CESTA = "qte_item_cesta";
-    static String[] colunas_itens_cesta = {COLUNA_ID_ITEM_CESTA,
-            COLUNA_CODIGO_CESTA, COLUNA_NOME_ITEM_CESTA,
-            COLUNA_QUANTIDADE_ITEM_CESTA, COLUNA_PRECO_ITEM_CESTA, COLUNA_DESCRICAO_ITEM_CESTA};
     public static final String COLUNA_QUANTIDADE_ITEM_LISTA = "qte_item_lista";
-    static String[] colunas_itens_lista = {COLUNA_ID_ITEM_LISTA,
-            COLUNA_CODIGO_LISTA, COLUNA_NOME_ITEM_LISTA,
-            COLUNA_QUANTIDADE_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA, COLUNA_DESCRICAO_ITEM_LISTA};
     // Nome das tabelas criadas no banco de dados
     private static final String TABELA_LISTAS = "listas";
     private static final String CRIA_TABELA_LISTA = "CREATE TABLE "
@@ -69,6 +61,14 @@ public class DBListas {
     private static final String BANCO_DE_DADOS = "super_lista";
     private static final int VERSAO_BANCO_DE_DADOS = 2; // NOVA VERSAO FOI CRIADA
     private static final String TAG = "DBListas";
+    // Titulos das colunas das Tabelas do Banco de Dados
+    static String[] colunas_listas = {COLUNA_ID_LISTA, COLUNA_NOME_LISTA};
+    static String[] colunas_itens_cesta = {COLUNA_ID_ITEM_CESTA,
+            COLUNA_CODIGO_CESTA, COLUNA_NOME_ITEM_CESTA,
+            COLUNA_QUANTIDADE_ITEM_CESTA, COLUNA_PRECO_ITEM_CESTA, COLUNA_DESCRICAO_ITEM_CESTA};
+    static String[] colunas_itens_lista = {COLUNA_ID_ITEM_LISTA,
+            COLUNA_CODIGO_LISTA, COLUNA_NOME_ITEM_LISTA,
+            COLUNA_QUANTIDADE_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA, COLUNA_DESCRICAO_ITEM_LISTA};
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 

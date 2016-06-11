@@ -25,48 +25,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-            <android.support.v7.widget.AppCompatAutoCompleteTextView
-                android:id="@+id/etNomeItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/outro_item"
-                android:inputType="textCapSentences|text|textAutoCorrect|textAutoComplete"
-                android:textColor="@color/preto" />
+
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/etNomeItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/outro_item"
+                    android:inputType="textCapSentences|text|textAutoCorrect|textAutoComplete"
+                    android:textColor="@color/preto" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etDescricaoItem"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="100dp"
-                android:ems="10"
-                android:hint="@string/descricao_item"
-                android:inputType="textCapSentences|textMultiLine|textAutoCorrect|textAutoComplete" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etDescricaoItem"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/descricao_item"
+                    android:inputType="textCapSentences|textMultiLine|textAutoCorrect|textAutoComplete"
+                    android:minHeight="100dp" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2.0"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2.0">
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9">
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/etQuantidadeItem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:ems="10"
-                    android:hint="@string/quantidade"
-                    android:inputType="numberDecimal" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etQuantidadeItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:ems="10"
+                        android:hint="@string/quantidade"
+                        android:inputType="numberDecimal" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.v7.widget.AppCompatSpinner
@@ -83,13 +86,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/etValorItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/valor"
-                android:inputType="numberDecimal" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etValorItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/valor"
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>

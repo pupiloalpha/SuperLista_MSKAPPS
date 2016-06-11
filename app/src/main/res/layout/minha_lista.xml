@@ -20,17 +20,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="100">
-        <android.support.v7.widget.AppCompatAutoCompleteTextView
-            android:id="@+id/etItem"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5.0dip"
-            android:ems="10"
-            android:hint="@string/outro_item"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine"
-            android:paddingLeft="5.0dip" />
+
+            <android.support.v7.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/etItem"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5.0dip"
+                android:ems="10"
+                android:hint="@string/outro_item"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences|textAutoComplete|textImeMultiLine|textAutoCorrect|text|textMultiLine"
+                android:paddingLeft="5.0dip" />
         </android.support.design.widget.TextInputLayout>
 
         <ImageButton

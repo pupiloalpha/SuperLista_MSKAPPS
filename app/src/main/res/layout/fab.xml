@@ -7,6 +7,6 @@
     android:layout_alignParentRight="true"
     android:layout_marginBottom="20dp"
     android:layout_marginRight="24dp"
+    android:background="@color/fab_fundo"
     android:contentDescription="@string/dica_cria_lista"
-    android:src="@drawable/ic_add_white"
-    android:background="@color/fab_fundo" />
+    android:src="@drawable/ic_add_white" />

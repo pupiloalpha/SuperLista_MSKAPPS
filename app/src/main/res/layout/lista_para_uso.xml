@@ -12,8 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/icon"
-        android:src="@drawable/ic_list_grey"
-        android:tint="@color/cinza" />
+        android:src="@drawable/ic_list_grey" />
 
     <TextView
         android:id="@+id/tvNomeLista"

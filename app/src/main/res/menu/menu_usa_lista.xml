@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/botao_novo_item"
-        android:icon="@drawable/adicionar"
+        android:icon="@drawable/ic_add_circle_white"
         android:orderInCategory="1"
         android:title="@string/menu_novo"
         mskapp:showAsAction="always" />

@@ -86,7 +86,7 @@ public class Ajustes extends PreferenceActivity implements
         SharedPreferences sharedPref = getSharedPreferences("backup", Context.MODE_PRIVATE);
         pastaBackUp = sharedPref.getString("backup", "");
 
-        if (!pastaBackUp.equals("")){
+        if (!pastaBackUp.equals("")) {
 
             backup.setSummary(pastaBackUp);
         }
@@ -223,19 +223,19 @@ public class Ajustes extends PreferenceActivity implements
         return null;
     }
 
-    public void abrePasta(){
+    public void abrePasta() {
         startActivityForResult(new Intent(this, EscolhePasta.class), 111);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch(requestCode){
+        switch (requestCode) {
             case 111:
 
-                if (resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
 
-                    if (data != null){
+                    if (data != null) {
 
                         Bundle extras = data.getExtras();
                         String path = (String) extras.get(EscolhePasta.CHOSEN_DIRECTORY);
@@ -254,7 +254,7 @@ public class Ajustes extends PreferenceActivity implements
 
                         } catch (Exception e) {
 
-                            Log.e("Seleção de arquivos","Deu erro!!!", e);
+                            Log.e("Seleção de arquivos", "Deu erro!!!", e);
                         }
                     }
                 }

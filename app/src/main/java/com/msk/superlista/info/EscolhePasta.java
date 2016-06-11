@@ -39,17 +39,17 @@ public class EscolhePasta extends ListActivity {
         Bundle extras = getIntent().getExtras();
 
         String strSDCardPath = System.getenv("SECONDARY_STORAGE");
-        if ((strSDCardPath == null) || strSDCardPath.length() == 0){
+        if ((strSDCardPath == null) || strSDCardPath.length() == 0) {
             strSDCardPath = System.getenv("EXTERNAL_SDCARD_STORAGE");
         }
-        if (strSDCardPath != null){
-            if (strSDCardPath.contains(":")){
-                strSDCardPath = strSDCardPath.substring (0, strSDCardPath.indexOf(":"));
+        if (strSDCardPath != null) {
+            if (strSDCardPath.contains(":")) {
+                strSDCardPath = strSDCardPath.substring(0, strSDCardPath.indexOf(":"));
             }
         }
 
-        File externalFilePath = new File (strSDCardPath);
-        if (externalFilePath.exists() && externalFilePath.canWrite()){
+        File externalFilePath = new File(strSDCardPath);
+        if (externalFilePath.exists() && externalFilePath.canWrite()) {
             dir = externalFilePath.getParentFile();
         } else {
             dir = Environment.getExternalStoragePublicDirectory(

@@ -45,10 +45,10 @@
                     android:id="@+id/etDescricaoItem"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="100dp"
                     android:ems="10"
                     android:hint="@string/descricao_item"
-                    android:inputType="textCapSentences|textMultiLine|textAutoCorrect|textAutoComplete" />
+                    android:inputType="textCapSentences|textMultiLine|textAutoCorrect|textAutoComplete"
+                    android:minHeight="100dp" />
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -118,8 +118,8 @@
                     android:layout_weight="1"
                     android:background="@color/icone_fundo"
                     android:contentDescription="@string/icon"
-                    android:drawableLeft="@drawable/data"
-                    android:drawableStart="@drawable/data"
+                    android:drawableLeft="@drawable/ic_event_date"
+                    android:drawableStart="@drawable/ic_event_date"
                     android:text="@string/dica_dia_alarme"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/preto" />
@@ -132,8 +132,8 @@
                     android:layout_weight="1.5"
                     android:background="@color/icone_fundo"
                     android:contentDescription="@string/icon"
-                    android:drawableLeft="@drawable/horario"
-                    android:drawableStart="@drawable/horario"
+                    android:drawableLeft="@drawable/ic_event_time"
+                    android:drawableStart="@drawable/ic_event_time"
                     android:text="@string/dica_horario_alarme"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/preto" />
