@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mskapp="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".db.CriaLista">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -34,7 +36,7 @@
                 android:paddingLeft="5.0dip" />
         </android.support.design.widget.TextInputLayout>
 
-        <ImageButton
+        <android.support.v7.widget.AppCompatImageButton
             android:id="@+id/ibAdicionaItens"
             android:layout_width="54dp"
             android:layout_height="54dp"
@@ -43,8 +45,8 @@
             android:layout_weight="20"
             android:background="@color/icone_fundo"
             android:contentDescription="@string/icon"
-            android:src="@drawable/ic_add_circle"
-            android:tint="@color/cinza" />
+            android:tint="@color/cinza"
+            mskapp:srcCompat="@drawable/ic_add_circle" />
 
     </LinearLayout>
 

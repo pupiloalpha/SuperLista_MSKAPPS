@@ -1,9 +1,13 @@
 package com.msk.superlista.db;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -15,12 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.msk.superlista.R;
-import com.msk.superlista.SuperLista;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColocaItensNaLista extends SuperLista implements
+public class ColocaItensNaLista extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
     private final List<String> selecionados = new ArrayList<String>();
     private String[] ITENSNOVOS = null;
@@ -198,6 +201,36 @@ public class ColocaItensNaLista extends SuperLista implements
         getSupportActionBar().setTitle(listaCriada);
 
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu pMenu) {
+        super.onCreateOptionsMenu(pMenu);
+        pMenu.clear();
+        getMenuInflater().inflate(R.menu.menu_app, pMenu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem pMenuItem) {
+        switch (pMenuItem.getItemId()) {
+
+            case android.R.id.home:
+                dbListaNova.close();
+                setResult(RESULT_OK, null);
+                finish();
+                break;
+            case R.id.ajustes:
+                startActivity(new Intent("com.msk.superlista.AJUSTES"));
+                break;
+            case R.id.sobre:
+                startActivity(new Intent("com.msk.superlista.SOBRE"));
+                break;
+        }
+        return false;
+
+    }
+
 
     @Override
     protected void onDestroy() {

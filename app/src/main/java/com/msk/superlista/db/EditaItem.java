@@ -13,6 +13,7 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
@@ -23,8 +24,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -38,17 +39,18 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         OnClickListener {
 
     final static Calendar c = Calendar.getInstance();
-    private static Button data, horario;
     private static int mDia, mMes, mAno, mHora, mMinuto;
+    private static AppCompatButton data, horario;
     // CLASSE COM BANCO DE DADOS
     DBListas dbListaCriada = new DBListas(this);
     DialogFragment dialogo;
     // ELEMENTOS DA TELA
-    private Button mudaItem, cancela;
+    private AppCompatButton mudaItem, cancela;
     private AppCompatSpinner unidades;
     private AppCompatEditText descricao, valor, quantidade;
     private AppCompatAutoCompleteTextView nome;
     private AppCompatCheckBox calendario;
+    private ImageView idata, ihora;
     // VARIAVEIS UTILIZADAS
     private ArrayAdapter<String> adapItem;
     private long idItem;
@@ -77,18 +79,25 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     }
 
     private void iniciar() {
-        nome = ((AppCompatAutoCompleteTextView) findViewById(R.id.etNomeItem));
-        descricao = ((AppCompatEditText) findViewById(R.id.etDescricaoItem));
-        quantidade = ((AppCompatEditText) findViewById(R.id.etQuantidadeItem));
-        unidades = ((AppCompatSpinner) findViewById(R.id.spUnidadeItem));
-        valor = ((AppCompatEditText) findViewById(R.id.etValorItem));
-        mudaItem = ((Button) findViewById(R.id.btModificaItemLista));
-        cancela = ((Button) findViewById(R.id.ivCancela));
-        data = (Button) findViewById(R.id.tvDataAlarme);
-        horario = (Button) findViewById(R.id.tvHorarioAlarme);
+        nome = (AppCompatAutoCompleteTextView) findViewById(R.id.etNomeItem);
+        descricao = (AppCompatEditText) findViewById(R.id.etDescricaoItem);
+        quantidade = (AppCompatEditText) findViewById(R.id.etQuantidadeItem);
+        unidades = (AppCompatSpinner) findViewById(R.id.spUnidadeItem);
+        valor = (AppCompatEditText) findViewById(R.id.etValorItem);
+        mudaItem = (AppCompatButton) findViewById(R.id.btModificaItemLista);
+        cancela = (AppCompatButton) findViewById(R.id.ivCancela);
+        data = (AppCompatButton) findViewById(R.id.tvDataAlarme);
+        horario = (AppCompatButton) findViewById(R.id.tvHorarioAlarme);
         calendario = (AppCompatCheckBox) findViewById(R.id.cbCalendario);
         data.setVisibility(View.INVISIBLE);
         horario.setVisibility(View.INVISIBLE);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            idata = (ImageView) findViewById(R.id.ivDataAlarme);
+            ihora = (ImageView) findViewById(R.id.ivHorarioAlarme);
+            idata.setVisibility(View.INVISIBLE);
+            ihora.setVisibility(View.INVISIBLE);
+        }
+
         adapItem = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources()
                 .getStringArray(R.array.ListaComTudo));
@@ -193,9 +202,17 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                 if (calendario.isChecked()) {
                     data.setVisibility(View.VISIBLE);
                     horario.setVisibility(View.VISIBLE);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        idata.setVisibility(View.VISIBLE);
+                        ihora.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     data.setVisibility(View.INVISIBLE);
                     horario.setVisibility(View.INVISIBLE);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        idata.setVisibility(View.INVISIBLE);
+                        ihora.setVisibility(View.INVISIBLE);
+                    }
                 }
 
                 break;

@@ -377,7 +377,6 @@ public class UsaListas extends AppCompatActivity {
 
         // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
         getMenuInflater().inflate(R.menu.menu_usa_lista, menu);
-
         return true;
     }
 

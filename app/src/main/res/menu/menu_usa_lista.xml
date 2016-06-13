@@ -17,12 +17,12 @@
     <item
         android:id="@+id/ajustes"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/menu_ajustes" />
+        android:title="@string/menu_ajustes"
+        mskapp:showAsAction="never" />
     <item
         android:id="@+id/sobre"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/menu_sobre" />
+        android:title="@string/menu_sobre"
+        mskapp:showAsAction="never" />
 
 </menu>

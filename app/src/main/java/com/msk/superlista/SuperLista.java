@@ -16,6 +16,7 @@ import android.provider.CalendarContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageButton;
 import android.text.InputType;
 import android.view.ContextMenu;
 import android.view.ContextThemeWrapper;
@@ -25,7 +26,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -45,7 +45,7 @@ public class SuperLista extends AppCompatActivity {
     private SimpleCursorAdapter buscaListas;
     private DBListas dbListasCriadas = new DBListas(this);
     private ImageView ivMenu;
-    private ImageButton fab;
+    private AppCompatImageButton fab;
     private LayoutInflater inflaterLista;
     private String listaFeita, descricao, valor, qtItens, conteudoLista, nItem, qteItem,
             valItem, listaCopia, pastaBackUp;
@@ -65,7 +65,7 @@ public class SuperLista extends AppCompatActivity {
 
         listasFeitas = ((ListView) findViewById(R.id.lvListas));
         listaVazia = (TextView) findViewById(R.id.tvListaVazia);
-        fab = (ImageButton) findViewById(R.id.ibfab);
+        fab = (AppCompatImageButton) findViewById(R.id.ibfab);
         dbListasCriadas.open();
 
         FazLista();

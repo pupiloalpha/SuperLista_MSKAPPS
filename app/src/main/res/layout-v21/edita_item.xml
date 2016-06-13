@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:mskapp="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -111,14 +110,6 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/ivDataAlarme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:tint="@color/cinza"
-                    mskapp:srcCompat="@drawable/ic_event_date" />
-
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/tvDataAlarme"
                     android:layout_width="match_parent"
@@ -126,19 +117,11 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:background="@color/icone_fundo"
-                    android:gravity="left|center_vertical"
-                    android:paddingLeft="5dp"
+                    android:drawableLeft="@drawable/ic_event_date"
+                    android:drawableStart="@drawable/ic_event_date"
                     android:text="@string/dica_dia_alarme"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/preto" />
-
-                <ImageView
-                    android:id="@+id/ivHorarioAlarme"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:tint="@color/cinza"
-                    mskapp:srcCompat="@drawable/ic_event_time" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/tvHorarioAlarme"
@@ -147,8 +130,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1.5"
                     android:background="@color/icone_fundo"
-                    android:gravity="left|center_vertical"
-                    android:paddingLeft="5dp"
+                    android:drawableLeft="@drawable/ic_event_time"
+                    android:drawableStart="@drawable/ic_event_time"
                     android:text="@string/dica_horario_alarme"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/preto" />
@@ -169,6 +152,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/botao_fundo"
+            android:drawableLeft="@drawable/ic_cancel_white"
+            android:drawableStart="@drawable/ic_cancel_white"
             android:text="@string/dica_cancela"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:textColor="@color/branco" />
@@ -179,6 +164,8 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/botao_fundo"
+            android:drawableLeft="@drawable/ic_done_white"
+            android:drawableStart="@drawable/ic_done_white"
             android:text="@string/dica_salvar"
             android:textAppearance="@android:style/TextAppearance.Medium"
             android:textColor="@color/branco" />

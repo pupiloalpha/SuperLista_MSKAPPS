@@ -332,6 +332,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         super.onCreateOptionsMenu(pMenu);
         pMenu.clear();
         getMenuInflater().inflate(R.menu.menu_cria_lista, pMenu);
+
         return true;
     }
 
