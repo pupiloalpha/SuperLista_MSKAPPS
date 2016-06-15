@@ -1,5 +1,6 @@
 package com.msk.superlista.info;
 
+import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +16,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.AppCompatEditText;
@@ -24,7 +24,6 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,8 +144,7 @@ public class Ajustes extends PreferenceActivity implements
 
     private void Dialogo() {
 
-        new AlertDialog.Builder(new ContextThemeWrapper(this,
-                R.style.TemaDialogo))
+        new AlertDialog.Builder(this)
                 .setTitle(R.string.titulo_apaga_tudo)
                 .setMessage(R.string.texto_apaga_tudo)
                 .setPositiveButton(R.string.ok,

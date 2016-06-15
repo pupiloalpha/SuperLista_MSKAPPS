@@ -1,6 +1,7 @@
 package com.msk.superlista;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,13 +14,11 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.CalendarContract;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.InputType;
 import android.view.ContextMenu;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -74,60 +73,64 @@ public class SuperLista extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final AppCompatEditText localEditText = new AppCompatEditText(SuperLista.this);
-                // localEditText.setText(listaFeita);
-                localEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-                new AlertDialog.Builder(new ContextThemeWrapper(SuperLista.this,
-                        R.style.TemaDialogo))
-                        .setTitle(R.string.cria_lista)
-                        .setMessage(R.string.texto_edita_nome)
-                        .setView(localEditText)
-                        .setPositiveButton(R.string.ok,
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(
-                                            DialogInterface pDialogInterface,
-                                            int pInt) {
-                                        String str = localEditText.getText()
-                                                .toString();
 
-                                        if (str.equals(""))
-                                            str = "Sem Nome";
-
-                                        String nomeLista1 = str;
-                                        String nomeLista2 = str;
-                                        dbListasCriadas.open();
-                                        int a = dbListasCriadas.contaNomeListas(nomeLista1);
-                                        int b = 1;
-
-                                        if (a != 0) {
-                                            while (a != 0) {
-                                                nomeLista2 = nomeLista1 + b;
-                                                a = dbListasCriadas.contaNomeListas(nomeLista2);
-                                                b = b + 1;
-                                            }
-                                            str = nomeLista2;
-                                        }
-
-                                        dbListasCriadas.criaLista(str);
-                                        dbListasCriadas.close();
-                                        Bundle localBundle = new Bundle();
-                                        localBundle.putString("lista", str);
-                                        localBundle.putString("tipo", "cria");
-                                        Intent localIntent = new Intent("com.msk.superlista.CRIALISTA");
-                                        localIntent.putExtras(localBundle);
-                                        startActivity(localIntent);
-                                    }
-                                }).setNegativeButton(R.string.cancelar,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(
-                                    DialogInterface pDialogo,
-                                    int pInt) {
-                                pDialogo.dismiss();
-                            }
-                        }).show();
-
+                Dialogo();
             }
         });
+    }
+
+    private void Dialogo() {
+
+        final AppCompatEditText localEditText = new AppCompatEditText(SuperLista.this);
+        // localEditText.setText(listaFeita);
+        localEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.cria_lista)
+                .setMessage(R.string.texto_edita_nome)
+                .setView(localEditText)
+                .setPositiveButton(R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface pDialogInterface,
+                                    int pInt) {
+                                String str = localEditText.getText()
+                                        .toString();
+
+                                if (str.equals(""))
+                                    str = "Sem Nome";
+
+                                String nomeLista1 = str;
+                                String nomeLista2 = str;
+                                dbListasCriadas.open();
+                                int a = dbListasCriadas.contaNomeListas(nomeLista1);
+                                int b = 1;
+
+                                if (a != 0) {
+                                    while (a != 0) {
+                                        nomeLista2 = nomeLista1 + b;
+                                        a = dbListasCriadas.contaNomeListas(nomeLista2);
+                                        b = b + 1;
+                                    }
+                                    str = nomeLista2;
+                                }
+
+                                dbListasCriadas.criaLista(str);
+                                dbListasCriadas.close();
+                                Bundle localBundle = new Bundle();
+                                localBundle.putString("lista", str);
+                                localBundle.putString("tipo", "cria");
+                                Intent localIntent = new Intent("com.msk.superlista.CRIALISTA");
+                                localIntent.putExtras(localBundle);
+                                startActivity(localIntent);
+                            }
+                        }).setNegativeButton(R.string.cancelar,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(
+                            DialogInterface pDialogo,
+                            int pInt) {
+                        pDialogo.dismiss();
+                    }
+                }).show();
     }
 
     @SuppressWarnings("deprecation")
@@ -305,8 +308,7 @@ public class SuperLista extends AppCompatActivity {
             case R.id.botao_renomeia_lista:
                 final AppCompatEditText localAppCompatEditText = new AppCompatEditText(this);
                 localAppCompatEditText.setText(listaFeita);
-                new AlertDialog.Builder(new ContextThemeWrapper(this,
-                        R.style.TemaDialogo))
+                new AlertDialog.Builder(this)
                         .setTitle(R.string.titulo_edita_nome)
                         .setMessage(R.string.texto_edita_nome)
                         .setView(localAppCompatEditText)
@@ -378,8 +380,7 @@ public class SuperLista extends AppCompatActivity {
         final AppCompatEditText localET = new AppCompatEditText(this);
         localET.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         localET.setText(listaFeita);
-        new AlertDialog.Builder(new ContextThemeWrapper(this,
-                R.style.TemaDialogo))
+        new AlertDialog.Builder(this)
                 .setTitle(R.string.titulo_edita_nome)
                 .setMessage(R.string.texto_edita_nome)
                 .setView(localET)

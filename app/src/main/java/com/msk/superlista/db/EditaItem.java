@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.msk.superlista.R;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressLint("InlinedApi")
@@ -180,7 +181,7 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         if (me.length() == 1)
             me = "0" + me;
         data.setText(getResources().getString(R.string.dica_dia_alarme, d, me,
-                mAno));
+                String.format(Locale.US, "%d", mAno)));
         mHora = c.get(Calendar.HOUR_OF_DAY);
         mMinuto = c.get(Calendar.MINUTE);
         String h = mHora + "";
@@ -260,10 +261,10 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                 else
                     preco = Double.parseDouble(valorItem);
 
-                String str3 = "R$ " + String.format("%.2f", preco);
+                String str3 = "R$ " + String.format(Locale.US, "%.2f", preco);
 
                 // dbListaCriada.open();
-                if (dbListaCriada.mudaPrecoItem(idItem, str3, cesta) == true) {
+                if (dbListaCriada.mudaPrecoItem(idItem, str3, cesta)) {
                     Toast.makeText(
                             getApplicationContext(),
                             String.format(
@@ -395,7 +396,7 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
             if (m.length() == 1)
                 m = "0" + m;
             data.setText(getResources().getString(R.string.dica_dia_alarme, d,
-                    m, mAno));
+                    m, String.format(Locale.US, "%d", mAno)));
         }
     }
 
