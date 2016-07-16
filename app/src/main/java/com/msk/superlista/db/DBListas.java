@@ -29,10 +29,14 @@ public class DBListas {
     // Novas colunas criadas sobre a descricao dos itens
     public static final String COLUNA_DESCRICAO_ITEM_CESTA = "descr_item_cesta";
     public static final String COLUNA_DESCRICAO_ITEM_LISTA = "descr_item_lista";
-    public static final String COLUNA_PRECO_ITEM_CESTA = "preco_item_cesta";
-    public static final String COLUNA_PRECO_ITEM_LISTA = "preco_item_lista";
     public static final String COLUNA_QUANTIDADE_ITEM_CESTA = "qte_item_cesta";
     public static final String COLUNA_QUANTIDADE_ITEM_LISTA = "qte_item_lista";
+    public static final String COLUNA_UNIDADE_ITEM_CESTA = "unid_item_cesta";
+    public static final String COLUNA_UNIDADE_ITEM_LISTA = "unid_item_lista";
+    public static final String COLUNA_VALOR_ITEM_CESTA = "valor_item_cesta";
+    public static final String COLUNA_VALOR_ITEM_LISTA = "valor_item_lista";
+    public static final String COLUNA_PRECO_ITEM_CESTA = "preco_item_cesta";
+    public static final String COLUNA_PRECO_ITEM_LISTA = "preco_item_lista";
     // Nome das tabelas criadas no banco de dados
     private static final String TABELA_LISTAS = "listas";
     private static final String CRIA_TABELA_LISTA = "CREATE TABLE "
@@ -45,36 +49,41 @@ public class DBListas {
             + TABELA_ITENS_LISTA + " ( " + COLUNA_ID_ITEM_LISTA
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_LISTA
             + " TEXT NOT NULL, " + COLUNA_NOME_ITEM_LISTA
-            + " TEXT NOT NULL, " + COLUNA_QUANTIDADE_ITEM_LISTA
-            + " TEXT NOT NULL, " + COLUNA_PRECO_ITEM_LISTA
-            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_LISTA + " TEXT)";
+            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_LISTA
+            + " TEXT, " + COLUNA_QUANTIDADE_ITEM_LISTA
+            + " REAL, " + COLUNA_UNIDADE_ITEM_LISTA
+            + " TEXT, " + COLUNA_VALOR_ITEM_LISTA
+            + " REAL, " + COLUNA_PRECO_ITEM_LISTA + " TXT)";
     private static final String TABELA_ITENS_CESTA = "itens_da_cesta";
     // Comandos SQL para criar as Tabelas do Banco de Dados
     private static final String CRIA_TABELA_ITENS_CESTA = "CREATE TABLE "
             + TABELA_ITENS_CESTA + " ( " + COLUNA_ID_ITEM_CESTA
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_CESTA
             + " TEXT NOT NULL, " + COLUNA_NOME_ITEM_CESTA
-            + " TEXT NOT NULL, " + COLUNA_QUANTIDADE_ITEM_CESTA
-            + " TEXT NOT NULL, " + COLUNA_PRECO_ITEM_CESTA
-            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_CESTA + " TEXT)";
+            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_CESTA
+            + " TEXT, " + COLUNA_QUANTIDADE_ITEM_CESTA
+            + " REAL, " + COLUNA_UNIDADE_ITEM_CESTA
+            + " TEXT, " + COLUNA_VALOR_ITEM_CESTA
+            + " REAL, " + COLUNA_PRECO_ITEM_CESTA + " TXT)";
     // Valores para criar o Banco de Dados
     private static final String BANCO_DE_DADOS = "super_lista";
-    private static final int VERSAO_BANCO_DE_DADOS = 2; // NOVA VERSAO FOI CRIADA
+    private static final int VERSAO_BANCO_DE_DADOS = 3; // NOVA VERSAO FOI CRIADA
     private static final String TAG = "DBListas";
     // Titulos das colunas das Tabelas do Banco de Dados
-    static String[] colunas_listas = {COLUNA_ID_LISTA, COLUNA_NOME_LISTA};
-    static String[] colunas_itens_cesta = {COLUNA_ID_ITEM_CESTA,
+    private static String[] colunas_listas = {COLUNA_ID_LISTA, COLUNA_NOME_LISTA};
+    private static String[] colunas_itens_cesta = {COLUNA_ID_ITEM_CESTA,
             COLUNA_CODIGO_CESTA, COLUNA_NOME_ITEM_CESTA,
-            COLUNA_QUANTIDADE_ITEM_CESTA, COLUNA_PRECO_ITEM_CESTA, COLUNA_DESCRICAO_ITEM_CESTA};
-    static String[] colunas_itens_lista = {COLUNA_ID_ITEM_LISTA,
+            COLUNA_DESCRICAO_ITEM_CESTA, COLUNA_QUANTIDADE_ITEM_CESTA,
+            COLUNA_UNIDADE_ITEM_CESTA, COLUNA_VALOR_ITEM_CESTA, COLUNA_PRECO_ITEM_CESTA};
+    private static String[] colunas_itens_lista = {COLUNA_ID_ITEM_LISTA,
             COLUNA_CODIGO_LISTA, COLUNA_NOME_ITEM_LISTA,
-            COLUNA_QUANTIDADE_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA, COLUNA_DESCRICAO_ITEM_LISTA};
+            COLUNA_DESCRICAO_ITEM_LISTA, COLUNA_QUANTIDADE_ITEM_LISTA,
+            COLUNA_UNIDADE_ITEM_LISTA, COLUNA_VALOR_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA};
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
 
-    public DBListas(Context paramContext) {
-        Context context = paramContext;
-        this.DBHelper = new DatabaseHelper(context);
+    public DBListas(Context cont) {
+        this.DBHelper = new DatabaseHelper(cont);
     }
 
     public DBListas open() throws SQLException {
@@ -224,25 +233,27 @@ public class DBListas {
 
     // ------ METODOS QUE CRIAM VALORES NO BANCO DE DADOS
 
-    public long insereItemCesta(String lista, String item, String descricao, String quantidade,
-                                String preco) {
+    public long insereItemCesta(String cesta, String item, String descricao, double quantidade,
+                                String unidade, double valor) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUNA_CODIGO_CESTA, lista);
+        cv.put(COLUNA_CODIGO_CESTA, cesta);
         cv.put(COLUNA_NOME_ITEM_CESTA, item);
-        cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
-        cv.put(COLUNA_PRECO_ITEM_CESTA, preco);
         cv.put(COLUNA_DESCRICAO_ITEM_CESTA, descricao);
+        cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
+        cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
+        cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
         return this.db.insert(TABELA_ITENS_CESTA, null, cv);
     }
 
-    public long insereItemLista(String lista, String item, String descricao, String quantidade,
-                                String preco) {
+    public long insereItemLista(String lista, String item, String descricao, double quantidade,
+                                String unidade, double valor) {
         ContentValues cv = new ContentValues();
         cv.put(COLUNA_CODIGO_LISTA, lista);
         cv.put(COLUNA_NOME_ITEM_LISTA, item);
-        cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
-        cv.put(COLUNA_PRECO_ITEM_LISTA, preco);
         cv.put(COLUNA_DESCRICAO_ITEM_LISTA, descricao);
+        cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
+        cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
+        cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
         return this.db.insert(TABELA_ITENS_LISTA, null, cv);
     }
 
@@ -254,10 +265,10 @@ public class DBListas {
 
     // ------ METODOS QUE EXIBEM VALORES DO BANCO DE DADOS
 
-    public String mostraItemLista(long idLong, String cesta) throws SQLException {
+    public String mostraItemLista(long idLong, String tipo) throws SQLException {
 
         Cursor cursor;
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
                     COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
                     null, null);
@@ -275,10 +286,31 @@ public class DBListas {
         return null;
     }
 
-    public String mostraDescricaoItemLista(long idLong, String cesta) throws SQLException {
+    public String mostraDescricaoItemLista(long idLong, String tipo) throws SQLException {
 
         Cursor cursor;
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
+            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
+                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
+                    null, null);
+        } else {
+            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
+                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
+                    null, null);
+        }
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String str = cursor.getString(3);
+            cursor.close();
+            return str;
+        }
+        return null;
+    }
+
+    public String mostraUnidadeItemLista(long idLong, String tipo) throws SQLException {
+
+        Cursor cursor;
+        if (tipo.equals("lista")) {
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
                     COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
                     null, null);
@@ -296,10 +328,10 @@ public class DBListas {
         return null;
     }
 
-    public String mostraQuantidadeItemLista(long idLong, String cesta) throws SQLException {
+    public Double mostraQuantidadeItemLista(long idLong, String tipo) throws SQLException {
 
         Cursor cursor;
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
                     COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
                     null, null);
@@ -310,16 +342,16 @@ public class DBListas {
         }
 
         if (cursor != null && cursor.moveToFirst()) {
-            String str = cursor.getString(3);
+            Double db = cursor.getDouble(4);
             cursor.close();
-            return str;
+            return db;
         }
-        return null;
+        return 0.0D;
     }
 
-    public String mostraValorItemLista(long idLong, String cesta) throws SQLException {
+    public Double mostraValorItemLista(long idLong, String tipo) throws SQLException {
         Cursor cursor;
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
                     COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
                     null, null);
@@ -328,56 +360,46 @@ public class DBListas {
                     COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
                     null, null);
         }
-        if (cursor != null) {
-            cursor.moveToFirst();
-            return cursor.getString(4);
+        if (cursor != null && cursor.moveToFirst()) {
+            Double db = cursor.getDouble(6);
+            cursor.close();
+            return db;
         }
-        return null;
+        return 0.0D;
     }
 
     @SuppressLint("DefaultLocale")
-    public String mostraValorCesta(String lista) throws SQLException {
+    public double mostraValor(String lista, String tipo) throws SQLException {
         lista = lista.replace("'", "''");
-        String u = "";
-        String valor = "";
-        String qte = "";
-        Cursor cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
-                null);
+        Cursor cursor = null;
+
+        if (tipo.equals("cesta"))
+            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
+                    COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
+                    null);
+        else
+            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
+                    COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
+                    null);
         int i = cursor.getCount();
         cursor.moveToLast();
         double preco = 0.0D;
-        double qt = 0.0D;
         for (int j = 0; j < i; j++) {
-            valor = cursor.getString(4);
-            qte = cursor.getString(3);
-            qte = qte.replace("", "");
-            qte = qte.replace(" unid", "");
-            qte = qte.replace(" caixa", "");
-            qte = qte.replace(" kg", "");
-            qte = qte.replace(" litro", "");
-            qte = qte.replace(" g", "");
-            qte = qte.replace(" ml", "");
-            qte = qte.replace(" pc", "");
-            qte = qte.replace(",", ".");
-            qt = Double.parseDouble(qte);
-            valor = valor.replace("R$ ", "");
-            valor = valor.replace("$ ", "");
-            valor = valor.replace(",", ".");
-            preco += qt * Double.parseDouble(valor);
+            double qt = cursor.getDouble(4);
+            double valor = cursor.getDouble(6);
+            preco += qt * valor;
             cursor.moveToPrevious();
         }
-        u = String.format("%.2f", preco); // VALOR DAS RECEITAS
         cursor.close();
-        return u;
+        return preco;
     }
 
     // ------------METODOS QUE ALTERAM VALORES NO BANCO DE DADOS
 
-    public boolean mudaNomeItem(long idLong, String item, String cesta) {
+    public boolean mudaNomeItem(long idLong, String item, String tipo) {
         ContentValues cv = new ContentValues();
 
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
             cv.put(COLUNA_NOME_ITEM_LISTA, item);
             return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
                     + " = '" + idLong + "'", null) > 0;
@@ -388,10 +410,24 @@ public class DBListas {
         }
     }
 
-    public boolean mudaDescricaoItem(long idLong, String descricao, String cesta) {
+    public boolean mudaUnidadeItem(long idLong, String unidade, String tipo) {
         ContentValues cv = new ContentValues();
 
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
+            cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
+            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
+                    + " = '" + idLong + "'", null) > 0;
+        } else {
+            cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
+            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
+                    + " = '" + idLong + "'", null) > 0;
+        }
+    }
+
+    public boolean mudaDescricaoItem(long idLong, String descricao, String tipo) {
+        ContentValues cv = new ContentValues();
+
+        if (tipo.equals("lista")) {
             cv.put(COLUNA_DESCRICAO_ITEM_LISTA, descricao);
             return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
                     + " = '" + idLong + "'", null) > 0;
@@ -418,23 +454,23 @@ public class DBListas {
                 + " = '" + nomeAntes + "' ", null) > 0;
     }
 
-    public boolean mudaPrecoItem(long idLong, String preco, String cesta) {
+    public boolean mudaValorItem(long idLong, double valor, String tipo) {
         ContentValues cv = new ContentValues();
-        if (cesta.equals("vazia")) {
-            cv.put(COLUNA_PRECO_ITEM_LISTA, preco);
+        if (tipo.equals("lista")) {
+            cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
             return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
                     + " = '" + idLong + "'", null) > 0;
         } else {
-            cv.put(COLUNA_PRECO_ITEM_CESTA, preco);
+            cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
             return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
                     + " = '" + idLong + "'", null) > 0;
         }
     }
 
-    public boolean mudaQuantidadeItem(long idLong, String quantidade,
-                                      String cesta) {
+    public boolean mudaQuantidadeItem(long idLong, double quantidade,
+                                      String tipo) {
         ContentValues cv = new ContentValues();
-        if (cesta.equals("vazia")) {
+        if (tipo.equals("lista")) {
             cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
             return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
                     + " = '" + idLong + "'", null) > 0;
@@ -453,7 +489,7 @@ public class DBListas {
                 COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
                 COLUNA_NOME_ITEM_LISTA + " ASC");
         int i = cursor.getColumnIndex(COLUNA_NOME_ITEM_LISTA);
-        int j = cursor.getColumnIndex(COLUNA_QUANTIDADE_ITEM_LISTA);
+        int j = cursor.getColumnIndex(COLUNA_UNIDADE_ITEM_LISTA);
         int k = cursor.getColumnIndex(COLUNA_DESCRICAO_ITEM_LISTA);
         String str = "Lista de itens de " + lista + ":\n";
         cursor.moveToFirst();
@@ -516,10 +552,10 @@ public class DBListas {
                 String currentDBPath = "//data//com.msk.superlista//databases//super_lista";
                 String backupDBPath = "super_lista";
                 File currentDB = new File(data, currentDBPath);
-                File backupDB = new File(sd, backupDBPath);
+                //File backupDB = new File(sd, backupDBPath);
 
                 if (currentDB.exists()) {
-                    FileChannel src = new FileInputStream(backupDB)
+                    FileChannel src = new FileInputStream(sd)
                             .getChannel();
                     FileChannel dst = new FileOutputStream(currentDB)
                             .getChannel();
@@ -530,6 +566,132 @@ public class DBListas {
             }
         } catch (Exception e) {
         }
+    }
+
+    public void ModificadaDados() throws SQLException {
+        // CORRIGE VALOR, QUANTIDADE E UNIDADE
+        String valor = "";
+        String qte = "";
+        String un = "";
+
+        Cursor cursor = db.query(TABELA_ITENS_LISTA, null,
+                null, null, null, null, null);
+        int i = cursor.getCount();
+        cursor.moveToLast();
+        long idLong;
+        double preco = 0.0D;
+        double qt = 0.0D;
+
+        try {
+            if (!cursor.getString(7).equals("")) {
+                for (int j = 0; j < i; j++) {
+                    idLong = cursor.getLong(0);
+                    valor = cursor.getString(7);
+                    qte = cursor.getString(5);
+                    qte = qte.replace("", "");
+                    qte = qte.replace(" unid", "");
+                    qte = qte.replace(" caixa", "");
+                    qte = qte.replace(" kg", "");
+                    qte = qte.replace(" litro", "");
+                    qte = qte.replace(" g", "");
+                    qte = qte.replace(" ml", "");
+                    qte = qte.replace(" pc", "");
+                    qte = qte.replace(",", ".");
+                    qt = Double.parseDouble(qte);
+                    un = cursor.getString(5);
+                    int k = un.length();
+                    String unid = un.substring(k);
+                    if (unid.equals("c")) {
+                        un = "pc";
+                    } else if (unid.equals("a")) {
+                        un = "caixa";
+                    } else if (unid.equals("g")) {
+                        un = "kg";
+                    } else if (unid.equals("o")) {
+                        un = "litro";
+                    } else if (unid.equals("l")) {
+                        un = "ml";
+                    } else {
+                        un = "unid";
+                    }
+                    valor = valor.replace("R$ ", "");
+                    valor = valor.replace("$ ", "");
+                    valor = valor.replace(",", ".");
+                    preco = Double.parseDouble(valor);
+                    ContentValues cv = new ContentValues();
+                    cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, qt);
+                    cv.put(COLUNA_VALOR_ITEM_LISTA, preco);
+                    cv.put(COLUNA_UNIDADE_ITEM_LISTA, un);
+                    cv.put(COLUNA_PRECO_ITEM_LISTA, "");
+                    db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
+                            + " = '" + idLong + "'", null);
+                    cursor.moveToPrevious();
+                }
+            }
+
+            cursor.close();
+
+            // CORRIGE VALOR, QUANTIDADE E UNIDADE
+            valor = "";
+            qte = "";
+            un = "";
+            cursor = db.query(TABELA_ITENS_CESTA, null,
+                    null, null, null, null, null);
+            i = cursor.getCount();
+            cursor.moveToLast();
+            preco = 0.0D;
+            qt = 0.0D;
+            if (!cursor.getString(7).equals("")) {
+                for (int j = 0; j < i; j++) {
+                    idLong = cursor.getLong(0);
+                    valor = cursor.getString(7);
+                    qte = cursor.getString(5);
+                    qte = qte.replace("", "");
+                    qte = qte.replace(" unid", "");
+                    qte = qte.replace(" caixa", "");
+                    qte = qte.replace(" kg", "");
+                    qte = qte.replace(" litro", "");
+                    qte = qte.replace(" g", "");
+                    qte = qte.replace(" ml", "");
+                    qte = qte.replace(" pc", "");
+                    qte = qte.replace(",", ".");
+                    qt = Double.parseDouble(qte);
+                    un = cursor.getString(5);
+                    int k = un.length();
+                    String unid = un.substring(k);
+                    if (unid.equals("c")) {
+                        un = "pc";
+                    } else if (unid.equals("a")) {
+                        un = "caixa";
+                    } else if (unid.equals("g")) {
+                        un = "kg";
+                    } else if (unid.equals("o")) {
+                        un = "litro";
+                    } else if (unid.equals("l")) {
+                        un = "ml";
+                    } else {
+                        un = "unid";
+                    }
+                    valor = valor.replace("R$ ", "");
+                    valor = valor.replace("$ ", "");
+                    valor = valor.replace(",", ".");
+                    preco = Double.parseDouble(valor);
+                    ContentValues cv = new ContentValues();
+                    cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, qt);
+                    cv.put(COLUNA_VALOR_ITEM_CESTA, preco);
+                    cv.put(COLUNA_UNIDADE_ITEM_CESTA, un);
+                    cv.put(COLUNA_PRECO_ITEM_CESTA, "");
+                    db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
+                            + " = '" + idLong + "'", null);
+                    cursor.moveToPrevious();
+                }
+            }
+            cursor.close();
+        } catch (Exception e) {
+            Log.w(TAG, "Erro ao modificar dados");
+        }
+
+
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
@@ -559,16 +721,21 @@ public class DBListas {
                     + "tabela_temporaria" + " ( " + COLUNA_ID_ITEM_LISTA
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_LISTA
                     + " TEXT, " + COLUNA_NOME_ITEM_LISTA
+                    + " TEXT, " + COLUNA_DESCRICAO_ITEM_LISTA
                     + " TEXT, " + COLUNA_QUANTIDADE_ITEM_LISTA
-                    + " TEXT, " + COLUNA_PRECO_ITEM_LISTA
-                    + " TEXT )");
+                    + " REAL, " + COLUNA_UNIDADE_ITEM_LISTA
+                    + " TXT, " + COLUNA_VALOR_ITEM_LISTA
+                    + " REAL, preco_item_lista TXT )");
 
             pSQLiteDB.execSQL("INSERT INTO tabela_temporaria"
                     + " SELECT " + COLUNA_ID_ITEM_LISTA
                     + ", " + COLUNA_CODIGO_LISTA
                     + ", " + COLUNA_NOME_ITEM_LISTA
+                    + ", " + COLUNA_DESCRICAO_ITEM_LISTA
+                    + ", " + null
                     + ", " + COLUNA_QUANTIDADE_ITEM_LISTA
-                    + ", " + COLUNA_PRECO_ITEM_LISTA
+                    + ", " + null
+                    + ", preco_item_lista"
                     + " FROM " + TABELA_ITENS_LISTA);
 
             pSQLiteDB.execSQL("DROP TABLE " + TABELA_ITENS_LISTA);
@@ -579,9 +746,11 @@ public class DBListas {
                     + TABELA_ITENS_LISTA + " SELECT " + COLUNA_ID_ITEM_LISTA
                     + ", " + COLUNA_CODIGO_LISTA
                     + ", " + COLUNA_NOME_ITEM_LISTA
+                    + ", " + COLUNA_DESCRICAO_ITEM_LISTA
                     + ", " + COLUNA_QUANTIDADE_ITEM_LISTA
-                    + ", " + COLUNA_PRECO_ITEM_LISTA
-                    + ", " + null + " FROM tabela_temporaria");
+                    + ", " + COLUNA_UNIDADE_ITEM_LISTA
+                    + ", " + COLUNA_VALOR_ITEM_LISTA
+                    + ", preco_item_lista FROM tabela_temporaria");
 
             pSQLiteDB.execSQL("DROP TABLE tabela_temporaria");
 
@@ -590,16 +759,21 @@ public class DBListas {
                     + "tabela_temporaria" + " ( " + COLUNA_ID_ITEM_CESTA
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_CESTA
                     + " TEXT, " + COLUNA_NOME_ITEM_CESTA
+                    + " TEXT, " + COLUNA_DESCRICAO_ITEM_CESTA
                     + " TEXT, " + COLUNA_QUANTIDADE_ITEM_CESTA
-                    + " TEXT, " + COLUNA_PRECO_ITEM_CESTA
-                    + " TEXT )");
+                    + " REAL, " + COLUNA_UNIDADE_ITEM_CESTA
+                    + " TXT, " + COLUNA_VALOR_ITEM_CESTA
+                    + " REAL, preco_item_cesta TXT )");
 
             pSQLiteDB.execSQL("INSERT INTO tabela_temporaria"
                     + " SELECT " + COLUNA_ID_ITEM_CESTA
                     + ", " + COLUNA_CODIGO_CESTA
                     + ", " + COLUNA_NOME_ITEM_CESTA
+                    + ", " + COLUNA_DESCRICAO_ITEM_CESTA
+                    + ", " + null
                     + ", " + COLUNA_QUANTIDADE_ITEM_CESTA
-                    + ", " + COLUNA_PRECO_ITEM_CESTA
+                    + ", " + null
+                    + ", preco_item_cesta"
                     + " FROM " + TABELA_ITENS_CESTA);
 
             pSQLiteDB.execSQL("DROP TABLE " + TABELA_ITENS_CESTA);
@@ -610,9 +784,11 @@ public class DBListas {
                     + TABELA_ITENS_CESTA + " SELECT " + COLUNA_ID_ITEM_CESTA
                     + ", " + COLUNA_CODIGO_CESTA
                     + ", " + COLUNA_NOME_ITEM_CESTA
+                    + ", " + COLUNA_DESCRICAO_ITEM_CESTA
                     + ", " + COLUNA_QUANTIDADE_ITEM_CESTA
-                    + ", " + COLUNA_PRECO_ITEM_CESTA
-                    + ", " + null + " FROM tabela_temporaria");
+                    + ", " + COLUNA_UNIDADE_ITEM_CESTA
+                    + ", " + COLUNA_VALOR_ITEM_CESTA
+                    + ", preco_item_cesta FROM tabela_temporaria");
 
             pSQLiteDB.execSQL("DROP TABLE tabela_temporaria");
         }

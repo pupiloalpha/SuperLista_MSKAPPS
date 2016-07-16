@@ -13,16 +13,17 @@ import android.provider.CalendarContract.Events;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -30,38 +31,38 @@ import android.widget.Toast;
 
 import com.msk.superlista.R;
 
+import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 @SuppressLint("InlinedApi")
 public class CriaLista extends AppCompatActivity implements View.OnClickListener {
 
     // VARIAVEIS UTLIZADAS
-    final static Calendar c = Calendar.getInstance();
+    private final static Calendar c = Calendar.getInstance();
     // CLASSE COM BANCO DE DADOS
-    DBListas dbListaCriada = new DBListas(this);
+    private DBListas dbListaCriada = new DBListas(this);
     // ELEMENTSO DA TELA
-    private ImageButton ibAdiciona, ibExclui;
+    private ImageView ibAdiciona, ibExclui;
     private LayoutInflater inflaterLista;
     private ListView listaCriada;
     private AppCompatAutoCompleteTextView nomeNovoItem;
     private TextView nomeItem, descricaoItem, semItem, preco, unidade;
     private View viewLista;
     // ELEMENTOS PARA MONTAR A LISTA
-    private ArrayAdapter<String> adapItem;
     private SimpleCursorAdapter buscaItens;
+    private NumberFormat dinheiro, quantidade;
     private Cursor itensParaLista = null;
     private Cursor itensParaCesta = null;
     private long idItem;
-    private int cesta = 0;
-    private String conteudoLista, itemDaLista, listaFeita, descricao, outroItemNovo,
-            quantidadeItem, valorItem, nItem, valItem, qteItem;
+    private String itemDaLista, listaFeita, descricao, unidItem, nItem, quantde, valor;
+    private double valorItem, qteItem;
 
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         setContentView(R.layout.minha_lista);
-        // setTheme(android.R.style.Theme_Black);
         dbListaCriada.open();
         iniciar();
         listaFeita = getIntent().getExtras().getString("lista");
@@ -82,7 +83,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 dbListaCriada.close();
                 FazLista();
                 Bundle carta = new Bundle();
-                carta.putString("cesta", "vazia");
+                carta.putString("tipo", "lista");
                 carta.putLong("id", idItem);
                 Intent correio = new Intent("com.msk.superlista.EDITAITEM");
                 correio.putExtras(carta);
@@ -94,30 +95,27 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
 
     private void iniciar() {
         nomeNovoItem = ((AppCompatAutoCompleteTextView) findViewById(R.id.etItem));
-        nomeItem = ((TextView) findViewById(R.id.tvItemEscolhido));
         semItem = ((TextView) findViewById(R.id.tvSemItem));
-        unidade = ((TextView) findViewById(R.id.tvUnidade));
-        preco = ((TextView) findViewById(R.id.tvValor));
         listaCriada = ((ListView) findViewById(R.id.lvListaCriada));
-        ibExclui = ((ImageButton) findViewById(R.id.ibExcluiItemEscolhido));
-        ibAdiciona = ((ImageButton) findViewById(R.id.ibAdicionaItens));
-        adapItem = new ArrayAdapter<String>(this,
+        ibAdiciona = ((ImageView) findViewById(R.id.ibAdicionaItens));
+        ArrayAdapter<String> adapItem = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources()
                 .getStringArray(R.array.ListaComTudo));
         nomeNovoItem.setAdapter(adapItem);
-
+        Locale current = getResources().getConfiguration().locale;
+        dinheiro = NumberFormat.getCurrencyInstance(current);
+        quantidade = NumberFormat.getNumberInstance(current);
     }
 
     private void RecuperaItens() {
         // VERIFICA SE USUARIO DESEJA RECUPERAR ITENS DA CESTA
         dbListaCriada.open();
-        cesta = dbListaCriada.contaItensCesta(listaFeita);
+        int cesta = dbListaCriada.contaItensCesta(listaFeita);
         dbListaCriada.close();
 
         if (cesta > 0) {
             // O QUE FAZER SE EXISTEM ITENS NA CESTA MAS NAO EXISTE NA LISTA
-            new AlertDialog.Builder(new ContextThemeWrapper(this,
-                    R.style.TemaDialogo))
+            new AlertDialog.Builder(this)
                     .setTitle(R.string.titulo_recupera_lista)
                     .setMessage(R.string.texto_recupera_lista)
                     .setPositiveButton(R.string.ok,
@@ -131,12 +129,14 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                                             .getCount(); j++) {
                                         itensParaCesta.moveToPosition(j);
                                         nItem = itensParaCesta.getString(2);
-                                        qteItem = itensParaCesta.getString(3);
-                                        valItem = itensParaCesta.getString(4);
-                                        descricao = itensParaCesta.getString(5);
+                                        descricao = itensParaCesta.getString(3);
+                                        qteItem = itensParaCesta.getDouble(4);
+                                        unidItem = itensParaCesta.getString(5);
+                                        valorItem = itensParaCesta.getDouble(6);
+
                                         dbListaCriada.insereItemLista(
                                                 listaFeita, nItem, descricao,
-                                                qteItem, valItem);
+                                                valorItem, unidItem, qteItem);
                                     }
 
                                     dbListaCriada.excluiItensCesta(listaFeita);
@@ -185,16 +185,17 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                     unidade = ((TextView) viewLista
                             .findViewById(R.id.tvUnidade));
                     preco = ((TextView) viewLista.findViewById(R.id.tvValor));
-                    ibExclui = ((ImageButton) viewLista
+                    ibExclui = ((ImageView) viewLista
                             .findViewById(R.id.ibExcluiItemEscolhido));
                     ibExclui.setFocusable(false);
                     // BUSCA VALORES PARA COLOCAR NA LINHA
                     dbListaCriada.open();
                     itensParaLista.moveToPosition(pItemLista);
                     itemDaLista = itensParaLista.getString(2);
-                    quantidadeItem = itensParaLista.getString(3);
-                    valorItem = itensParaLista.getString(4);
-                    descricao = itensParaLista.getString(5);
+                    descricao = itensParaLista.getString(3);
+                    quantde = quantidade.format(itensParaLista.getDouble(4)) + " "
+                            + itensParaLista.getString(5);
+                    valor = dinheiro.format(itensParaLista.getDouble(6));
 
                     // COLOCA OS VALORES NA LINHA
                     nomeItem.setText(itemDaLista);
@@ -202,20 +203,24 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                         descricaoItem.setText(descricao);
                     if (descricaoItem.getText().toString().equals(""))
                         descricaoItem.setText(R.string.descricao_item);
-                    ibExclui.setTag(Long.valueOf(itensParaLista.getLong(0)));
-                    unidade.setText(quantidadeItem);
-                    preco.setText(valorItem);
+                    ibExclui.setTag(itensParaLista.getLong(0));
+                    unidade.setText(quantde);
+                    preco.setText(valor);
+                    if (itensParaLista.getDouble(6) == 0.0D)
+                        preco.setVisibility(View.GONE);
                     dbListaCriada.close();
 
                     // METODO AO CLICAR NO ICONE DE EXCLUIR ITEM
                     ibExclui.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View vItem) {
-                            ibExclui = ((ImageButton) vItem);
-                            idItem = ((Long) ibExclui.getTag()).longValue();
+                            //ibExclui = ((ImageView) vItem);
+                            Animation anime = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+                            vItem.startAnimation(anime);
+                            idItem = ((Long) vItem.getTag()).longValue();
                             dbListaCriada.open();
-                            String str = dbListaCriada.mostraItemLista(idItem, "vazia");
+                            String str = dbListaCriada.mostraItemLista(idItem, "lista");
 
-                            if (dbListaCriada.excluiItemLista(idItem) == true)
+                            if (dbListaCriada.excluiItemLista(idItem))
                                 Toast.makeText(
                                         getApplicationContext(),
                                         String.format(
@@ -260,8 +265,10 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
     public void onClick(View paramView) {
         switch (paramView.getId()) {
             case R.id.ibAdicionaItens:
+                Animation anime = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
+                paramView.startAnimation(anime);
                 nomeNovoItem.setTag(nomeNovoItem.getText().toString());
-                outroItemNovo = nomeNovoItem.getTag().toString();
+                String outroItemNovo = nomeNovoItem.getTag().toString();
                 nomeNovoItem.setText("");
                 if (!outroItemNovo.equals("")) {
                     dbListaCriada.open();
@@ -272,8 +279,8 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                     if (qt == 0 && qt0 == 0) {
                         if (dbListaCriada.insereItemLista(listaFeita,
                                 outroItemNovo, null,
-                                getResources().getString(R.string.dica_unid),
-                                getResources().getString(R.string.dica_zero)) >= 0)
+                                1.0D,
+                                "unid", 0.0D) >= 0)
                             Toast.makeText(
                                     getApplicationContext(),
                                     String.format(
@@ -323,7 +330,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         toolbar.setSubtitle(qtItens);
         toolbar.setDisplayHomeAsUpEnabled(true);
         toolbar.setHomeButtonEnabled(true);
-        //nomeLista.setText(listaFeita);
 
     }
 
@@ -360,7 +366,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.botao_envia_lista:
                 dbListaCriada.open();
-                conteudoLista = dbListaCriada.pegaItensLista(listaFeita);
+                String conteudoLista = dbListaCriada.pegaItensLista(listaFeita);
                 dbListaCriada.close();
                 Intent correio = new Intent(Intent.ACTION_SEND);
                 correio.putExtra(Intent.EXTRA_TEXT, conteudoLista);
@@ -400,7 +406,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         int lista = dbListaCriada.contaItensLista(listaFeita);
         int cesta = dbListaCriada.contaItensCesta(listaFeita);
 
-        if (lista <= 0 && cesta <= 0) {
+        if (lista < 1 && cesta < 1) {
             dbListaCriada.excluiLista(listaFeita);
         }
 

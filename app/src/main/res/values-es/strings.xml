@@ -61,8 +61,8 @@
     <string name="dica_item_fora_cesta">Artículo %1$s está fuera de la cesta.</string>
     <string name="dica_lista_removida">Lista %1$s ha sido removida.</string>
     <string name="info_item">Detalles de %1$s</string>
-    <string name="info_valor_item">Total a pagar: $ %1$s</string>
-    <string name="dica_valor_lista">$ %1$s</string>
+    <string name="info_valor_cesta">A pagar: %1$s</string>
+    <string name="info_valor_lista">De espera: %1$s</string>
 
     <!-- Strings de dialogos no Aplicativo -->
 
@@ -120,9 +120,9 @@ Realice una copia de las listas de la tarjeta SD. Creación y edición de todo t
     <string name="pref_descricao_auto_bkup_sim">Hacer copia de seguridad siempre que la aplicación de cerca</string>
     <string name="pref_descricao_auto_bkup_nao">Hacer copia de seguridad sólo cuando el usuario seleccione</string>
     <string name="pref_titulo_bkup">Hacer copia de seguridad de las listas</string>
-    <string name="pref_descricao_bkup">Guarda una copia de las listas en la tarjeta SD</string>
+    <string name="pref_descricao_bkup">Guarda una copia de las listas</string>
     <string name="pref_titulo_restaura">Restaurar las listas guardadas</string>
-    <string name="pref_descricao_restaura">Recupera listas guardadas en la tarjeta SD</string>
+    <string name="pref_descricao_restaura">Recupera listas guardadas</string>
 
     <!-- Ajustes APAGATUDO -->
 

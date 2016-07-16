@@ -36,8 +36,8 @@ import com.msk.superlista.db.DBListas;
 public class Ajustes extends PreferenceActivity implements
         OnPreferenceClickListener {
 
-    Toolbar toolbar;
-    DBListas dbMinhasListas = new DBListas(this);
+    private Toolbar toolbar;
+    private DBListas dbMinhasListas = new DBListas(this);
     private Preference backup, restaura, apagatudo, versao;
     private CheckBoxPreference cesta, autobkup;
     private PreferenceScreen prefs;
@@ -104,10 +104,15 @@ public class Ajustes extends PreferenceActivity implements
         chave = itemPref.getKey();
 
         if (chave.equals("backup")) {
-            // Cria um Backup do Banco de Dados
-            abrePasta();
-
+            // Seleciona pasta para backup
+            abrePasta(111);
         }
+
+        if (chave.equals("restaura")) {
+            // Seleciona o arquivo backup
+            abrePasta(222);
+        }
+
         if (chave.equals("autobackup")) {
 
             if (autobkup.isChecked()) {
@@ -117,16 +122,6 @@ public class Ajustes extends PreferenceActivity implements
             }
         }
 
-        if (chave.equals("restaura")) {
-            // Restaura DB
-            dbMinhasListas.open();
-            dbMinhasListas.restauraBD(pastaBackUp);
-            // onResume();
-            Toast.makeText(getApplicationContext(),
-                    getString(R.string.dica_restaura_bd), Toast.LENGTH_SHORT)
-                    .show();
-            dbMinhasListas.close();
-        }
         if (chave.equals("apagatudo")) {
 
             Dialogo();
@@ -221,8 +216,22 @@ public class Ajustes extends PreferenceActivity implements
         return null;
     }
 
-    public void abrePasta() {
-        startActivityForResult(new Intent(this, EscolhePasta.class), 111);
+    public void abrePasta(int nr) {
+        if (nr == 111) {
+            Bundle envelope = new Bundle();
+            envelope.putString("tipo", "");
+            Intent atividade = new Intent(this, EscolhePasta.class);
+            atividade.putExtras(envelope);
+            startActivityForResult(atividade, nr);
+        }
+
+        if (nr == 222) {
+            Bundle envelope = new Bundle();
+            envelope.putString("tipo", "super_lista");
+            Intent atividade = new Intent(this, EscolhePasta.class);
+            atividade.putExtras(envelope);
+            startActivityForResult(atividade, nr);
+        }
     }
 
 
@@ -240,6 +249,11 @@ public class Ajustes extends PreferenceActivity implements
 
                         try {
 
+                            SharedPreferences sharedPref = getSharedPreferences("backup", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sharedPref.edit();
+                            edit.putString("backup", path);
+                            edit.commit();
+
                             // Cria um Backup do Banco de Dados
                             dbMinhasListas.open();
                             dbMinhasListas.copiaBD(path);
@@ -250,9 +264,44 @@ public class Ajustes extends PreferenceActivity implements
                                     .show();
                             dbMinhasListas.close();
 
+                            pastaBackUp = sharedPref.getString("backup", "");
+
+                            if (!pastaBackUp.equals("")) {
+
+                                backup.setSummary(pastaBackUp);
+                            }
+
                         } catch (Exception e) {
 
                             Log.e("Seleção de arquivos", "Deu erro!!!", e);
+                        }
+                    }
+                }
+
+                break;
+            case 222:
+
+                if (resultCode == RESULT_OK) {
+
+                    if (data != null) {
+
+                        Bundle extras = data.getExtras();
+                        String path = (String) extras.get(EscolhePasta.CHOSEN_DIRECTORY);
+
+                        try {
+
+                            // Restaura DB
+                            dbMinhasListas.open();
+                            dbMinhasListas.restauraBD(path);
+                            // onResume();
+                            Toast.makeText(getApplicationContext(),
+                                    getString(R.string.dica_restaura_bd), Toast.LENGTH_SHORT)
+                                    .show();
+                            dbMinhasListas.close();
+
+                        } catch (Exception e) {
+
+                            Log.e("Selecao de arquivos", "Deu erro!!!", e);
                         }
                     }
                 }

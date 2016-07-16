@@ -60,8 +60,8 @@
     <string name="dica_item_fora_cesta">Item %1$s put out of cesta.</string>
     <string name="dica_lista_removida">Lista %1$s was removed.</string>
     <string name="info_item">Details of %1$s</string>
-    <string name="info_valor_item">Total to pay: R$ %1$s</string>
-    <string name="dica_valor_lista">$ %1$s</string>
+    <string name="info_valor_cesta">To pay: %1$s</string>
+    <string name="info_valor_lista">Provided: %1$s</string>
 
     <!-- Strings de dialogos no Aplicativo -->
 
@@ -121,10 +121,10 @@
     <string name="pref_descricao_auto_bkup_nao">Make backup of lists when close</string>
     <string name="pref_key_auto_bkup">autobackup</string>
     <string name="pref_titulo_bkup">Make backup of lists</string>
-    <string name="pref_descricao_bkup">Backup of lists in SD card</string>
+    <string name="pref_descricao_bkup">Backup of lists in device storage</string>
     <string name="pref_key_bkup">backup</string>
     <string name="pref_titulo_restaura">Restore saved lists</string>
-    <string name="pref_descricao_restaura">Restore backup from SD card</string>
+    <string name="pref_descricao_restaura">Restore backup from device</string>
     <string name="pref_key_restaura">restaura</string>
 
     <!-- Ajustes APAGATUDO -->

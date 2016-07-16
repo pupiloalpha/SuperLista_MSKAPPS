@@ -55,8 +55,8 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     // VARIAVEIS UTILIZADAS
     private ArrayAdapter<String> adapItem;
     private long idItem;
-    private double preco;
-    private String nomeItem, descricaoItem, quantidadeItem, unidadeItem, valorItem, cesta;
+    private double valorItem, quantidadeItem;
+    private String nomeItem, descricaoItem, unidadeItem, tipo;
 
     @Override
     protected void onCreate(Bundle paramBundle) {
@@ -64,7 +64,7 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         setContentView(R.layout.edita_item);
 
         Bundle localBundle = getIntent().getExtras();
-        cesta = localBundle.getString("cesta");
+        tipo = localBundle.getString("tipo");
         idItem = localBundle.getLong("id");
         dbListaCriada.open();
         iniciar();
@@ -108,65 +108,46 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     private void mostradados() {
 
         // BUSCA DADOS
-        // dbListaCriada.open();
-        quantidadeItem = dbListaCriada.mostraQuantidadeItemLista(idItem, cesta);
-        valorItem = dbListaCriada.mostraValorItemLista(idItem, cesta);
-        descricaoItem = dbListaCriada.mostraDescricaoItemLista(idItem, cesta);
-        nomeItem = dbListaCriada.mostraItemLista(idItem, cesta);
-
-        // dbListaCriada.close();
+        nomeItem = dbListaCriada.mostraItemLista(idItem, tipo);
+        descricaoItem = dbListaCriada.mostraDescricaoItemLista(idItem, tipo);
+        quantidadeItem = dbListaCriada.mostraQuantidadeItemLista(idItem, tipo);
+        unidadeItem = dbListaCriada.mostraUnidadeItemLista(idItem, tipo);
+        valorItem = dbListaCriada.mostraValorItemLista(idItem, tipo);
 
         // COLOCA NOME ITEM NA TELA
         nome.setText(nomeItem);
 
-        // CONVERTE VALOR EM DECIMAL
-        valorItem = valorItem.replace("R$ ", "");
-        valorItem = valorItem.replace("$ ", "");
-        valorItem = valorItem.replace(",", ".");
+        // COLOCA DESCRICAO DO ITEM NA TELA
+        descricao.setText(descricaoItem);
 
-        // COLOCA VALOR NA TELA
-        if (!valorItem.equals("0.00"))
-            valor.setText(valorItem);
+        // COLOCA QUANTIDADE NA TELA
+        if (quantidadeItem != 0.0D)
+            quantidade.setText(quantidadeItem + "");
         else
-            valor.setText("");
+            quantidade.setText("");
 
         // DEFINE UNIDADE UTILIZADA
-        int i = quantidadeItem.length();
-        String unid = quantidadeItem.substring(i);
-
-        if (unid.equals("c")) {
+        if (unidadeItem.equals("pc")) {
             unidades.setSelection(6);
-        } else if (unid.equals("a")) {
+        } else if (unidadeItem.equals("caixa")) {
             unidades.setSelection(1);
-        } else if (unid.equals("g")) {
+        } else if (unidadeItem.equals("kg")) {
             unidades.setSelection(2);
-        } else if (unid.equals("o")) {
+        } else if (unidadeItem.equals("litro")) {
             unidades.setSelection(3);
-        } else if (unid.equals("g")) {
+        } else if (unidadeItem.equals("g")) {
             unidades.setSelection(4);
-        } else if (unid.equals("l")) {
+        } else if (unidadeItem.equals("ml")) {
             unidades.setSelection(5);
         } else {
             unidades.setSelection(0);
         }
 
-        // CONVERTE QUANTIDADE EM NUMERO
-        quantidadeItem = quantidadeItem.replace(" unid", "");
-        quantidadeItem = quantidadeItem.replace(" caixa", "");
-        quantidadeItem = quantidadeItem.replace(" kg", "");
-        quantidadeItem = quantidadeItem.replace(" litro", "");
-        quantidadeItem = quantidadeItem.replace(" g", "");
-        quantidadeItem = quantidadeItem.replace(" ml", "");
-        quantidadeItem = quantidadeItem.replace(" pc", "");
-
-        // COLOCA QUANTIDADE NA TELA
-        if (!quantidadeItem.equals("01"))
-            quantidade.setText(quantidadeItem);
+        // COLOCA VALOR NA TELA
+        if (valorItem != 0.0D)
+            valor.setText(valorItem + "");
         else
-            quantidade.setText("");
-
-        // COLOCA DESCRICAO DO ITEM NA TELA
-        descricao.setText(descricaoItem);
+            valor.setText("");
     }
 
     private void DataDeHoje() {
@@ -232,47 +213,24 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
             case R.id.btModificaItemLista:
 
                 //NOME DO ITEM
-
-                if (!nome.getText().toString().equals(nomeItem))
+                if (!nome.getText().toString().equals(""))
                     dbListaCriada.mudaNomeItem(idItem, nome.getText()
-                                    .toString(),
-                            cesta);
+                            .toString(), tipo);
 
                 dbListaCriada.mudaDescricaoItem(idItem, descricao.getText()
-                                .toString(),
-                        cesta);
+                        .toString(), tipo);
 
-                quantidadeItem = quantidade.getText().toString();
+                dbListaCriada.mudaUnidadeItem(idItem, unidadeItem, tipo);
+
                 // QUANTIDADE DO ITEM
-                if (quantidadeItem.equals(""))
-                    quantidadeItem = "01";
-                if (quantidadeItem.length() == 1)
-                    quantidadeItem = "0" + quantidadeItem;
+                if (quantidade.getText().toString().equals(""))
+                    quantidadeItem = 1.0D;
+                dbListaCriada.mudaQuantidadeItem(idItem, quantidadeItem, tipo);
 
-                String str2 = quantidadeItem + " " + unidadeItem;
-                // dbListaCriada.open();
-                dbListaCriada.mudaQuantidadeItem(idItem, str2, cesta);
-                // dbListaCriada.close();
-
-                valorItem = valor.getText().toString();
                 // PRECO DO ITEM
-                if (valorItem.equals(""))
-                    preco = 0.0D;
-                else
-                    preco = Double.parseDouble(valorItem);
-
-                String str3 = "R$ " + String.format(Locale.US, "%.2f", preco);
-
-                // dbListaCriada.open();
-                if (dbListaCriada.mudaPrecoItem(idItem, str3, cesta)) {
-                    Toast.makeText(
-                            getApplicationContext(),
-                            String.format(
-                                    getResources().getString(
-                                            R.string.dica_item_modificado),
-                                    nomeItem), Toast.LENGTH_SHORT).show();
-                }
-                // dbListaCriada.close();
+                if (valor.getText().toString().equals(""))
+                    valorItem = 0.0D;
+                dbListaCriada.mudaValorItem(idItem, valorItem, tipo);
 
                 if (calendario.isChecked()) {
                     c.set(mAno, mMes, mDia, mHora, mMinuto);
@@ -292,12 +250,16 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                     intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
                     startActivity(intent);
                 }
-
+                setResult(RESULT_OK, null);
+                Toast.makeText(
+                        getApplicationContext(),
+                        String.format(
+                                getResources().getString(
+                                        R.string.dica_item_modificado),
+                                nomeItem), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.ivCancela:
-                dbListaCriada.close();
-                setResult(RESULT_OK, null);
                 finish();
                 break;
         }
@@ -348,7 +310,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                dbListaCriada.close();
                 finish();
                 break;
         }
@@ -358,7 +319,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     @Override
     protected void onDestroy() {
         dbListaCriada.close();
-        setResult(RESULT_OK, null);
         super.onDestroy();
     }
 

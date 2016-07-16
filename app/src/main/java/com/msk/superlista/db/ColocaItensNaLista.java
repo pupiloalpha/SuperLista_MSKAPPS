@@ -27,7 +27,6 @@ public class ColocaItensNaLista extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
     private final List<String> selecionados = new ArrayList<String>();
     private String[] ITENSNOVOS = null;
-    private ArrayAdapter<String> adapLista;
     private Spinner categorias;
     private CheckBox chk;
     private DBListas dbListaNova = new DBListas(this);
@@ -35,7 +34,6 @@ public class ColocaItensNaLista extends AppCompatActivity implements
     private String itemNome;
     private Cursor itensParaLista = null;
     private String listaCriada;
-    private String[] listaItens;
     private ListView listaVazia;
     private TextView nomeItem;
     private View viewLista;
@@ -62,7 +60,7 @@ public class ColocaItensNaLista extends AppCompatActivity implements
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void MostraItens() {
         listaVazia = ((ListView) findViewById(R.id.lvItensLista));
-        adapLista = new ArrayAdapter(this, android.R.layout.simple_list_item_1) {
+        ArrayAdapter<String> adapLista = new ArrayAdapter(this, android.R.layout.simple_list_item_1) {
 
             public View getView(int posicao, View vLista, ViewGroup vGroup) {
 
@@ -94,10 +92,7 @@ public class ColocaItensNaLista extends AppCompatActivity implements
                                             str), Toast.LENGTH_SHORT).show();
                             // dbListaNova.open();
                             dbListaNova.insereItemLista(listaCriada, str, "",
-                                    getResources()
-                                            .getString(R.string.dica_unid),
-                                    getResources()
-                                            .getString(R.string.dica_zero));
+                                    0.0D, "unid", 0.0D);
                             // dbListaNova.close();
                             if (!selecionados.contains(str))
                                 selecionados.add(str);
@@ -115,6 +110,7 @@ public class ColocaItensNaLista extends AppCompatActivity implements
                             if (!selecionados.contains(str))
                                 selecionados.remove(str);
                         }
+                        setResult(RESULT_OK, null);
                     }
                 });
 
@@ -134,7 +130,6 @@ public class ColocaItensNaLista extends AppCompatActivity implements
                         chk.setChecked(true);
                     }
                 }
-                // dbListaNova.close();
 
                 return viewLista;
 
@@ -156,36 +151,36 @@ public class ColocaItensNaLista extends AppCompatActivity implements
 
     public void onItemSelected(AdapterView<?> paramAdapterView, View paramView,
                                int paramInt, long paramLong) {
+
         switch (paramInt) {
             default:
             case 0:
-                listaItens = getResources()
+                ITENSNOVOS = getResources()
                         .getStringArray(R.array.ListaMantimentos);
                 break;
             case 1:
-                listaItens = getResources().getStringArray(R.array.ListaCarnes);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaCarnes);
                 break;
             case 2:
-                listaItens = getResources().getStringArray(R.array.ListaFeira);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaFeira);
                 break;
             case 3:
-                listaItens = getResources().getStringArray(R.array.ListaHigiene);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaHigiene);
                 break;
             case 4:
-                listaItens = getResources().getStringArray(R.array.ListaBebidas);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaBebidas);
                 break;
             case 5:
-                listaItens = getResources().getStringArray(R.array.ListaPapelaria);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaPapelaria);
                 break;
             case 6:
-                listaItens = getResources().getStringArray(R.array.ListaPresente);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaPresente);
                 break;
             case 7:
-                listaItens = getResources().getStringArray(R.array.ListaDiversos);
+                ITENSNOVOS = getResources().getStringArray(R.array.ListaDiversos);
                 break;
         }
 
-        ITENSNOVOS = listaItens;
         MostraItens();
 
     }
@@ -202,7 +197,6 @@ public class ColocaItensNaLista extends AppCompatActivity implements
 
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu pMenu) {
         super.onCreateOptionsMenu(pMenu);
@@ -216,8 +210,6 @@ public class ColocaItensNaLista extends AppCompatActivity implements
         switch (pMenuItem.getItemId()) {
 
             case android.R.id.home:
-                dbListaNova.close();
-                setResult(RESULT_OK, null);
                 finish();
                 break;
             case R.id.ajustes:
@@ -231,11 +223,9 @@ public class ColocaItensNaLista extends AppCompatActivity implements
 
     }
 
-
     @Override
     protected void onDestroy() {
         dbListaNova.close();
-        setResult(RESULT_OK, null);
         super.onDestroy();
     }
 

@@ -3,16 +3,16 @@
     xmlns:mskapp="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@color/linha_fundo"
     android:orientation="horizontal"
     android:padding="5dp">
 
-    <ImageButton
+    <ImageView
         android:id="@+id/ibExcluiItemEscolhido"
         android:layout_width="42dp"
         android:layout_height="54dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
-        android:background="@color/icone_fundo"
         android:contentDescription="@string/icon"
         android:tint="@color/cinza"
         mskapp:srcCompat="@drawable/ic_delete_grey" />
@@ -56,8 +56,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:weightSum="2.0">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvUnidade"

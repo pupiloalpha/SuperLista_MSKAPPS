@@ -3,12 +3,12 @@ package com.msk.superlista;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -33,21 +33,21 @@ import android.widget.Toast;
 
 import com.msk.superlista.db.DBListas;
 
+import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class SuperLista extends AppCompatActivity {
-    SharedPreferences buscaPreferencias = null;
-    Boolean autobkup = true;
-    Calendar c = Calendar.getInstance();
+
+    private Calendar c = Calendar.getInstance();
     // ActionBar actionBar;
-    Intent correio;
+    private Intent correio;
     private SimpleCursorAdapter buscaListas;
     private DBListas dbListasCriadas = new DBListas(this);
     private ImageView ivMenu;
-    private AppCompatImageButton fab;
     private LayoutInflater inflaterLista;
-    private String listaFeita, descricao, valor, qtItens, conteudoLista, nItem, qteItem,
-            valItem, listaCopia, pastaBackUp;
+    private String listaFeita, descricao, unidade, qtItens, nItem, listaCopia, pastaBackUp;
+    private double qteItem, valItem, valor;
     private Cursor listas = null;
     private Cursor itens = null;
     private ListView listasFeitas;
@@ -57,15 +57,14 @@ public class SuperLista extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
-        buscaPreferencias = PreferenceManager.getDefaultSharedPreferences(this);
-        autobkup = buscaPreferencias.getBoolean("autobackup", true);
-        pastaBackUp = buscaPreferencias.getString("backup", "");
+
         setContentView(R.layout.tela_inicial);
 
         listasFeitas = ((ListView) findViewById(R.id.lvListas));
         listaVazia = (TextView) findViewById(R.id.tvListaVazia);
-        fab = (AppCompatImageButton) findViewById(R.id.ibfab);
+        AppCompatImageButton fab = (AppCompatImageButton) findViewById(R.id.ibfab);
         dbListasCriadas.open();
+        dbListasCriadas.ModificadaDados();
 
         FazLista();
         usarActionBar();
@@ -73,7 +72,6 @@ public class SuperLista extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Dialogo();
             }
         });
@@ -118,7 +116,6 @@ public class SuperLista extends AppCompatActivity {
                                 dbListasCriadas.close();
                                 Bundle localBundle = new Bundle();
                                 localBundle.putString("lista", str);
-                                localBundle.putString("tipo", "cria");
                                 Intent localIntent = new Intent("com.msk.superlista.CRIALISTA");
                                 localIntent.putExtras(localBundle);
                                 startActivity(localIntent);
@@ -187,10 +184,14 @@ public class SuperLista extends AppCompatActivity {
                     }
                     // ADICIONAR STRINGS PARA QUANTIDADE DE ITENS DA LISTA
 
-                    valor = dbListasCriadas.mostraValorCesta(listaFeita);
+                    valor = dbListasCriadas.mostraValor(listaFeita, "cesta") + dbListasCriadas.mostraValor(listaFeita, "lista");
+                    Locale current = getResources().getConfiguration().locale;
+                    NumberFormat dinheiro = NumberFormat.getCurrencyInstance(current);
 
-                    valorLista.setText(getResources().getString(
-                            R.string.dica_valor_lista, valor));
+                    valorLista.setText(dinheiro.format(valor));
+                    if (valor == 0.0D) {
+                        valorLista.setVisibility(View.GONE);
+                    }
 
                     viewLista.setTag(listaFeita);
                     ivMenu.setTag(listaFeita);
@@ -245,6 +246,10 @@ public class SuperLista extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
+        dbListasCriadas.open();
+        String conteudoLista = dbListasCriadas.pegaItensLista(listaFeita);
+        dbListasCriadas.close();
+
         switch (item.getItemId()) {
             case R.id.botao_edita_lista:
                 // Editar Lista
@@ -271,9 +276,7 @@ public class SuperLista extends AppCompatActivity {
                 FazLista();
                 break;
             case R.id.botao_envia_lista:
-                dbListasCriadas.open();
-                conteudoLista = dbListasCriadas.pegaItensLista(listaFeita);
-                dbListasCriadas.close();
+
                 correio = new Intent(Intent.ACTION_SEND);
                 correio.putExtra(Intent.EXTRA_TEXT, conteudoLista);
                 correio.setType("text/plain");
@@ -287,9 +290,7 @@ public class SuperLista extends AppCompatActivity {
 
                 break;
             case R.id.botao_lembrete_lista:
-                dbListasCriadas.open();
-                conteudoLista = dbListasCriadas.pegaItensLista(listaFeita);
-                dbListasCriadas.close();
+
                 Intent evento = new Intent(Intent.ACTION_EDIT);
                 evento.setType("vnd.android.cursor.item/event");
                 evento.putExtra(CalendarContract.Events.TITLE, listaFeita);
@@ -367,8 +368,7 @@ public class SuperLista extends AppCompatActivity {
     @Override
     public void onContextMenuClosed(Menu menu) {
 
-        ColorFilter filter = new LightingColorFilter(Color.DKGRAY, Color.DKGRAY);
-        ivMenu.getDrawable().setColorFilter(filter);
+        ivMenu.getDrawable().setColorFilter(new LightingColorFilter(Color.DKGRAY, Color.DKGRAY));
 
         super.onContextMenuClosed(menu);
     }
@@ -420,11 +420,13 @@ public class SuperLista extends AppCompatActivity {
                                 for (int j = 0; j < itens.getCount(); j++) {
                                     itens.moveToPosition(j);
                                     nItem = itens.getString(2);
-                                    qteItem = itens.getString(3);
-                                    valItem = itens.getString(4);
-                                    descricao = itens.getString(5);
+                                    descricao = itens.getString(3);
+                                    qteItem = itens.getDouble(4);
+                                    unidade = itens.getString(5);
+                                    valItem = itens.getDouble(6);
+
                                     dbListasCriadas.insereItemLista(listaCopia,
-                                            nItem, descricao, qteItem, valItem);
+                                            nItem, descricao, qteItem, unidade, valItem);
                                 }
 
                                 dbListasCriadas.close();
@@ -484,12 +486,16 @@ public class SuperLista extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 
+        SharedPreferences buscaPreferencias = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean autobkup = buscaPreferencias.getBoolean("autobackup", true);
+        SharedPreferences sharedPref = getSharedPreferences("backup", Context.MODE_PRIVATE);
+        String pastaBackUp = sharedPref.getString("backup", "");
+
         dbListasCriadas.open();
 
-        int i = 0;
-        i = dbListasCriadas.contaListas();
+        int i = dbListasCriadas.contaListas();
 
-        if (autobkup == true && i != 0) {
+        if (autobkup && i != 0) {
 
             dbListasCriadas.copiaBD(pastaBackUp);
             BackupManager android = new BackupManager(getApplicationContext());

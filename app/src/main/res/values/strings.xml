@@ -60,8 +60,8 @@
     <string name="dica_item_fora_cesta">Item %1$s fora da cesta.</string>
     <string name="dica_lista_removida">Lista %1$s foi removida.</string>
     <string name="info_item">Detalhes de %1$s</string>
-    <string name="info_valor_item">Total a pagar: R$ %1$s</string>
-    <string name="dica_valor_lista">R$ %1$s</string>
+    <string name="info_valor_cesta">A pagar: %1$s</string>
+    <string name="info_valor_lista">Previsto: %1$s</string>
 
     <!-- Strings de dialogos no Aplicativo -->
 
@@ -121,10 +121,10 @@
     <string name="pref_descricao_auto_bkup_nao">Fazer backup das listas quando usuário solicitar</string>
     <string name="pref_key_auto_bkup">autobackup</string>
     <string name="pref_titulo_bkup">Fazer backup das listas</string>
-    <string name="pref_descricao_bkup">Salva uma cópia das listas no cartão SD</string>
+    <string name="pref_descricao_bkup">Salva uma cópia das listas</string>
     <string name="pref_key_bkup">backup</string>
     <string name="pref_titulo_restaura">Restaurar listas salvas</string>
-    <string name="pref_descricao_restaura">Recupera uma cópia das listas salvas no cartão SD</string>
+    <string name="pref_descricao_restaura">Recupera uma cópia das listas salvas</string>
     <string name="pref_key_restaura">restaura</string>
 
     <!-- Ajustes APAGATUDO -->

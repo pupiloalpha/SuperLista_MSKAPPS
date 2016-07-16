@@ -20,7 +20,7 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         OnClickListener {
 
     // CLASSE COM BANCO DE DADOS
-    DBListas dbListaCriada = new DBListas(this);
+    private DBListas dbListaCriada = new DBListas(this);
     // ELEMENTOS DA TELA
     private Button novoItem, cancela;
     private Spinner unidades;
@@ -28,9 +28,8 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
     private EditText valor, quantidade, descricao;
     private ArrayAdapter<String> adapItem;
     // VARIAVEIS UTILIZADAS
-    private double preco;
-    private String nomeItem, nomeLista, descricaoItem, quantidadeItem, unidadeItem, valorItem,
-            tipoCesta;
+    private double preco, quantidadeItem;
+    private String nomeLista, unidadeItem, tipoCesta;
 
     @Override
     protected void onCreate(Bundle paramBundle) {
@@ -38,7 +37,7 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         setContentView(R.layout.novo_item);
         Bundle localBundle = getIntent().getExtras();
         nomeLista = localBundle.getString("lista");
-        tipoCesta = localBundle.getString("cesta");
+        tipoCesta = localBundle.getString("tipo");
         dbListaCriada.open();
         iniciar();
         unidades.setOnItemSelectedListener(this);
@@ -60,6 +59,7 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         nomeNovoItem.setAdapter(adapItem);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
     }
 
     public void onClick(View botao) {
@@ -68,33 +68,22 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
 
             case R.id.ivNovoItem:
 
-                nomeNovoItem.setTag(nomeNovoItem.getText().toString());
-                nomeItem = nomeNovoItem.getTag().toString();
-                nomeNovoItem.setText("");
+                String nomeItem = nomeNovoItem.getText().toString();
+                String descricaoItem = descricao.getText().toString();
 
-                descricaoItem = descricao.getText().toString();
-                descricao.setText("");
-
-                quantidadeItem = quantidade.getText().toString();
                 // QUANTIDADE DO ITEM
-                if (quantidadeItem.equals(""))
-                    quantidadeItem = "01";
-                if (quantidadeItem.length() == 1)
-                    quantidadeItem = "0" + quantidadeItem;
+                if (quantidade.getText().toString().equals(""))
+                    quantidadeItem = 1.0D;
+                else
+                    quantidadeItem = Double.parseDouble(quantidade.getText().toString());
 
-                String str2 = quantidadeItem + " " + unidadeItem;
-
-                valorItem = valor.getText().toString();
-                // PRECO DO ITEM
-                if (valorItem.equals(""))
+                // VALOR DO ITEM
+                if (valor.getText().toString().equals(""))
                     preco = 0.0D;
                 else
-                    preco = Double.parseDouble(valorItem);
-
-                String str3 = "R$ " + String.format("%.2f", preco);
+                    preco = Double.parseDouble(valor.getText().toString());
 
                 if (!nomeItem.equals("")) {
-                    // dbListaCriada.open();
 
                     int qt = dbListaCriada
                             .contaNomeItensListas(nomeLista, nomeItem);
@@ -102,12 +91,12 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
                             nomeItem);
                     if (qt == 0 && qt1 == 0) {
 
-                        if (tipoCesta.equals("vazia")) {
+                        if (tipoCesta.equals("lista")) {
                             dbListaCriada.insereItemLista(nomeLista, nomeItem,
-                                    descricaoItem, str2, str3);
+                                    descricaoItem, quantidadeItem, unidadeItem, preco);
                         } else {
                             dbListaCriada.insereItemCesta(nomeLista, nomeItem,
-                                    descricaoItem, str2, str3);
+                                    descricaoItem, quantidadeItem, unidadeItem, preco);
                         }
                         Toast.makeText(
                                 getApplicationContext(),
@@ -123,14 +112,12 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
                                                 R.string.dica_item_existente),
                                         nomeItem), Toast.LENGTH_SHORT).show();
                     }
-                    // dbListaCriada.close();
+
                 }
                 setResult(RESULT_OK, null);
                 finish();
                 break;
             case R.id.ivCancela:
-                dbListaCriada.close();
-                setResult(RESULT_OK, null);
                 finish();
                 break;
         }
@@ -168,13 +155,11 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
     public void onNothingSelected(AdapterView<?> paramAdapterView) {
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case android.R.id.home:
-                dbListaCriada.close();
                 finish();
                 break;
         }
@@ -184,7 +169,6 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
     @Override
     protected void onDestroy() {
         dbListaCriada.close();
-        setResult(RESULT_OK, null);
         super.onDestroy();
     }
 
