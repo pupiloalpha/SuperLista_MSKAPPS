@@ -135,9 +135,7 @@ public class FragmentoCesta extends Fragment {
                     "qte_item_cesta", "preco_item_cesta", "descr_item_cesta"}, new int[]{
                     R.id.tvItemCesta, R.id.tvUnid, R.id.tvPreco, R.id.tvDescricaoItemCesta}) {
                 public int getCount() {
-                    dbListaCriada.open();
-                    int i = dbListaCriada.contaItensCesta(lista);
-                    dbListaCriada.close();
+                    int i = itensLista.getCount();
                     return i;
                 }
 
