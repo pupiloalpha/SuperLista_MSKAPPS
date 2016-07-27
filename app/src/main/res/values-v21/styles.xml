@@ -22,11 +22,4 @@
         <item name="android:timePickerDialogTheme">@style/TemaDialogo</item>
     </style>
 
-    <!-- Tema das caixas de diálogos -->
-    <style name="TemaDialogo" parent="@style/Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimary">@color/azul_escuro</item>
-        <item name="colorPrimaryDark">@color/preto</item>
-        <item name="colorAccent">@color/azul_escuro</item>
-    </style>
-
 </resources>

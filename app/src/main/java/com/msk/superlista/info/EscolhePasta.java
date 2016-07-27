@@ -44,8 +44,11 @@ public class EscolhePasta extends ListActivity {
                 dir = new File(preferredStartDir);
             }
         } else {
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
-                dir = new File("/sdcard");
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (new File("/sdcard").exists())
+                    dir = new File("/sdcard");
+                else
+                    dir = new File("/");
             } else {
                 dir = Environment.getExternalStorageDirectory().getParentFile().getParentFile();
             }
@@ -172,6 +175,8 @@ public class EscolhePasta extends ListActivity {
                 continue;
             if (!file.canRead())
                 continue;
+            if (!file.canWrite())
+                continue;
             pastas.add(file);
         }
         Collections.sort(pastas);
@@ -186,6 +191,8 @@ public class EscolhePasta extends ListActivity {
                 if (file.isHidden())
                     continue;
                 if (!file.canRead())
+                    continue;
+                if (!file.canWrite())
                     continue;
                 xls.add(file);
             }

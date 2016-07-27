@@ -1,5 +1,6 @@
 package com.msk.superlista.info;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,6 +18,8 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.AppCompatEditText;
@@ -36,6 +40,8 @@ import com.msk.superlista.db.DBListas;
 public class Ajustes extends PreferenceActivity implements
         OnPreferenceClickListener {
 
+    private static final int ABRE_PASTA = 666;
+    private static final int ABRE_ARQUIVO = 777;
     private Toolbar toolbar;
     private DBListas dbMinhasListas = new DBListas(this);
     private Preference backup, restaura, apagatudo, versao;
@@ -105,16 +111,21 @@ public class Ajustes extends PreferenceActivity implements
 
         if (chave.equals("backup")) {
             // Seleciona pasta para backup
-            abrePasta(111);
+            if (Build.VERSION.SDK_INT >= 23)
+                PermissaoSD(ABRE_PASTA);
+            else
+                abrePasta(ABRE_PASTA);
         }
 
         if (chave.equals("restaura")) {
             // Seleciona o arquivo backup
-            abrePasta(222);
+            if (Build.VERSION.SDK_INT >= 23)
+                PermissaoSD(ABRE_ARQUIVO);
+            else
+                abrePasta(ABRE_ARQUIVO);
         }
 
         if (chave.equals("autobackup")) {
-
             if (autobkup.isChecked()) {
                 autobkup.setSummary(R.string.pref_descricao_auto_bkup_sim);
             } else {
@@ -123,16 +134,15 @@ public class Ajustes extends PreferenceActivity implements
         }
 
         if (chave.equals("apagatudo")) {
-
             Dialogo();
         }
+
         if (chave.equals("cesta")) {
             if (cesta.isChecked()) {
                 cesta.setSummary(R.string.pref_descricao_cesta);
             } else {
                 cesta.setSummary(R.string.pref_descricao_lista);
             }
-
         }
         return false;
     }
@@ -146,7 +156,6 @@ public class Ajustes extends PreferenceActivity implements
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface pDialogo,
                                                 int pInt) {
-
                                 // Apaga banco de dados
                                 dbMinhasListas.open();
                                 dbMinhasListas.excluiListas();
@@ -155,7 +164,6 @@ public class Ajustes extends PreferenceActivity implements
                                         getString(R.string.dica_exclusao_bd),
                                         Toast.LENGTH_SHORT).show();
                                 dbMinhasListas.close();
-
                             }
                         })
                 .setNegativeButton(R.string.cancelar,
@@ -165,7 +173,6 @@ public class Ajustes extends PreferenceActivity implements
                                 pDialogo.dismiss();
                             }
                         }).show();
-
     }
 
     @Override
@@ -217,7 +224,7 @@ public class Ajustes extends PreferenceActivity implements
     }
 
     public void abrePasta(int nr) {
-        if (nr == 111) {
+        if (nr == ABRE_PASTA) {
             Bundle envelope = new Bundle();
             envelope.putString("tipo", "");
             Intent atividade = new Intent(this, EscolhePasta.class);
@@ -225,7 +232,7 @@ public class Ajustes extends PreferenceActivity implements
             startActivityForResult(atividade, nr);
         }
 
-        if (nr == 222) {
+        if (nr == ABRE_ARQUIVO) {
             Bundle envelope = new Bundle();
             envelope.putString("tipo", "super_lista");
             Intent atividade = new Intent(this, EscolhePasta.class);
@@ -234,6 +241,35 @@ public class Ajustes extends PreferenceActivity implements
         }
     }
 
+    private void PermissaoSD(int nr) {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // Mensagem para usuario sobre necessidade de permissão
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, nr);
+            }
+        } else {
+            abrePasta(nr);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            // permission was granted, yay! Do the
+            abrePasta(requestCode);
+        } else {
+            // permission denied, boo! Disable the
+            Toast.makeText(getApplicationContext(), getString(R.string.sem_itens), Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
