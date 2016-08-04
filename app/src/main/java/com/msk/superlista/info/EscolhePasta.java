@@ -45,10 +45,7 @@ public class EscolhePasta extends ListActivity {
             }
         } else {
             if (Build.VERSION.SDK_INT >= 23) {
-                if (new File("/sdcard").exists())
-                    dir = new File("/sdcard");
-                else
-                    dir = new File("/");
+                dir = new File("/");
             } else {
                 dir = Environment.getExternalStorageDirectory().getParentFile().getParentFile();
             }
