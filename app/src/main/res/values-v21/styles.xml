@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Tema das telas do aplicativo -->
-    <style name="TemaNovo" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="TemaNovo" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/azul_escuro</item>
         <item name="colorPrimaryDark">@color/preto</item>
         <item name="colorAccent">@color/azul_escuro</item>

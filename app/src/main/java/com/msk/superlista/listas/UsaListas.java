@@ -128,7 +128,6 @@ public class UsaListas extends AppCompatActivity implements ActionBar.TabListene
                     double quantidadeItem = itensCestaCheia.getDouble(4);
                     String unidadeItem = itensCestaCheia.getString(5);
                     double valorItem = itensCestaCheia.getDouble(6);
-
                     dbListaCriada.insereItemLista(listaFeita, itemDaLista,
                             descricaoItem, quantidadeItem, unidadeItem, valorItem);
                 }
@@ -137,7 +136,6 @@ public class UsaListas extends AppCompatActivity implements ActionBar.TabListene
                 dbListaCriada.close();
                 nrPagina = mViewPager.getCurrentItem();
                 AtualizaFragmento(nrPagina);
-
                 break;
             case R.id.ajustes:
                 startActivity(new Intent("com.msk.superlista.AJUSTES"));
@@ -151,11 +149,9 @@ public class UsaListas extends AppCompatActivity implements ActionBar.TabListene
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-
         nrPagina = tab.getPosition();
         mViewPager.setCurrentItem(nrPagina);
         AtualizaFragmento(nrPagina);
-
     }
 
     @Override
@@ -164,14 +160,30 @@ public class UsaListas extends AppCompatActivity implements ActionBar.TabListene
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences buscaPreferencias = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        boolean apagarLista = buscaPreferencias.getBoolean("cesta", true);
+
+        dbListaCriada.open();
+        Cursor itensCestaCheia = dbListaCriada.buscaItensLista(listaFeita);
+        if (itensCestaCheia.getCount() == 0 && apagarLista) {
+            dbListaCriada.excluiItensCesta(listaFeita);
+            dbListaCriada.excluiItensLista(listaFeita);
+            dbListaCriada.excluiLista(listaFeita);
+        }
+        dbListaCriada.close();
     }
 
     protected void onDestroy() {
         super.onDestroy();
 
         SharedPreferences buscaPreferencias = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
+                .getDefaultSharedPreferences(this);
         boolean apagarLista = buscaPreferencias.getBoolean("cesta", true);
 
         dbListaCriada.open();

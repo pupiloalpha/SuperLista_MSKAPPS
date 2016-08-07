@@ -1,40 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/branco"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:gravity="clip_horizontal"
-    android:orientation="vertical"
     tools:context=".db.NovoItem">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/aplBarra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        tools:ignore="RtlSymmetry">
+
+        <include layout="@layout/barra_titulo" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:theme="@style/TemaTexto">
+
+            <android.support.v7.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/etNomeItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/outro_item"
+                android:inputType="textCapSentences|text|textAutoCorrect|textAutoComplete"
+                android:textColor="@color/branco" />
+        </android.support.design.widget.TextInputLayout>
+
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5">
+        android:layout_height="match_parent"
+        android:layout_below="@id/aplBarra">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
-                    android:id="@+id/etNomeItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/outro_item"
-                    android:inputType="textCapSentences|text|textAutoCorrect|textAutoComplete"
-                    android:textColor="@color/preto" />
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -99,37 +109,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/ivCancela"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/botao_fundo"
-            android:contentDescription="@string/icon"
-            android:drawableLeft="@drawable/ic_cancel_white"
-            android:drawableStart="@drawable/ic_cancel_white"
-            android:text="@string/dica_cancela"
-            android:textAppearance="@android:style/TextAppearance.Medium"
-            android:textColor="@color/branco" />
-
-        <Button
-            android:id="@+id/ivNovoItem"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/botao_fundo"
-            android:contentDescription="@string/icon"
-            android:drawableLeft="@drawable/ic_done_white"
-            android:drawableStart="@drawable/ic_done_white"
-            android:text="CRIAR ITEM"
-            android:textAppearance="@android:style/TextAppearance.Medium"
-            android:textColor="@color/branco" />
-    </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

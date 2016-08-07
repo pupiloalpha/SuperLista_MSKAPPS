@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -17,7 +18,9 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -46,7 +49,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     DBListas dbListaCriada = new DBListas(this);
     DialogFragment dialogo;
     // ELEMENTOS DA TELA
-    private AppCompatButton mudaItem, cancela;
     private AppCompatSpinner unidades;
     private AppCompatEditText descricao, valor, quantidade;
     private AppCompatAutoCompleteTextView nome;
@@ -56,7 +58,7 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     private ArrayAdapter<String> adapItem;
     private long idItem;
     private double valorItem, quantidadeItem;
-    private String nomeItem, descricaoItem, unidadeItem, tipo;
+    private String nomeItem, listaItem, descricaoItem, unidadeItem, tipo;
 
     @Override
     protected void onCreate(Bundle paramBundle) {
@@ -72,8 +74,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         mostradados();
         DataDeHoje();
         unidades.setOnItemSelectedListener(this);
-        mudaItem.setOnClickListener(this);
-        cancela.setOnClickListener(this);
         calendario.setOnClickListener(this);
         data.setOnClickListener(this);
         horario.setOnClickListener(this);
@@ -85,8 +85,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         quantidade = (AppCompatEditText) findViewById(R.id.etQuantidadeItem);
         unidades = (AppCompatSpinner) findViewById(R.id.spUnidadeItem);
         valor = (AppCompatEditText) findViewById(R.id.etValorItem);
-        mudaItem = (AppCompatButton) findViewById(R.id.btModificaItemLista);
-        cancela = (AppCompatButton) findViewById(R.id.ivCancela);
         data = (AppCompatButton) findViewById(R.id.tvDataAlarme);
         horario = (AppCompatButton) findViewById(R.id.tvHorarioAlarme);
         calendario = (AppCompatCheckBox) findViewById(R.id.cbCalendario);
@@ -108,11 +106,14 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     private void mostradados() {
 
         // BUSCA DADOS
-        nomeItem = dbListaCriada.mostraItemLista(idItem, tipo);
-        descricaoItem = dbListaCriada.mostraDescricaoItemLista(idItem, tipo);
-        quantidadeItem = dbListaCriada.mostraQuantidadeItemLista(idItem, tipo);
-        unidadeItem = dbListaCriada.mostraUnidadeItemLista(idItem, tipo);
-        valorItem = dbListaCriada.mostraValorItemLista(idItem, tipo);
+        Cursor buscador = dbListaCriada.buscaItem(idItem, tipo);
+        buscador.moveToFirst();
+        listaItem = buscador.getString(1);
+        nomeItem = buscador.getString(2);
+        descricaoItem = buscador.getString(3);
+        quantidadeItem = buscador.getDouble(4);
+        unidadeItem = buscador.getString(5);
+        valorItem = buscador.getDouble(6);
 
         // COLOCA NOME ITEM NA TELA
         nome.setText(nomeItem);
@@ -180,7 +181,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
         switch (botao.getId()) {
 
             case R.id.cbCalendario:
-
                 if (calendario.isChecked()) {
                     data.setVisibility(View.VISIBLE);
                     horario.setVisibility(View.VISIBLE);
@@ -196,41 +196,85 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                         ihora.setVisibility(View.INVISIBLE);
                     }
                 }
-
                 break;
             case R.id.tvDataAlarme:
-
                 dialogo = new AlteraData();
                 dialogo.show(getFragmentManager(), "alteraData");
-
                 break;
             case R.id.tvHorarioAlarme:
-
                 dialogo = new AlteraHorario();
                 dialogo.show(getFragmentManager(), "alteraHorario");
-
                 break;
-            case R.id.btModificaItemLista:
+        }
+    }
 
-                //NOME DO ITEM
-                if (!nome.getText().toString().equals(""))
-                    dbListaCriada.mudaNomeItem(idItem, nome.getText()
-                            .toString(), tipo);
+    public void onItemSelected(AdapterView<?> adapter, View pView,
+                               int paramInt, long paramLong) {
+        switch (paramInt) {
+            case 0:
+                unidadeItem = "unid";
+                break;
+            case 1:
+                unidadeItem = "caixa";
+                break;
+            case 2:
+                unidadeItem = "kg";
+                break;
+            case 3:
+                unidadeItem = "litro";
+                break;
+            case 4:
+                unidadeItem = "g";
+                break;
+            case 5:
+                unidadeItem = "ml";
+                break;
+            case 6:
+                unidadeItem = "pc";
+                break;
+        }
+    }
 
-                dbListaCriada.mudaDescricaoItem(idItem, descricao.getText()
-                        .toString(), tipo);
+    public void onNothingSelected(AdapterView<?> paramAdapterView) {
+    }
 
-                dbListaCriada.mudaUnidadeItem(idItem, unidadeItem, tipo);
+    @SuppressLint("NewApi")
+    private void usarActionBar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cancel_white);
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_edita_item, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.menu_edita:
                 // QUANTIDADE DO ITEM
                 if (quantidade.getText().toString().equals(""))
                     quantidadeItem = 1.0D;
-                dbListaCriada.mudaQuantidadeItem(idItem, quantidadeItem, tipo);
-
+                else
+                    quantidadeItem = Double.parseDouble(quantidade.getText().toString());
                 // PRECO DO ITEM
                 if (valor.getText().toString().equals(""))
                     valorItem = 0.0D;
-                dbListaCriada.mudaValorItem(idItem, valorItem, tipo);
+                else
+                    valorItem = Double.parseDouble(valor.getText().toString());
+                // MODIFICA DADOS ITEM
+                dbListaCriada.mudaItem(idItem, tipo, listaItem, nome.getText().toString(),
+                        descricao.getText().toString(), quantidadeItem, unidadeItem, valorItem);
 
                 if (calendario.isChecked()) {
                     c.set(mAno, mMes, mDia, mHora, mMinuto);
@@ -257,59 +301,6 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                                 getResources().getString(
                                         R.string.dica_item_modificado),
                                 nomeItem), Toast.LENGTH_SHORT).show();
-                finish();
-                break;
-            case R.id.ivCancela:
-                finish();
-                break;
-        }
-    }
-
-    public void onItemSelected(AdapterView<?> adapter, View pView,
-                               int paramInt, long paramLong) {
-
-        switch (paramInt) {
-            case 0:
-                unidadeItem = "unid";
-                break;
-            case 1:
-                unidadeItem = "caixa";
-                break;
-            case 2:
-                unidadeItem = "kg";
-                break;
-            case 3:
-                unidadeItem = "litro";
-                break;
-            case 4:
-                unidadeItem = "g";
-                break;
-            case 5:
-                unidadeItem = "ml";
-                break;
-            case 6:
-                unidadeItem = "pc";
-                break;
-        }
-
-    }
-
-    public void onNothingSelected(AdapterView<?> paramAdapterView) {
-    }
-
-    @SuppressLint("NewApi")
-    private void usarActionBar() {
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
                 finish();
                 break;
         }
@@ -385,5 +376,4 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
                     R.string.dica_horario_alarme, h, m));
         }
     }
-
 }

@@ -11,11 +11,11 @@
 
     <string name="cria_lista">ADD LIST</string>
     <string name="minha_lista">MIY LIST</string>
-    <string name="item_altera">SAVE </string>
+    <string name="item_altera">Save</string>
     <string name="item_falta">Done</string>
     <string name="item_peguei">Undone</string>
-    <string name="dica_salvar">EDIT </string>
-    <string name="dica_cancela">CANCEL</string>
+    <string name="dica_salvar">Edit</string>
+    <string name="dica_cancela">Cancel</string>
 
     <!-- Strings de alarmes do Aplicativo -->
 

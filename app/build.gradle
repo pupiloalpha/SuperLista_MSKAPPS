@@ -8,8 +8,8 @@ android {
         applicationId "com.msk.superlista"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 420208
-        versionName "2.2.8"
+        versionCode 420209
+        versionName "2.2.9"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

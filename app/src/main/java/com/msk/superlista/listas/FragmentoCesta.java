@@ -145,32 +145,8 @@ public class FragmentoCesta extends Fragment {
 
                 public View getView(int pItemCesta, View vCesta,
                                     ViewGroup vGCesta) {
-
-                    CriaItemLista(vCesta);
                     BuscaItensDB(pItemCesta);
-
-                    // COLOCA ITENS NA TELA
-                    nomeItem.setText(itemDaLista);
-                    if (descricaoItem != null)
-                        descricao.setText(descricaoItem);
-                    if (descricao.getText().toString().equals(""))
-                        descricao.setText(R.string.descricao_item);
-                    unidade.setText(quantidade.format(quantidadeItem) + " " + unidadeItem);
-                    preco.setText(dinheiro.format(valorItem));
-                    if (valorItem == 0.0D) {
-                        preco.setVisibility(View.GONE);
-                    }
-
-                    menuItemLista
-                            .setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View vItem) {
-                                    menuItemLista = ((ImageView) vItem);
-                                    menuItemLista.getDrawable().setColorFilter(Color.rgb(51, 181, 229), PorterDuff.Mode.MULTIPLY);
-                                    idItem = ((Long) vItem.getTag()).longValue();
-                                    menuContexto();
-                                }
-                            });
-
+                    CriaItemLista(vCesta);
                     return viewItem;
                 }
             };
@@ -195,25 +171,10 @@ public class FragmentoCesta extends Fragment {
         }
     }
 
-    private void CriaItemLista(View v) {
-
-        // Infla os itens que serao mostrados na lista
-        viewItem = v;
-        viewItem = inflaterLista.inflate(R.layout.item_na_cesta,
-                null);
-        nomeItem = ((TextView) viewItem.findViewById(R.id.tvItemCesta));
-        descricao = ((TextView) viewItem.findViewById(R.id.tvDescricaoItemCesta));
-        unidade = ((TextView) viewItem.findViewById(R.id.tvUnid));
-        preco = ((TextView) viewItem.findViewById(R.id.tvPreco));
-
-        menuItemLista = (ImageView) viewItem.findViewById(R.id.ivMenuItem);
-    }
-
     private void BuscaItensDB(int item) {
 
         // BUSCA ITENS NO DB
         dbListaCriada.open();
-
         itensLista.moveToPosition(item);
         idItem = itensLista.getLong(0);
         itemDaLista = itensLista.getString(2);
@@ -221,11 +182,44 @@ public class FragmentoCesta extends Fragment {
         quantidadeItem = itensLista.getDouble(4);
         unidadeItem = itensLista.getString(5);
         valorItem = itensLista.getDouble(6);
-        menuItemLista.setTag(idItem);
-
         dbListaCriada.close();
     }
 
+    private void CriaItemLista(View v) {
+
+        // Infla os itens que serao mostrados na lista
+        viewItem = v;
+        viewItem = inflaterLista.inflate(R.layout.item_na_cesta, null);
+        nomeItem = ((TextView) viewItem.findViewById(R.id.tvItemCesta));
+        descricao = ((TextView) viewItem.findViewById(R.id.tvDescricaoItemCesta));
+        unidade = ((TextView) viewItem.findViewById(R.id.tvUnid));
+        preco = ((TextView) viewItem.findViewById(R.id.tvPreco));
+        menuItemLista = (ImageView) viewItem.findViewById(R.id.ivMenuItem);
+
+        // COLOCA ITENS NA TELA
+        nomeItem.setText(itemDaLista);
+        if (descricaoItem != null)
+            descricao.setText(descricaoItem);
+        if (descricao.getText().toString().equals(""))
+            descricao.setText(R.string.descricao_item);
+        unidade.setText(quantidade.format(quantidadeItem) + " " + unidadeItem);
+        preco.setText(dinheiro.format(valorItem));
+        if (valorItem == 0.0D) {
+            preco.setVisibility(View.GONE);
+        }
+
+        menuItemLista.setTag(idItem);
+        menuItemLista
+                .setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View vItem) {
+                        menuItemLista = ((ImageView) vItem);
+                        menuItemLista.getDrawable().setColorFilter(
+                                Color.rgb(51, 181, 229), PorterDuff.Mode.MULTIPLY);
+                        idItem = ((Long) vItem.getTag()).longValue();
+                        menuContexto();
+                    }
+                });
+    }
 
     private void menuContexto() {
         AlertDialog.Builder dialogoBuilder = new AlertDialog.Builder(getActivity());
@@ -236,10 +230,8 @@ public class FragmentoCesta extends Fragment {
         dialogoBuilder.setItems(meuMenu,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                         switch (id) {
                             case 0:
-
                                 // ENVIA DADOS PARA EDITOR DO ITEM
                                 Bundle carta = new Bundle();
                                 carta.putLong("id", idItem);

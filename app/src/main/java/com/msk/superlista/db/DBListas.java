@@ -81,8 +81,10 @@ public class DBListas {
             COLUNA_UNIDADE_ITEM_LISTA, COLUNA_VALOR_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA};
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
+    private Context contexto;
 
     public DBListas(Context cont) {
+        contexto = cont;
         this.DBHelper = new DatabaseHelper(cont);
     }
 
@@ -110,6 +112,18 @@ public class DBListas {
         return this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
                 COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
                 COLUNA_NOME_ITEM_LISTA + " ASC");
+    }
+
+    public Cursor buscaItem(long idItem, String tipo) {
+        if (tipo.equals("lista")) {
+            return this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
+                    COLUNA_ID_ITEM_LISTA + " = '" + idItem + "' ", null, null, null,
+                    null);
+        } else {
+            return this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
+                    COLUNA_ID_ITEM_CESTA + " = '" + idItem + "' ", null, null, null,
+                    null);
+        }
     }
 
     public Cursor buscaListas() {
@@ -286,88 +300,6 @@ public class DBListas {
         return null;
     }
 
-    public String mostraDescricaoItemLista(long idLong, String tipo) throws SQLException {
-
-        Cursor cursor;
-        if (tipo.equals("lista")) {
-            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        } else {
-            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        }
-
-        if (cursor != null && cursor.moveToFirst()) {
-            String str = cursor.getString(3);
-            cursor.close();
-            return str;
-        }
-        return null;
-    }
-
-    public String mostraUnidadeItemLista(long idLong, String tipo) throws SQLException {
-
-        Cursor cursor;
-        if (tipo.equals("lista")) {
-            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        } else {
-            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        }
-
-        if (cursor != null && cursor.moveToFirst()) {
-            String str = cursor.getString(5);
-            cursor.close();
-            return str;
-        }
-        return null;
-    }
-
-    public Double mostraQuantidadeItemLista(long idLong, String tipo) throws SQLException {
-
-        Cursor cursor;
-        if (tipo.equals("lista")) {
-            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        } else {
-            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_CESTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        }
-
-        if (cursor != null && cursor.moveToFirst()) {
-            Double db = cursor.getDouble(4);
-            cursor.close();
-            return db;
-        }
-        return 0.0D;
-    }
-
-    public Double mostraValorItemLista(long idLong, String tipo) throws SQLException {
-        Cursor cursor;
-        if (tipo.equals("lista")) {
-            cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        } else {
-            cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
-                    null, null);
-        }
-        if (cursor != null && cursor.moveToFirst()) {
-            Double db = cursor.getDouble(6);
-            cursor.close();
-            return db;
-        }
-        return 0.0D;
-    }
-
     @SuppressLint("DefaultLocale")
     public double mostraValor(String lista, String tipo) throws SQLException {
         lista = lista.replace("'", "''");
@@ -396,43 +328,26 @@ public class DBListas {
 
     // ------------METODOS QUE ALTERAM VALORES NO BANCO DE DADOS
 
-    public boolean mudaNomeItem(long idLong, String item, String tipo) {
+    public boolean mudaItem(long idLong, String tipo, String lista, String nome,
+                            String descricao, double quantidade, String unidade, double valor) {
         ContentValues cv = new ContentValues();
 
         if (tipo.equals("lista")) {
-            cv.put(COLUNA_NOME_ITEM_LISTA, item);
-            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
-                    + " = '" + idLong + "'", null) > 0;
-        } else {
-            cv.put(COLUNA_NOME_ITEM_CESTA, item);
-            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
-                    + " = '" + idLong + "'", null) > 0;
-        }
-    }
-
-    public boolean mudaUnidadeItem(long idLong, String unidade, String tipo) {
-        ContentValues cv = new ContentValues();
-
-        if (tipo.equals("lista")) {
-            cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
-            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
-                    + " = '" + idLong + "'", null) > 0;
-        } else {
-            cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
-            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
-                    + " = '" + idLong + "'", null) > 0;
-        }
-    }
-
-    public boolean mudaDescricaoItem(long idLong, String descricao, String tipo) {
-        ContentValues cv = new ContentValues();
-
-        if (tipo.equals("lista")) {
+            cv.put(COLUNA_CODIGO_LISTA, lista);
+            cv.put(COLUNA_NOME_ITEM_LISTA, nome);
             cv.put(COLUNA_DESCRICAO_ITEM_LISTA, descricao);
+            cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
+            cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
+            cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
             return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
                     + " = '" + idLong + "'", null) > 0;
         } else {
+            cv.put(COLUNA_CODIGO_CESTA, lista);
+            cv.put(COLUNA_NOME_ITEM_CESTA, nome);
             cv.put(COLUNA_DESCRICAO_ITEM_CESTA, descricao);
+            cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
+            cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
+            cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
             return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
                     + " = '" + idLong + "'", null) > 0;
         }
@@ -452,33 +367,6 @@ public class DBListas {
         cv.put(COLUNA_CODIGO_LISTA, nomeDepois);
         return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_CODIGO_LISTA
                 + " = '" + nomeAntes + "' ", null) > 0;
-    }
-
-    public boolean mudaValorItem(long idLong, double valor, String tipo) {
-        ContentValues cv = new ContentValues();
-        if (tipo.equals("lista")) {
-            cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
-            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
-                    + " = '" + idLong + "'", null) > 0;
-        } else {
-            cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
-            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
-                    + " = '" + idLong + "'", null) > 0;
-        }
-    }
-
-    public boolean mudaQuantidadeItem(long idLong, double quantidade,
-                                      String tipo) {
-        ContentValues cv = new ContentValues();
-        if (tipo.equals("lista")) {
-            cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
-            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
-                    + " = '" + idLong + "'", null) > 0;
-        } else {
-            cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
-            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
-                    + " = '" + idLong + "'", null) > 0;
-        }
     }
 
     // ------------METODOS QUE COPIAM VALORES DO BANCO DE DADOS
@@ -504,23 +392,21 @@ public class DBListas {
         }
     }
 
-    // CLASSE DO BANCO DE DADOS QUE CRIA TABELAS OU ATUALIZA A VERSAO DO BANCO
+    // ----- Procedimentos para fazer BACKUP e RESTARURAR BACKUP
 
     @SuppressWarnings("resource")
     public void copiaBD(String pasta) {
 
         try {
             File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
 
             if (!pasta.equals(""))
                 sd = new File(pasta);
 
             if (sd.canWrite()) {
-                String currentDBPath = "//data//com.msk.superlista//databases//super_lista";
-                String backupDBPath = "super_lista";
-                File currentDB = new File(data, currentDBPath);
-                File backupDB = new File(sd, backupDBPath);
+
+                File currentDB = contexto.getDatabasePath(BANCO_DE_DADOS);
+                File backupDB = new File(sd, BANCO_DE_DADOS);
 
                 if (currentDB.exists()) {
                     FileChannel src = new FileInputStream(currentDB)
@@ -536,23 +422,17 @@ public class DBListas {
         }
     }
 
-    // ----- Procedimentos para fazer BACKUP e RESTARURAR BACKUP
-
     @SuppressWarnings("resource")
     public void restauraBD(String pasta) {
 
         try {
             File sd = Environment.getExternalStorageDirectory();
-            File data = Environment.getDataDirectory();
 
             if (!pasta.equals(""))
                 sd = new File(pasta);
 
             if (sd.canWrite()) {
-                String currentDBPath = "//data//com.msk.superlista//databases//super_lista";
-                String backupDBPath = "super_lista";
-                File currentDB = new File(data, currentDBPath);
-                //File backupDB = new File(sd, backupDBPath);
+                File currentDB = contexto.getDatabasePath(BANCO_DE_DADOS);
 
                 if (currentDB.exists()) {
                     FileChannel src = new FileInputStream(sd)
@@ -690,9 +570,10 @@ public class DBListas {
         } catch (Exception e) {
             Log.w(TAG, "Erro ao modificar dados");
         }
-
-
     }
+
+
+    // CLASSE DO BANCO DE DADOS QUE CRIA TABELAS OU ATUALIZA A VERSAO DO BANCO
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context pContext) {

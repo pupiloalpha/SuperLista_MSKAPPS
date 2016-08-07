@@ -183,7 +183,6 @@ public class SuperLista extends AppCompatActivity {
                         qtItensLista.setText(qtItens + " itens");
                     }
                     // ADICIONAR STRINGS PARA QUANTIDADE DE ITENS DA LISTA
-
                     valor = dbListasCriadas.mostraValor(listaFeita, "cesta") + dbListasCriadas.mostraValor(listaFeita, "lista");
                     Locale current = getResources().getConfiguration().locale;
                     NumberFormat dinheiro = NumberFormat.getCurrencyInstance(current);
@@ -234,13 +233,10 @@ public class SuperLista extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
-
         super.onCreateContextMenu(menu, v, menuInfo);
-
         listaFeita = v.getTag().toString();
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_altera_lista, menu);
-
     }
 
     @Override
@@ -259,7 +255,6 @@ public class SuperLista extends AppCompatActivity {
                 correio = new Intent("com.msk.superlista.CRIALISTA");
                 correio.putExtras(envelope);
                 startActivity(correio);
-
                 break;
             case R.id.botao_exclui_lista:
                 dbListasCriadas.open();
@@ -283,7 +278,6 @@ public class SuperLista extends AppCompatActivity {
                 startActivity(Intent.createChooser(correio, String
                         .format(getResources().getString(R.string.compartilhar),
                                 listaFeita)));
-
                 break;
             case R.id.botao_copia_lista:
                 Dialogo(listaFeita);
@@ -360,19 +354,15 @@ public class SuperLista extends AppCompatActivity {
 
                 break;
         }
-
         return super.onContextItemSelected(item);
     }
-
 
     @Override
     public void onContextMenuClosed(Menu menu) {
 
         ivMenu.getDrawable().setColorFilter(new LightingColorFilter(Color.DKGRAY, Color.DKGRAY));
-
         super.onContextMenuClosed(menu);
     }
-
 
     private void Dialogo(String lista_copia) {
 
@@ -412,7 +402,6 @@ public class SuperLista extends AppCompatActivity {
                                             listaCopia = nomeLista2;
                                         }
                                     }
-
                                 }
 
                                 dbListasCriadas.criaLista(listaCopia);
@@ -447,10 +436,8 @@ public class SuperLista extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     private void usarActionBar() {
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(false);
-
     }
 
     @Override
@@ -480,7 +467,6 @@ public class SuperLista extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         FazLista();
-        usarActionBar();
     }
 
     @Override
@@ -492,17 +478,13 @@ public class SuperLista extends AppCompatActivity {
         String pastaBackUp = sharedPref.getString("backup", "");
 
         dbListasCriadas.open();
-
         int i = dbListasCriadas.contaListas();
 
         if (autobkup && i != 0) {
-
             dbListasCriadas.copiaBD(pastaBackUp);
             BackupManager android = new BackupManager(getApplicationContext());
             android.dataChanged();
-
         }
-
         dbListasCriadas.close();
         super.onDestroy();
     }
@@ -514,5 +496,4 @@ public class SuperLista extends AppCompatActivity {
             FazLista();
         }
     }
-
 }

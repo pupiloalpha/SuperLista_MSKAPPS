@@ -2,27 +2,25 @@ package com.msk.superlista.db;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.msk.superlista.R;
 
-public class NovoItem extends AppCompatActivity implements OnItemSelectedListener,
-        OnClickListener {
+public class NovoItem extends AppCompatActivity implements OnItemSelectedListener {
 
     // CLASSE COM BANCO DE DADOS
     private DBListas dbListaCriada = new DBListas(this);
     // ELEMENTOS DA TELA
-    private Button novoItem, cancela;
     private Spinner unidades;
     private AutoCompleteTextView nomeNovoItem;
     private EditText valor, quantidade, descricao;
@@ -40,9 +38,15 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         tipoCesta = localBundle.getString("tipo");
         dbListaCriada.open();
         iniciar();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_cancel_white);
+
         unidades.setOnItemSelectedListener(this);
-        novoItem.setOnClickListener(this);
-        cancela.setOnClickListener(this);
     }
 
     private void iniciar() {
@@ -51,23 +55,58 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         nomeNovoItem = ((AutoCompleteTextView) findViewById(R.id.etNomeItem));
         unidades = ((Spinner) findViewById(R.id.spUnidadeItem));
         valor = ((EditText) findViewById(R.id.etValorItem));
-        novoItem = ((Button) findViewById(R.id.ivNovoItem));
-        cancela = ((Button) findViewById(R.id.ivCancela));
         adapItem = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources()
                 .getStringArray(R.array.ListaComTudo));
         nomeNovoItem.setAdapter(adapItem);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+    }
+
+    public void onItemSelected(AdapterView<?> adapter, View pView,
+                               int paramInt, long paramLong) {
+
+        switch (paramInt) {
+            case 0:
+                unidadeItem = "unid";
+                break;
+            case 1:
+                unidadeItem = "caixa";
+                break;
+            case 2:
+                unidadeItem = "kg";
+                break;
+            case 3:
+                unidadeItem = "litro";
+                break;
+            case 4:
+                unidadeItem = "g";
+                break;
+            case 5:
+                unidadeItem = "ml";
+                break;
+            case 6:
+                unidadeItem = "pc";
+                break;
+        }
 
     }
 
-    public void onClick(View botao) {
+    public void onNothingSelected(AdapterView<?> paramAdapterView) {
+    }
 
-        switch (botao.getId()) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_cria_item, menu);
+        return true;
+    }
 
-            case R.id.ivNovoItem:
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.menu_cria:
                 String nomeItem = nomeNovoItem.getText().toString();
                 String descricaoItem = descricao.getText().toString();
 
@@ -115,51 +154,6 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
 
                 }
                 setResult(RESULT_OK, null);
-                finish();
-                break;
-            case R.id.ivCancela:
-                finish();
-                break;
-        }
-    }
-
-    public void onItemSelected(AdapterView<?> adapter, View pView,
-                               int paramInt, long paramLong) {
-
-        switch (paramInt) {
-            case 0:
-                unidadeItem = "unid";
-                break;
-            case 1:
-                unidadeItem = "caixa";
-                break;
-            case 2:
-                unidadeItem = "kg";
-                break;
-            case 3:
-                unidadeItem = "litro";
-                break;
-            case 4:
-                unidadeItem = "g";
-                break;
-            case 5:
-                unidadeItem = "ml";
-                break;
-            case 6:
-                unidadeItem = "pc";
-                break;
-        }
-
-    }
-
-    public void onNothingSelected(AdapterView<?> paramAdapterView) {
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case android.R.id.home:
                 finish();
                 break;
         }
