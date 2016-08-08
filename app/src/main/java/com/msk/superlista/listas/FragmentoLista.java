@@ -209,6 +209,9 @@ public class FragmentoLista extends Fragment {
         if (valorItem == 0.0D) {
             preco.setVisibility(View.GONE);
         }
+        if (quantidadeItem == 1.0D) {
+            unidade.setVisibility(View.GONE);
+        }
 
         menuItemLista.setTag(idItem);
         menuItemLista
