@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class FragmentoCesta extends Fragment {
     // ELEMENTOS DA TELA
     private ImageView menuItemLista;
     private LayoutInflater inflaterLista;
+    private LinearLayout info;
     private ListView listaParaUsar;
     private TextView nomeItem, descricao, semItens, valorLista, preco, unidade;
 
@@ -190,6 +192,7 @@ public class FragmentoCesta extends Fragment {
         // Infla os itens que serao mostrados na lista
         viewItem = v;
         viewItem = inflaterLista.inflate(R.layout.item_na_cesta, null);
+        info = (LinearLayout) viewItem.findViewById(R.id.infoItem);
         nomeItem = ((TextView) viewItem.findViewById(R.id.tvItemCesta));
         descricao = ((TextView) viewItem.findViewById(R.id.tvDescricaoItemCesta));
         unidade = ((TextView) viewItem.findViewById(R.id.tvUnid));
@@ -204,11 +207,12 @@ public class FragmentoCesta extends Fragment {
             descricao.setText(R.string.descricao_item);
         unidade.setText(quantidade.format(quantidadeItem) + " " + unidadeItem);
         preco.setText(dinheiro.format(valorItem));
-        if (valorItem == 0.0D) {
-            preco.setVisibility(View.GONE);
-        }
-        if (quantidadeItem == 1.0D) {
-            unidade.setVisibility(View.GONE);
+        if (quantidadeItem == 1.0D && valorItem == 0.0D) {
+            info.setVisibility(View.GONE);
+        } else {
+            if (valorItem == 0.0D) {
+                preco.setVisibility(View.GONE);
+            }
         }
 
         menuItemLista.setTag(idItem);

@@ -24,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
     // ELEMENTSO DA TELA
     private ImageView ibAdiciona, ibExclui;
     private LayoutInflater inflaterLista;
+    private LinearLayout info;
     private ListView listaCriada;
     private AppCompatAutoCompleteTextView nomeNovoItem;
     private TextView nomeItem, descricaoItem, semItem, preco, unidade;
@@ -178,6 +180,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                             .findViewById(R.id.tvItemEscolhido));
                     descricaoItem = ((TextView) viewLista
                             .findViewById(R.id.tvDescricaoItemEscolhido));
+                    info = (LinearLayout) viewLista.findViewById(R.id.infoItem);
                     unidade = ((TextView) viewLista
                             .findViewById(R.id.tvUnidade));
                     preco = ((TextView) viewLista.findViewById(R.id.tvValor));
@@ -202,10 +205,14 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                     ibExclui.setTag(itensParaLista.getLong(0));
                     unidade.setText(quantde);
                     preco.setText(valor);
-                    if (itensParaLista.getDouble(4) == 1.0D)
-                        unidade.setVisibility(View.GONE);
-                    if (itensParaLista.getDouble(6) == 0.0D)
-                        preco.setVisibility(View.GONE);
+                    if (itensParaLista.getDouble(4) == 1.0D && itensParaLista.getDouble(6) == 0.0D) {
+                        info.setVisibility(View.GONE);
+                    } else {
+                        if (itensParaLista.getDouble(6) == 0.0D) {
+                            preco.setVisibility(View.GONE);
+                        }
+                    }
+
                     dbListaCriada.close();
 
                     // METODO AO CLICAR NO ICONE DE EXCLUIR ITEM
