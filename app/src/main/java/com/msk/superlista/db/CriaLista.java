@@ -89,7 +89,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 correio.putExtras(carta);
                 startActivity(correio);
             }
-
         });
     }
 
@@ -151,9 +150,7 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                                     pDialogo.dismiss();
                                 }
                             }).show();
-
         }
-
     }
 
     @SuppressWarnings("deprecation")
@@ -172,7 +169,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 // Metodo que monta a lista
                 public View getView(int pItemLista, View vLista,
                                     ViewGroup vGLista) {
-
                     // MONTA A LINHA DA LISTA
                     viewLista = vLista;
                     inflaterLista = getLayoutInflater();
@@ -238,7 +234,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                             usarActionBar();
                         }
                     });
-
                     return viewLista;
                 }
 
@@ -254,7 +249,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 public long getItemId(int pItemLista) {
                     return pItemLista;
                 }
-
             };
 
             int posicao = listaCriada.getFirstVisiblePosition();
@@ -302,7 +296,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 }
                 usarActionBar();
                 break;
-
         }
         buscaItens.notifyDataSetChanged();
         FazLista();
@@ -332,7 +325,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         toolbar.setSubtitle(qtItens);
         toolbar.setDisplayHomeAsUpEnabled(true);
         toolbar.setHomeButtonEnabled(true);
-
     }
 
     @Override
@@ -340,7 +332,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         super.onCreateOptionsMenu(pMenu);
         pMenu.clear();
         getMenuInflater().inflate(R.menu.menu_cria_lista, pMenu);
-
         return true;
     }
 
@@ -398,7 +389,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                 break;
         }
         return false;
-
     }
 
     @Override
@@ -423,7 +413,6 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         FazLista();
         usarActionBar();
         super.onResume();
-
     }
 
     @Override
@@ -431,5 +420,4 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
         dbListaCriada.close();
         super.onPause();
     }
-
 }
