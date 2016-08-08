@@ -206,6 +206,8 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                     ibExclui.setTag(itensParaLista.getLong(0));
                     unidade.setText(quantde);
                     preco.setText(valor);
+                    if (itensParaLista.getDouble(4) == 1.0D)
+                        unidade.setVisibility(View.GONE);
                     if (itensParaLista.getDouble(6) == 0.0D)
                         preco.setVisibility(View.GONE);
                     dbListaCriada.close();
