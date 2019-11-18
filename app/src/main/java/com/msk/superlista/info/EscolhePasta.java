@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.msk.superlista.R;
 
@@ -47,7 +48,7 @@ public class EscolhePasta extends ListActivity {
             if (Build.VERSION.SDK_INT >= 23) {
                 dir = new File("/");
             } else {
-                dir = Environment.getExternalStorageDirectory().getParentFile().getParentFile();
+                dir = Environment.getExternalStorageDirectory();
             }
         }
 
