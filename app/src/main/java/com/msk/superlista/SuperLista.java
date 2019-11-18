@@ -61,9 +61,9 @@ public class SuperLista extends AppCompatActivity {
 
         setContentView(R.layout.tela_inicial);
 
-        listasFeitas = ((ListView) findViewById(R.id.lvListas));
-        listaVazia = (TextView) findViewById(R.id.tvListaVazia);
-        AppCompatImageButton fab = (AppCompatImageButton) findViewById(R.id.ibfab);
+        listasFeitas = findViewById(R.id.lvListas);
+        listaVazia = findViewById(R.id.tvListaVazia);
+        AppCompatImageButton fab = findViewById(R.id.ibfab);
         dbListasCriadas.open();
         dbListasCriadas.ModificadaDados();
 
@@ -157,14 +157,14 @@ public class SuperLista extends AppCompatActivity {
                     inflaterLista = getLayoutInflater();
                     viewLista = inflaterLista.inflate(R.layout.lista_para_uso,
                             null);
-                    nomeLista = ((TextView) viewLista
-                            .findViewById(R.id.tvNomeLista));
-                    qtItensLista = ((TextView) viewLista
-                            .findViewById(R.id.tvItensLista));
-                    valorLista = ((TextView) viewLista
-                            .findViewById(R.id.tvValorLista));
-                    ivMenu = ((ImageView) viewLista
-                            .findViewById(R.id.ivMenuLista));
+                    nomeLista = viewLista
+                            .findViewById(R.id.tvNomeLista);
+                    qtItensLista = viewLista
+                            .findViewById(R.id.tvItensLista);
+                    valorLista = viewLista
+                            .findViewById(R.id.tvValorLista);
+                    ivMenu = viewLista
+                            .findViewById(R.id.ivMenuLista);
                     ivMenu.setFocusable(false);
                     dbListasCriadas.open();
                     listas.moveToPosition(pInt);

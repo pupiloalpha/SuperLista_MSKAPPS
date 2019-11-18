@@ -55,9 +55,9 @@ public class EscolhePasta extends ListActivity {
         setContentView(R.layout.lista_pastas);
         setTitle(dir.getAbsolutePath());
 
-        TextView sem = (TextView) findViewById(R.id.tvSemResultados);
+        TextView sem = findViewById(R.id.tvSemResultados);
 
-        Button btnChoose = (Button) findViewById(R.id.btnChoose);
+        Button btnChoose = findViewById(R.id.btnChoose);
         if (!tipo.equals("")) {
             btnChoose.setVisibility(View.GONE);
         } else {
@@ -86,9 +86,9 @@ public class EscolhePasta extends ListActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 View rowView = inflater.inflate(R.layout.linha_pastas, null);
 
-                TextView tv = (TextView) rowView.findViewById(R.id.tvPasta);
-                TextView data = (TextView) rowView.findViewById(R.id.tvData);
-                AppCompatImageView iv = (AppCompatImageView) rowView.findViewById(R.id.ivFolder);
+                TextView tv = rowView.findViewById(R.id.tvPasta);
+                TextView data = rowView.findViewById(R.id.tvData);
+                AppCompatImageView iv = rowView.findViewById(R.id.ivFolder);
 
                 String str = pastas[position];
                 tv.setText(str);

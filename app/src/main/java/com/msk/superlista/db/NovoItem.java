@@ -40,7 +40,7 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
         dbListaCriada.open();
         iniciar();
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar_toolbar);
+        Toolbar toolbar = findViewById(R.id.actionbar_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -51,11 +51,11 @@ public class NovoItem extends AppCompatActivity implements OnItemSelectedListene
     }
 
     private void iniciar() {
-        descricao = ((EditText) findViewById(R.id.etDescricaoItem));
-        quantidade = ((EditText) findViewById(R.id.etQuantidadeItem));
-        nomeNovoItem = ((AutoCompleteTextView) findViewById(R.id.etNomeItem));
-        unidades = ((Spinner) findViewById(R.id.spUnidadeItem));
-        valor = ((EditText) findViewById(R.id.etValorItem));
+        descricao = findViewById(R.id.etDescricaoItem);
+        quantidade = findViewById(R.id.etQuantidadeItem);
+        nomeNovoItem = findViewById(R.id.etNomeItem);
+        unidades = findViewById(R.id.spUnidadeItem);
+        valor = findViewById(R.id.etValorItem);
         adapItem = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources()
                 .getStringArray(R.array.ListaComTudo));

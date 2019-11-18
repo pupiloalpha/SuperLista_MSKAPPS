@@ -81,19 +81,19 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
     }
 
     private void iniciar() {
-        nome = (AppCompatAutoCompleteTextView) findViewById(R.id.etNomeItem);
-        descricao = (AppCompatEditText) findViewById(R.id.etDescricaoItem);
-        quantidade = (AppCompatEditText) findViewById(R.id.etQuantidadeItem);
-        unidades = (AppCompatSpinner) findViewById(R.id.spUnidadeItem);
-        valor = (AppCompatEditText) findViewById(R.id.etValorItem);
-        data = (AppCompatButton) findViewById(R.id.tvDataAlarme);
-        horario = (AppCompatButton) findViewById(R.id.tvHorarioAlarme);
-        calendario = (AppCompatCheckBox) findViewById(R.id.cbCalendario);
+        nome = findViewById(R.id.etNomeItem);
+        descricao = findViewById(R.id.etDescricaoItem);
+        quantidade = findViewById(R.id.etQuantidadeItem);
+        unidades = findViewById(R.id.spUnidadeItem);
+        valor = findViewById(R.id.etValorItem);
+        data = findViewById(R.id.tvDataAlarme);
+        horario = findViewById(R.id.tvHorarioAlarme);
+        calendario = findViewById(R.id.cbCalendario);
         data.setVisibility(View.INVISIBLE);
         horario.setVisibility(View.INVISIBLE);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            idata = (ImageView) findViewById(R.id.ivDataAlarme);
-            ihora = (ImageView) findViewById(R.id.ivHorarioAlarme);
+            idata = findViewById(R.id.ivDataAlarme);
+            ihora = findViewById(R.id.ivHorarioAlarme);
             idata.setVisibility(View.INVISIBLE);
             ihora.setVisibility(View.INVISIBLE);
         }
@@ -241,7 +241,7 @@ public class EditaItem extends AppCompatActivity implements OnItemSelectedListen
 
     @SuppressLint("NewApi")
     private void usarActionBar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.actionbar_toolbar);
+        Toolbar toolbar = findViewById(R.id.actionbar_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);

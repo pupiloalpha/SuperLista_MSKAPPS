@@ -20,7 +20,7 @@ public class Sobre extends AppCompatActivity {
         super.onCreate(paramBundle);
         setContentView(R.layout.sobre);
 
-        sobre = (TextView) findViewById(R.id.tvSobre);
+        sobre = findViewById(R.id.tvSobre);
 
         try {
             pinfo = getPackageManager().getPackageInfo(getPackageName(), 0);

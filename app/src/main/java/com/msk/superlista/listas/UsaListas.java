@@ -45,7 +45,7 @@ public class UsaListas extends AppCompatActivity implements ActionBar.TabListene
 
         mPaginas = new Paginas(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mPaginas);
 
         nrPagina = 0;

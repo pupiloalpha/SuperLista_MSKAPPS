@@ -49,7 +49,6 @@ public class FragmentoLista extends Fragment {
     private double quantidadeItem, valorItem;
     private Cursor itensLista = null;
     private NumberFormat dinheiro, quantidade;
-    ;
     private View viewItem;
     private Long idItem;
 
@@ -81,9 +80,9 @@ public class FragmentoLista extends Fragment {
                              Bundle savedInstanceState) {
         View vLista = inflater.inflate(R.layout.conteudo_usa_listas, container, false);
 
-        listaParaUsar = (ListView) vLista.findViewById(R.id.listaDeItens);
-        semItens = (TextView) vLista.findViewById(R.id.tvCestaSemItem);
-        valorLista = (TextView) vLista.findViewById(R.id.tvValorLista);
+        listaParaUsar = vLista.findViewById(R.id.listaDeItens);
+        semItens = vLista.findViewById(R.id.tvCestaSemItem);
+        valorLista = vLista.findViewById(R.id.tvValorLista);
 
         ColocaItensLista();
 
@@ -195,12 +194,12 @@ public class FragmentoLista extends Fragment {
         // Infla os itens que serao mostrados na lista
         viewItem = v;
         viewItem = inflaterLista.inflate(R.layout.item_na_cesta, null);
-        info = (LinearLayout) viewItem.findViewById(R.id.infoItem);
-        nomeItem = ((TextView) viewItem.findViewById(R.id.tvItemCesta));
-        descricao = ((TextView) viewItem.findViewById(R.id.tvDescricaoItemCesta));
-        unidade = ((TextView) viewItem.findViewById(R.id.tvUnid));
-        preco = ((TextView) viewItem.findViewById(R.id.tvPreco));
-        menuItemLista = (ImageView) viewItem.findViewById(R.id.ivMenuItem);
+        info = viewItem.findViewById(R.id.infoItem);
+        nomeItem = viewItem.findViewById(R.id.tvItemCesta);
+        descricao = viewItem.findViewById(R.id.tvDescricaoItemCesta);
+        unidade = viewItem.findViewById(R.id.tvUnid);
+        preco = viewItem.findViewById(R.id.tvPreco);
+        menuItemLista = viewItem.findViewById(R.id.ivMenuItem);
 
         // COLOCA ITENS NA TELA
         nomeItem.setText(itemDaLista);

@@ -54,13 +54,13 @@ public class ColocaItensNaLista extends AppCompatActivity implements
 
     private void iniciar() {
 
-        listaVazia = ((ListView) findViewById(R.id.lvItensLista));
-        categorias = ((Spinner) findViewById(R.id.spCategorias));
+        listaVazia = findViewById(R.id.lvItensLista);
+        categorias = findViewById(R.id.spCategorias);
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
     private void MostraItens() {
-        listaVazia = ((ListView) findViewById(R.id.lvItensLista));
+        listaVazia = findViewById(R.id.lvItensLista);
         ArrayAdapter<String> adapLista = new ArrayAdapter(this, android.R.layout.simple_list_item_1) {
 
             public View getView(int posicao, View vLista, ViewGroup vGroup) {
@@ -73,9 +73,9 @@ public class ColocaItensNaLista extends AppCompatActivity implements
                     viewLista = inflaterLista.inflate(
                             R.layout.item_lista_pronta, null);
                 }
-                chk = ((CheckBox) viewLista.findViewById(R.id.cbItemNovaLista));
-                nomeItem = ((TextView) viewLista
-                        .findViewById(R.id.tvItemNovaLista));
+                chk = viewLista.findViewById(R.id.cbItemNovaLista);
+                nomeItem = viewLista
+                        .findViewById(R.id.tvItemNovaLista);
 
                 chk.setTag(itemNome);
                 nomeItem.setText(itemNome);

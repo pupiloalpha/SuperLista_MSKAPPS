@@ -96,10 +96,10 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
     }
 
     private void iniciar() {
-        nomeNovoItem = ((AppCompatAutoCompleteTextView) findViewById(R.id.etItem));
-        semItem = ((TextView) findViewById(R.id.tvSemItem));
-        listaCriada = ((ListView) findViewById(R.id.lvListaCriada));
-        ibAdiciona = ((ImageView) findViewById(R.id.ibAdicionaItens));
+        nomeNovoItem = findViewById(R.id.etItem);
+        semItem = findViewById(R.id.tvSemItem);
+        listaCriada = findViewById(R.id.lvListaCriada);
+        ibAdiciona = findViewById(R.id.ibAdicionaItens);
         ArrayAdapter<String> adapItem = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, getResources()
                 .getStringArray(R.array.ListaComTudo));
@@ -177,16 +177,16 @@ public class CriaLista extends AppCompatActivity implements View.OnClickListener
                     inflaterLista = getLayoutInflater();
                     viewLista = inflaterLista.inflate(R.layout.item_da_lista,
                             null);
-                    nomeItem = ((TextView) viewLista
-                            .findViewById(R.id.tvItemEscolhido));
-                    descricaoItem = ((TextView) viewLista
-                            .findViewById(R.id.tvDescricaoItemEscolhido));
-                    info = (LinearLayout) viewLista.findViewById(R.id.infoItem);
-                    unidade = ((TextView) viewLista
-                            .findViewById(R.id.tvUnidade));
-                    preco = ((TextView) viewLista.findViewById(R.id.tvValor));
-                    ibExclui = ((ImageView) viewLista
-                            .findViewById(R.id.ibExcluiItemEscolhido));
+                    nomeItem = viewLista
+                            .findViewById(R.id.tvItemEscolhido);
+                    descricaoItem = viewLista
+                            .findViewById(R.id.tvDescricaoItemEscolhido);
+                    info = viewLista.findViewById(R.id.infoItem);
+                    unidade = viewLista
+                            .findViewById(R.id.tvUnidade);
+                    preco = viewLista.findViewById(R.id.tvValor);
+                    ibExclui = viewLista
+                            .findViewById(R.id.ibExcluiItemEscolhido);
                     ibExclui.setFocusable(false);
                     // BUSCA VALORES PARA COLOCAR NA LINHA
                     dbListaCriada.open();

@@ -60,10 +60,10 @@ public class Ajustes extends PreferenceActivity implements
 
         prefs = getPreferenceScreen();
 
-        backup = (Preference) prefs.findPreference("backup");
-        restaura = (Preference) prefs.findPreference("restaura");
-        apagatudo = (Preference) prefs.findPreference("apagatudo");
-        versao = (Preference) prefs.findPreference("versao");
+        backup = prefs.findPreference("backup");
+        restaura = prefs.findPreference("restaura");
+        apagatudo = prefs.findPreference("apagatudo");
+        versao = prefs.findPreference("versao");
         cesta = (CheckBoxPreference) prefs.findPreference("cesta");
         autobkup = (CheckBoxPreference) prefs.findPreference("autobackup");
 
@@ -181,7 +181,7 @@ public class Ajustes extends PreferenceActivity implements
         ViewGroup contentView = (ViewGroup) LayoutInflater.from(this).inflate(
                 R.layout.ajustes, new LinearLayout(this), false);
 
-        toolbar = (Toolbar) contentView.findViewById(R.id.actionbar_toolbar);
+        toolbar = contentView.findViewById(R.id.actionbar_toolbar);
         toolbar.setBackgroundColor(Color.parseColor("#FF0099CC"));
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFFFF"));
         toolbar.setNavigationIcon(R.drawable.ic_back_white);
@@ -191,7 +191,7 @@ public class Ajustes extends PreferenceActivity implements
             }
         });
 
-        ViewGroup contentWrapper = (ViewGroup) contentView
+        ViewGroup contentWrapper = contentView
                 .findViewById(R.id.conteudo_ajustes);
         LayoutInflater.from(this).inflate(layoutResID, contentWrapper, true);
 
@@ -261,7 +261,7 @@ public class Ajustes extends PreferenceActivity implements
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           String[] permissions, int[] grantResults) {
         // If request is cancelled, the result arrays are empty.
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             // permission was granted, yay! Do the
