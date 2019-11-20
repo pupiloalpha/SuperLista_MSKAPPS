@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/lvItem"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
@@ -18,7 +18,7 @@
         android:orientation="vertical"
         android:paddingLeft="5.0dip"
         android:paddingRight="5.0dip"
-        android:weightSum="2.0">
+        android:weightSum="2">
 
         <TextView
             android:id="@+id/tvItemCesta"
@@ -28,8 +28,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/item"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/preto" />
+            android:textAppearance="?android:attr/textAppearance"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvDescricaoItemCesta"
@@ -44,7 +44,7 @@
 
     <LinearLayout
         android:id="@+id/infoItem"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"

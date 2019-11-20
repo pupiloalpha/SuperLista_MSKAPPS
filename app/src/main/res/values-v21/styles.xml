@@ -5,7 +5,6 @@
         <item name="colorPrimary">@color/azul_escuro</item>
         <item name="colorPrimaryDark">@color/preto</item>
         <item name="colorAccent">@color/azul_escuro</item>
-        <item name="android:alertDialogTheme">@style/TemaDialogo</item>
     </style>
 
     <!-- Tema das telas do aplicativo -->
@@ -15,7 +14,6 @@
         <item name="colorAccent">@color/branco</item>
         <item name="actionBarTabStyle">@style/ActionBarTab</item>
         <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
-        <item name="android:alertDialogTheme">@style/TemaDialogo</item>
     </style>
 
 </resources>

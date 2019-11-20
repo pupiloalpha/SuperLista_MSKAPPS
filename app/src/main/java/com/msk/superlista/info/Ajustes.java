@@ -235,7 +235,7 @@ public class Ajustes extends PreferenceActivity implements
 
         if (nr == ABRE_ARQUIVO) {
             Bundle envelope = new Bundle();
-            envelope.putString("tipo", "super_lista");
+            envelope.putString("tipo", "super_lista.db");
             Intent atividade = new Intent(this, EscolhePasta.class);
             atividade.putExtras(envelope);
             startActivityForResult(atividade, nr);

@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
+import android.provider.BaseColumns;
 import android.util.Log;
 
 import java.io.File;
@@ -15,71 +16,57 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
-public class DBListas {
+public final class DBListas {
 
-    // Nomes das Colunas do Banco de Dados
-    public static final String COLUNA_CODIGO_CESTA = "id_cesta";
-    public static final String COLUNA_CODIGO_LISTA = "id_lista";
-    public static final String COLUNA_NOME_LISTA = "lista";
-    public static final String COLUNA_NOME_ITEM_CESTA = "item_cesta";
-    public static final String COLUNA_NOME_ITEM_LISTA = "item_lista";
-    public static final String COLUNA_ID_LISTA = "_id";
-    public static final String COLUNA_ID_ITEM_CESTA = "_id";
-    public static final String COLUNA_ID_ITEM_LISTA = "_id";
-    // Novas colunas criadas sobre a descricao dos itens
-    public static final String COLUNA_DESCRICAO_ITEM_CESTA = "descr_item_cesta";
-    public static final String COLUNA_DESCRICAO_ITEM_LISTA = "descr_item_lista";
-    public static final String COLUNA_QUANTIDADE_ITEM_CESTA = "qte_item_cesta";
-    public static final String COLUNA_QUANTIDADE_ITEM_LISTA = "qte_item_lista";
-    public static final String COLUNA_UNIDADE_ITEM_CESTA = "unid_item_cesta";
-    public static final String COLUNA_UNIDADE_ITEM_LISTA = "unid_item_lista";
-    public static final String COLUNA_VALOR_ITEM_CESTA = "valor_item_cesta";
-    public static final String COLUNA_VALOR_ITEM_LISTA = "valor_item_lista";
-    public static final String COLUNA_PRECO_ITEM_CESTA = "preco_item_cesta";
-    public static final String COLUNA_PRECO_ITEM_LISTA = "preco_item_lista";
+    // Comandos SQL para criar as Tabelas do Banco de Dados
+    private static final String CRIA_TABELA_LISTA = "CREATE TABLE "
+            + TABELA_LISTAS + " (" + Listas.COLUNA_ID_LISTA
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + Listas.COLUNA_NOME_LISTA
+            + " TEXT NOT NULL, UNIQUE (" + Listas.COLUNA_NOME_LISTA
+            + ") ON CONFLICT REPLACE)";
+
     // Nome das tabelas criadas no banco de dados
     private static final String TABELA_LISTAS = "listas";
-    private static final String CRIA_TABELA_LISTA = "CREATE TABLE "
-            + TABELA_LISTAS + " (" + COLUNA_ID_LISTA
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_NOME_LISTA
-            + " TEXT NOT NULL, UNIQUE (" + COLUNA_NOME_LISTA
-            + ") ON CONFLICT REPLACE)";
     private static final String TABELA_ITENS_LISTA = "itens_da_lista";
-    private static final String CRIA_TABELA_ITENS_LISTA = "CREATE TABLE "
-            + TABELA_ITENS_LISTA + " ( " + COLUNA_ID_ITEM_LISTA
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_LISTA
-            + " TEXT NOT NULL, " + COLUNA_NOME_ITEM_LISTA
-            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_LISTA
-            + " TEXT, " + COLUNA_QUANTIDADE_ITEM_LISTA
-            + " REAL, " + COLUNA_UNIDADE_ITEM_LISTA
-            + " TEXT, " + COLUNA_VALOR_ITEM_LISTA
-            + " REAL, " + COLUNA_PRECO_ITEM_LISTA + " TXT)";
     private static final String TABELA_ITENS_CESTA = "itens_da_cesta";
-    // Comandos SQL para criar as Tabelas do Banco de Dados
+    private static final String CRIA_TABELA_ITENS_LISTA = "CREATE TABLE "
+            + TABELA_ITENS_LISTA + " ( " + ItensLista.COLUNA_ID_ITEM_LISTA
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ItensLista.COLUNA_CODIGO_LISTA
+            + " TEXT NOT NULL, " + ItensLista.COLUNA_NOME_ITEM_LISTA
+            + " TEXT NOT NULL, " + ItensLista.COLUNA_DESCRICAO_ITEM_LISTA
+            + " TEXT, " + ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA
+            + " REAL, " + ItensLista.COLUNA_UNIDADE_ITEM_LISTA
+            + " TEXT, " + ItensLista.COLUNA_VALOR_ITEM_LISTA
+            + " REAL, " + ItensLista.COLUNA_PRECO_ITEM_LISTA + " TXT)";
     private static final String CRIA_TABELA_ITENS_CESTA = "CREATE TABLE "
-            + TABELA_ITENS_CESTA + " ( " + COLUNA_ID_ITEM_CESTA
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_CESTA
-            + " TEXT NOT NULL, " + COLUNA_NOME_ITEM_CESTA
-            + " TEXT NOT NULL, " + COLUNA_DESCRICAO_ITEM_CESTA
-            + " TEXT, " + COLUNA_QUANTIDADE_ITEM_CESTA
-            + " REAL, " + COLUNA_UNIDADE_ITEM_CESTA
-            + " TEXT, " + COLUNA_VALOR_ITEM_CESTA
-            + " REAL, " + COLUNA_PRECO_ITEM_CESTA + " TXT)";
+            + TABELA_ITENS_CESTA + " ( " + ItensCesta.COLUNA_ID_ITEM_CESTA
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ItensCesta.COLUNA_CODIGO_CESTA
+            + " TEXT NOT NULL, " + ItensCesta.COLUNA_NOME_ITEM_CESTA
+            + " TEXT NOT NULL, " + ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA
+            + " TEXT, " + ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA
+            + " REAL, " + ItensCesta.COLUNA_UNIDADE_ITEM_CESTA
+            + " TEXT, " + ItensCesta.COLUNA_VALOR_ITEM_CESTA
+            + " REAL, " + ItensCesta.COLUNA_PRECO_ITEM_CESTA + " TXT)";
     // Valores para criar o Banco de Dados
-    private static final String BANCO_DE_DADOS = "super_lista";
+    private static final String BANCO_DE_DADOS = "super_lista.db";
+    // Titulos das colunas das Tabelas do Banco de Dados
+    private static String[] colunas_listas = {Listas.COLUNA_ID_LISTA, Listas.COLUNA_NOME_LISTA};
     private static final int VERSAO_BANCO_DE_DADOS = 3; // NOVA VERSAO FOI CRIADA
     private static final String TAG = "DBListas";
-    // Titulos das colunas das Tabelas do Banco de Dados
-    private static String[] colunas_listas = {COLUNA_ID_LISTA, COLUNA_NOME_LISTA};
-    private static String[] colunas_itens_cesta = {COLUNA_ID_ITEM_CESTA,
-            COLUNA_CODIGO_CESTA, COLUNA_NOME_ITEM_CESTA,
-            COLUNA_DESCRICAO_ITEM_CESTA, COLUNA_QUANTIDADE_ITEM_CESTA,
-            COLUNA_UNIDADE_ITEM_CESTA, COLUNA_VALOR_ITEM_CESTA, COLUNA_PRECO_ITEM_CESTA};
-    private static String[] colunas_itens_lista = {COLUNA_ID_ITEM_LISTA,
-            COLUNA_CODIGO_LISTA, COLUNA_NOME_ITEM_LISTA,
-            COLUNA_DESCRICAO_ITEM_LISTA, COLUNA_QUANTIDADE_ITEM_LISTA,
-            COLUNA_UNIDADE_ITEM_LISTA, COLUNA_VALOR_ITEM_LISTA, COLUNA_PRECO_ITEM_LISTA};
+    private static String[] colunas_itens_lista = {ItensLista.COLUNA_ID_ITEM_LISTA,
+            ItensLista.COLUNA_CODIGO_LISTA, ItensLista.COLUNA_NOME_ITEM_LISTA,
+            ItensLista.COLUNA_DESCRICAO_ITEM_LISTA, ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA,
+            ItensLista.COLUNA_UNIDADE_ITEM_LISTA, ItensLista.COLUNA_VALOR_ITEM_LISTA, ItensLista.COLUNA_PRECO_ITEM_LISTA};
+    private static String[] colunas_itens_cesta = {ItensCesta.COLUNA_ID_ITEM_CESTA,
+            ItensCesta.COLUNA_CODIGO_CESTA, ItensCesta.COLUNA_NOME_ITEM_CESTA,
+            ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA, ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA,
+            ItensCesta.COLUNA_UNIDADE_ITEM_CESTA, ItensCesta.COLUNA_VALOR_ITEM_CESTA, ItensCesta.COLUNA_PRECO_ITEM_CESTA};
+    // Instancias para usar o banco de dados
     private DatabaseHelper DBHelper;
+
+    private DBListas() {
+        // CONSTRUTOR NECESSARIO
+    }
     private SQLiteDatabase db;
     private Context contexto;
 
@@ -100,43 +87,44 @@ public class DBListas {
 
     // ------- CURSORES QUE PERCORREM O BANCO DE DADOS EM BUSCA DE INFORMACOES
 
-    public Cursor buscaItensCesta(String lista) {
-        lista = lista.replace("'", "''");
+    public Cursor buscaItensCesta(String cesta) {
+        cesta = cesta.replace("'", "''");
         return this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
-                COLUNA_NOME_ITEM_CESTA + " ASC");
+                ItensCesta.COLUNA_CODIGO_CESTA + " = '" + cesta + "' ", null, null, null,
+                ItensCesta.COLUNA_NOME_ITEM_CESTA + " ASC");
     }
 
     public Cursor buscaItensLista(String lista) {
         lista = lista.replace("'", "''");
         return this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
-                COLUNA_NOME_ITEM_LISTA + " ASC");
+                ItensLista.COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
+                ItensLista.COLUNA_NOME_ITEM_LISTA + " ASC");
     }
 
     public Cursor buscaItem(long idItem, String tipo) {
         if (tipo.equals("lista")) {
             return this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idItem + "' ", null, null, null,
+                    ItensLista.COLUNA_ID_ITEM_LISTA + " = '" + idItem + "' ", null, null, null,
                     null);
         } else {
             return this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_CESTA + " = '" + idItem + "' ", null, null, null,
+                    ItensCesta.COLUNA_ID_ITEM_CESTA + " = '" + idItem + "' ", null, null, null,
                     null);
         }
     }
 
     public Cursor buscaListas() {
         return this.db.query(TABELA_LISTAS, colunas_listas, null, null, null,
-                null, COLUNA_NOME_LISTA + " ASC");
+                null, Listas.COLUNA_NOME_LISTA + " ASC");
     }
 
     // ------METODOS QUE CONTAS VALORES NO BANCO DE DADOS
 
-    public int contaItensCesta(String lista) {
-        lista = lista.replace("'", "''");
-        Cursor cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
+    public int contaItensCesta(String cesta) {
+        cesta = cesta.replace("'", "''");
+        String[] str = {ItensCesta.COLUNA_CODIGO_CESTA};
+        Cursor cursor = this.db.query(TABELA_ITENS_CESTA, str,
+                ItensCesta.COLUNA_CODIGO_CESTA + " = '" + cesta + "' ", null, null, null,
                 null);
         int i = cursor.getCount();
         cursor.close();
@@ -145,8 +133,9 @@ public class DBListas {
 
     public int contaItensLista(String lista) {
         lista = lista.replace("'", "''");
-        Cursor cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
+        String[] str = {ItensLista.COLUNA_CODIGO_LISTA};
+        Cursor cursor = this.db.query(TABELA_ITENS_LISTA, str,
+                ItensLista.COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
                 null);
         int i = cursor.getCount();
         cursor.close();
@@ -164,7 +153,7 @@ public class DBListas {
     public int contaNomeListas(String lista) {
         lista = lista.replace("'", "''");
         Cursor cursor = this.db.query(true, TABELA_LISTAS, colunas_listas,
-                COLUNA_NOME_LISTA + " = '" + lista + "' ", null, null,
+                Listas.COLUNA_NOME_LISTA + " = '" + lista + "' ", null, null,
                 null, null, null);
         int i = cursor.getCount();
         cursor.close();
@@ -174,27 +163,29 @@ public class DBListas {
     public int contaNomeItensListas(String lista, String item) {
         lista = lista.replace("'", "''");
         item = item.replace("'", "''");
+        String[] str = {ItensLista.COLUNA_CODIGO_LISTA, ItensLista.COLUNA_NOME_ITEM_LISTA};
         Cursor cursor = this.db.query(
                 true,
                 TABELA_ITENS_LISTA,
-                colunas_itens_lista,
-                COLUNA_CODIGO_LISTA + " = '" + lista + "' AND "
-                        + COLUNA_NOME_ITEM_LISTA + " = '" + item + "' ",
+                str,
+                ItensLista.COLUNA_CODIGO_LISTA + " = '" + lista + "' AND "
+                        + ItensLista.COLUNA_NOME_ITEM_LISTA + " = '" + item + "' ",
                 null, null, null, null, null);
         int i = cursor.getCount();
         cursor.close();
         return i;
     }
 
-    public int contaNomeItensCestas(String lista, String item) {
-        lista = lista.replace("'", "''");
+    public int contaNomeItensCestas(String cesta, String item) {
+        cesta = cesta.replace("'", "''");
         item = item.replace("'", "''");
+        String[] str = {ItensCesta.COLUNA_CODIGO_CESTA, ItensCesta.COLUNA_NOME_ITEM_CESTA};
         Cursor cursor = this.db.query(
                 true,
                 TABELA_ITENS_CESTA,
-                colunas_itens_cesta,
-                COLUNA_CODIGO_CESTA + " = '" + lista + "' AND "
-                        + COLUNA_NOME_ITEM_CESTA + " = '" + item + "' ",
+                str,
+                ItensCesta.COLUNA_CODIGO_CESTA + " = '" + cesta + "' AND "
+                        + ItensCesta.COLUNA_NOME_ITEM_CESTA + " = '" + item + "' ",
                 null, null, null, null, null);
         int i = cursor.getCount();
         cursor.close();
@@ -206,36 +197,36 @@ public class DBListas {
     public boolean excluiItem(String lista, String item) {
         lista = lista.replace("'", "''");
         item = item.replace("'", "''");
-        return this.db.delete(TABELA_ITENS_LISTA, COLUNA_CODIGO_LISTA + " = '"
-                + lista + "' AND " + COLUNA_NOME_ITEM_LISTA + "= '" + item
+        return this.db.delete(TABELA_ITENS_LISTA, ItensLista.COLUNA_CODIGO_LISTA + " = '"
+                + lista + "' AND " + ItensLista.COLUNA_NOME_ITEM_LISTA + "= '" + item
                 + "'", null) > 0;
     }
 
     public boolean excluiItemCesta(long idLong) {
-        return this.db.delete(TABELA_ITENS_CESTA, COLUNA_ID_ITEM_CESTA + " = '"
+        return this.db.delete(TABELA_ITENS_CESTA, ItensCesta.COLUNA_ID_ITEM_CESTA + " = '"
                 + idLong + "'", null) > 0;
     }
 
     public boolean excluiItemLista(long idLong) {
-        return this.db.delete(TABELA_ITENS_LISTA, COLUNA_ID_ITEM_LISTA + " = '"
+        return this.db.delete(TABELA_ITENS_LISTA, ItensLista.COLUNA_ID_ITEM_LISTA + " = '"
                 + idLong + "'", null) > 0;
     }
 
-    public boolean excluiItensCesta(String lista) {
-        lista = lista.replace("'", "''");
-        return this.db.delete(TABELA_ITENS_CESTA, COLUNA_CODIGO_CESTA + " = '"
-                + lista + "' ", null) > 0;
+    public boolean excluiItensCesta(String cesta) {
+        cesta = cesta.replace("'", "''");
+        return this.db.delete(TABELA_ITENS_CESTA, ItensCesta.COLUNA_CODIGO_CESTA + " = '"
+                + cesta + "' ", null) > 0;
     }
 
     public boolean excluiItensLista(String lista) {
         lista = lista.replace("'", "''");
-        return this.db.delete(TABELA_ITENS_LISTA, COLUNA_CODIGO_LISTA + " = '"
+        return this.db.delete(TABELA_ITENS_LISTA, ItensLista.COLUNA_CODIGO_LISTA + " = '"
                 + lista + "' ", null) > 0;
     }
 
     public boolean excluiLista(String lista) {
         lista = lista.replace("'", "''");
-        return this.db.delete(TABELA_LISTAS, COLUNA_NOME_LISTA + " = '"
+        return this.db.delete(TABELA_LISTAS, Listas.COLUNA_NOME_LISTA + " = '"
                 + lista + "' ", null) > 0;
     }
 
@@ -250,30 +241,30 @@ public class DBListas {
     public long insereItemCesta(String cesta, String item, String descricao, double quantidade,
                                 String unidade, double valor) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUNA_CODIGO_CESTA, cesta);
-        cv.put(COLUNA_NOME_ITEM_CESTA, item);
-        cv.put(COLUNA_DESCRICAO_ITEM_CESTA, descricao);
-        cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
-        cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
-        cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
+        cv.put(ItensCesta.COLUNA_CODIGO_CESTA, cesta);
+        cv.put(ItensCesta.COLUNA_NOME_ITEM_CESTA, item);
+        cv.put(ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA, descricao);
+        cv.put(ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
+        cv.put(ItensCesta.COLUNA_UNIDADE_ITEM_CESTA, unidade);
+        cv.put(ItensCesta.COLUNA_VALOR_ITEM_CESTA, valor);
         return this.db.insert(TABELA_ITENS_CESTA, null, cv);
     }
 
     public long insereItemLista(String lista, String item, String descricao, double quantidade,
                                 String unidade, double valor) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUNA_CODIGO_LISTA, lista);
-        cv.put(COLUNA_NOME_ITEM_LISTA, item);
-        cv.put(COLUNA_DESCRICAO_ITEM_LISTA, descricao);
-        cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
-        cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
-        cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
+        cv.put(ItensLista.COLUNA_CODIGO_LISTA, lista);
+        cv.put(ItensLista.COLUNA_NOME_ITEM_LISTA, item);
+        cv.put(ItensLista.COLUNA_DESCRICAO_ITEM_LISTA, descricao);
+        cv.put(ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
+        cv.put(ItensLista.COLUNA_UNIDADE_ITEM_LISTA, unidade);
+        cv.put(ItensLista.COLUNA_VALOR_ITEM_LISTA, valor);
         return this.db.insert(TABELA_ITENS_LISTA, null, cv);
     }
 
     public long criaLista(String lista) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUNA_NOME_LISTA, lista);
+        cv.put(Listas.COLUNA_NOME_LISTA, lista);
         return this.db.insert(TABELA_LISTAS, null, cv);
     }
 
@@ -284,11 +275,11 @@ public class DBListas {
         Cursor cursor;
         if (tipo.equals("lista")) {
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
+                    ItensLista._ID + " = '" + idLong + "' ", null, null,
                     null, null);
         } else {
             cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_ID_ITEM_LISTA + " = '" + idLong + "' ", null, null,
+                    ItensCesta._ID + " = '" + idLong + "' ", null, null,
                     null, null);
         }
 
@@ -307,11 +298,11 @@ public class DBListas {
 
         if (tipo.equals("cesta"))
             cursor = this.db.query(TABELA_ITENS_CESTA, colunas_itens_cesta,
-                    COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
+                    ItensCesta.COLUNA_CODIGO_CESTA + " = '" + lista + "' ", null, null, null,
                     null);
         else
             cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                    COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
+                    ItensLista.COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
                     null);
         int i = cursor.getCount();
         cursor.moveToLast();
@@ -333,22 +324,22 @@ public class DBListas {
         ContentValues cv = new ContentValues();
 
         if (tipo.equals("lista")) {
-            cv.put(COLUNA_CODIGO_LISTA, lista);
-            cv.put(COLUNA_NOME_ITEM_LISTA, nome);
-            cv.put(COLUNA_DESCRICAO_ITEM_LISTA, descricao);
-            cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
-            cv.put(COLUNA_UNIDADE_ITEM_LISTA, unidade);
-            cv.put(COLUNA_VALOR_ITEM_LISTA, valor);
-            return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
+            cv.put(ItensLista.COLUNA_CODIGO_LISTA, lista);
+            cv.put(ItensLista.COLUNA_NOME_ITEM_LISTA, nome);
+            cv.put(ItensLista.COLUNA_DESCRICAO_ITEM_LISTA, descricao);
+            cv.put(ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA, quantidade);
+            cv.put(ItensLista.COLUNA_UNIDADE_ITEM_LISTA, unidade);
+            cv.put(ItensLista.COLUNA_VALOR_ITEM_LISTA, valor);
+            return this.db.update(TABELA_ITENS_LISTA, cv, ItensLista._ID
                     + " = '" + idLong + "'", null) > 0;
         } else {
-            cv.put(COLUNA_CODIGO_CESTA, lista);
-            cv.put(COLUNA_NOME_ITEM_CESTA, nome);
-            cv.put(COLUNA_DESCRICAO_ITEM_CESTA, descricao);
-            cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
-            cv.put(COLUNA_UNIDADE_ITEM_CESTA, unidade);
-            cv.put(COLUNA_VALOR_ITEM_CESTA, valor);
-            return this.db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
+            cv.put(ItensCesta.COLUNA_CODIGO_CESTA, lista);
+            cv.put(ItensCesta.COLUNA_NOME_ITEM_CESTA, nome);
+            cv.put(ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA, descricao);
+            cv.put(ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA, quantidade);
+            cv.put(ItensCesta.COLUNA_UNIDADE_ITEM_CESTA, unidade);
+            cv.put(ItensCesta.COLUNA_VALOR_ITEM_CESTA, valor);
+            return this.db.update(TABELA_ITENS_CESTA, cv, ItensCesta._ID
                     + " = '" + idLong + "'", null) > 0;
         }
     }
@@ -356,16 +347,16 @@ public class DBListas {
     public boolean mudaNomeLista(String nomeAntes, String nomeDepois) {
         ContentValues cv = new ContentValues();
         nomeAntes = nomeAntes.replace("'", "''");
-        cv.put(COLUNA_NOME_LISTA, nomeDepois);
-        return this.db.update(TABELA_LISTAS, cv, COLUNA_NOME_LISTA
+        cv.put(Listas.COLUNA_NOME_LISTA, nomeDepois);
+        return this.db.update(TABELA_LISTAS, cv, Listas.COLUNA_NOME_LISTA
                 + " = '" + nomeAntes + "' ", null) > 0;
     }
 
     public boolean mudaNomeListaItens(String nomeAntes, String nomeDepois) {
         ContentValues cv = new ContentValues();
         nomeAntes = nomeAntes.replace("'", "''");
-        cv.put(COLUNA_CODIGO_LISTA, nomeDepois);
-        return this.db.update(TABELA_ITENS_LISTA, cv, COLUNA_CODIGO_LISTA
+        cv.put(ItensLista.COLUNA_CODIGO_LISTA, nomeDepois);
+        return this.db.update(TABELA_ITENS_LISTA, cv, ItensLista.COLUNA_CODIGO_LISTA
                 + " = '" + nomeAntes + "' ", null) > 0;
     }
 
@@ -374,11 +365,11 @@ public class DBListas {
     public String pegaItensLista(String lista) throws SQLException {
         lista = lista.replace("'", "''");
         Cursor cursor = this.db.query(TABELA_ITENS_LISTA, colunas_itens_lista,
-                COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
-                COLUNA_NOME_ITEM_LISTA + " ASC");
-        int i = cursor.getColumnIndex(COLUNA_NOME_ITEM_LISTA);
-        int j = cursor.getColumnIndex(COLUNA_UNIDADE_ITEM_LISTA);
-        int k = cursor.getColumnIndex(COLUNA_DESCRICAO_ITEM_LISTA);
+                ItensLista.COLUNA_CODIGO_LISTA + " = '" + lista + "' ", null, null, null,
+                ItensLista.COLUNA_NOME_ITEM_LISTA + " ASC");
+        int i = cursor.getColumnIndex(ItensLista.COLUNA_NOME_ITEM_LISTA);
+        int j = cursor.getColumnIndex(ItensLista.COLUNA_UNIDADE_ITEM_LISTA);
+        int k = cursor.getColumnIndex(ItensLista.COLUNA_DESCRICAO_ITEM_LISTA);
         String str = "Lista de itens de " + lista + ":\n";
         cursor.moveToFirst();
         while (true) {
@@ -499,11 +490,11 @@ public class DBListas {
                     valor = valor.replace(",", ".");
                     preco = Double.parseDouble(valor);
                     ContentValues cv = new ContentValues();
-                    cv.put(COLUNA_QUANTIDADE_ITEM_LISTA, qt);
-                    cv.put(COLUNA_VALOR_ITEM_LISTA, preco);
-                    cv.put(COLUNA_UNIDADE_ITEM_LISTA, un);
-                    cv.put(COLUNA_PRECO_ITEM_LISTA, "");
-                    db.update(TABELA_ITENS_LISTA, cv, COLUNA_ID_ITEM_LISTA
+                    cv.put(ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA, qt);
+                    cv.put(ItensLista.COLUNA_VALOR_ITEM_LISTA, preco);
+                    cv.put(ItensLista.COLUNA_UNIDADE_ITEM_LISTA, un);
+                    cv.put(ItensLista.COLUNA_PRECO_ITEM_LISTA, "");
+                    db.update(TABELA_ITENS_LISTA, cv, ItensLista._ID
                             + " = '" + idLong + "'", null);
                     cursor.moveToPrevious();
                 }
@@ -557,11 +548,11 @@ public class DBListas {
                     valor = valor.replace(",", ".");
                     preco = Double.parseDouble(valor);
                     ContentValues cv = new ContentValues();
-                    cv.put(COLUNA_QUANTIDADE_ITEM_CESTA, qt);
-                    cv.put(COLUNA_VALOR_ITEM_CESTA, preco);
-                    cv.put(COLUNA_UNIDADE_ITEM_CESTA, un);
-                    cv.put(COLUNA_PRECO_ITEM_CESTA, "");
-                    db.update(TABELA_ITENS_CESTA, cv, COLUNA_ID_ITEM_CESTA
+                    cv.put(ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA, qt);
+                    cv.put(ItensCesta.COLUNA_VALOR_ITEM_CESTA, preco);
+                    cv.put(ItensCesta.COLUNA_UNIDADE_ITEM_CESTA, un);
+                    cv.put(ItensCesta.COLUNA_PRECO_ITEM_CESTA, "");
+                    db.update(TABELA_ITENS_CESTA, cv, ItensCesta._ID
                             + " = '" + idLong + "'", null);
                     cursor.moveToPrevious();
                 }
@@ -572,6 +563,38 @@ public class DBListas {
         }
     }
 
+    public static class Listas implements BaseColumns {
+        // Nomes das Colunas do Banco de Dados
+        public static final String COLUNA_ID_LISTA = "_id";
+        public static final String COLUNA_NOME_LISTA = "lista";
+    }
+
+    // NOMES DAS COLUNAS DA TABELA DE ITENS NA LISTA
+    public static class ItensLista implements BaseColumns {
+        // Nomes das Colunas do Banco de Dados
+        public static final String COLUNA_ID_ITEM_LISTA = "_id";
+        public static final String COLUNA_CODIGO_LISTA = "id_lista";
+        public static final String COLUNA_NOME_ITEM_LISTA = "item_lista";
+        public static final String COLUNA_DESCRICAO_ITEM_LISTA = "descr_item_lista";
+        public static final String COLUNA_QUANTIDADE_ITEM_LISTA = "qte_item_lista";
+        public static final String COLUNA_UNIDADE_ITEM_LISTA = "unid_item_lista";
+        public static final String COLUNA_VALOR_ITEM_LISTA = "valor_item_lista";
+        public static final String COLUNA_PRECO_ITEM_LISTA = "preco_item_lista";
+    }
+
+    // NOME DAS COLUNAS DA TABELA DE ITENS NA CESTA
+    public static class ItensCesta implements BaseColumns {
+        // Nomes das Colunas do Banco de Dados
+        public static final String COLUNA_ID_ITEM_CESTA = "_id";
+        public static final String COLUNA_CODIGO_CESTA = "id_cesta";
+        public static final String COLUNA_NOME_ITEM_CESTA = "item_cesta";
+        // Novas colunas criadas sobre a descricao dos itens
+        public static final String COLUNA_DESCRICAO_ITEM_CESTA = "descr_item_cesta";
+        public static final String COLUNA_QUANTIDADE_ITEM_CESTA = "qte_item_cesta";
+        public static final String COLUNA_UNIDADE_ITEM_CESTA = "unid_item_cesta";
+        public static final String COLUNA_VALOR_ITEM_CESTA = "valor_item_cesta";
+        public static final String COLUNA_PRECO_ITEM_CESTA = "preco_item_cesta";
+    }
 
     // CLASSE DO BANCO DE DADOS QUE CRIA TABELAS OU ATUALIZA A VERSAO DO BANCO
 
@@ -599,22 +622,22 @@ public class DBListas {
 
             // TABELA DE ITENS DENTRO DAS LISTAS
             pSQLiteDB.execSQL("CREATE TABLE "
-                    + "tabela_temporaria" + " ( " + COLUNA_ID_ITEM_LISTA
-                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_LISTA
-                    + " TEXT, " + COLUNA_NOME_ITEM_LISTA
-                    + " TEXT, " + COLUNA_DESCRICAO_ITEM_LISTA
-                    + " TEXT, " + COLUNA_QUANTIDADE_ITEM_LISTA
-                    + " REAL, " + COLUNA_UNIDADE_ITEM_LISTA
-                    + " TXT, " + COLUNA_VALOR_ITEM_LISTA
+                    + "tabela_temporaria" + " ( " + ItensLista._ID
+                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ItensLista.COLUNA_CODIGO_LISTA
+                    + " TEXT, " + ItensLista.COLUNA_NOME_ITEM_LISTA
+                    + " TEXT, " + ItensLista.COLUNA_DESCRICAO_ITEM_LISTA
+                    + " TEXT, " + ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA
+                    + " REAL, " + ItensLista.COLUNA_UNIDADE_ITEM_LISTA
+                    + " TXT, " + ItensLista.COLUNA_VALOR_ITEM_LISTA
                     + " REAL, preco_item_lista TXT )");
 
             pSQLiteDB.execSQL("INSERT INTO tabela_temporaria"
-                    + " SELECT " + COLUNA_ID_ITEM_LISTA
-                    + ", " + COLUNA_CODIGO_LISTA
-                    + ", " + COLUNA_NOME_ITEM_LISTA
-                    + ", " + COLUNA_DESCRICAO_ITEM_LISTA
+                    + " SELECT " + ItensLista.COLUNA_ID_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_CODIGO_LISTA
+                    + ", " + ItensLista.COLUNA_NOME_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_DESCRICAO_ITEM_LISTA
                     + ", " + null
-                    + ", " + COLUNA_QUANTIDADE_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA
                     + ", " + null
                     + ", preco_item_lista"
                     + " FROM " + TABELA_ITENS_LISTA);
@@ -624,35 +647,35 @@ public class DBListas {
             pSQLiteDB.execSQL(CRIA_TABELA_ITENS_LISTA);
 
             pSQLiteDB.execSQL("INSERT INTO "
-                    + TABELA_ITENS_LISTA + " SELECT " + COLUNA_ID_ITEM_LISTA
-                    + ", " + COLUNA_CODIGO_LISTA
-                    + ", " + COLUNA_NOME_ITEM_LISTA
-                    + ", " + COLUNA_DESCRICAO_ITEM_LISTA
-                    + ", " + COLUNA_QUANTIDADE_ITEM_LISTA
-                    + ", " + COLUNA_UNIDADE_ITEM_LISTA
-                    + ", " + COLUNA_VALOR_ITEM_LISTA
+                    + TABELA_ITENS_LISTA + " SELECT " + ItensLista._ID
+                    + ", " + ItensLista.COLUNA_CODIGO_LISTA
+                    + ", " + ItensLista.COLUNA_NOME_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_DESCRICAO_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_QUANTIDADE_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_UNIDADE_ITEM_LISTA
+                    + ", " + ItensLista.COLUNA_VALOR_ITEM_LISTA
                     + ", preco_item_lista FROM tabela_temporaria");
 
             pSQLiteDB.execSQL("DROP TABLE tabela_temporaria");
 
             // TABELA DE ITENS DENTRO DAS CESTAS
             pSQLiteDB.execSQL("CREATE TABLE "
-                    + "tabela_temporaria" + " ( " + COLUNA_ID_ITEM_CESTA
-                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUNA_CODIGO_CESTA
-                    + " TEXT, " + COLUNA_NOME_ITEM_CESTA
-                    + " TEXT, " + COLUNA_DESCRICAO_ITEM_CESTA
-                    + " TEXT, " + COLUNA_QUANTIDADE_ITEM_CESTA
-                    + " REAL, " + COLUNA_UNIDADE_ITEM_CESTA
-                    + " TXT, " + COLUNA_VALOR_ITEM_CESTA
+                    + "tabela_temporaria" + " ( " + ItensCesta._ID
+                    + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ItensCesta.COLUNA_CODIGO_CESTA
+                    + " TEXT, " + ItensCesta.COLUNA_NOME_ITEM_CESTA
+                    + " TEXT, " + ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA
+                    + " TEXT, " + ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA
+                    + " REAL, " + ItensCesta.COLUNA_UNIDADE_ITEM_CESTA
+                    + " TXT, " + ItensCesta.COLUNA_VALOR_ITEM_CESTA
                     + " REAL, preco_item_cesta TXT )");
 
             pSQLiteDB.execSQL("INSERT INTO tabela_temporaria"
-                    + " SELECT " + COLUNA_ID_ITEM_CESTA
-                    + ", " + COLUNA_CODIGO_CESTA
-                    + ", " + COLUNA_NOME_ITEM_CESTA
-                    + ", " + COLUNA_DESCRICAO_ITEM_CESTA
+                    + " SELECT " + ItensCesta._ID
+                    + ", " + ItensCesta.COLUNA_CODIGO_CESTA
+                    + ", " + ItensCesta.COLUNA_NOME_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA
                     + ", " + null
-                    + ", " + COLUNA_QUANTIDADE_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA
                     + ", " + null
                     + ", preco_item_cesta"
                     + " FROM " + TABELA_ITENS_CESTA);
@@ -662,13 +685,13 @@ public class DBListas {
             pSQLiteDB.execSQL(CRIA_TABELA_ITENS_CESTA);
 
             pSQLiteDB.execSQL("INSERT INTO "
-                    + TABELA_ITENS_CESTA + " SELECT " + COLUNA_ID_ITEM_CESTA
-                    + ", " + COLUNA_CODIGO_CESTA
-                    + ", " + COLUNA_NOME_ITEM_CESTA
-                    + ", " + COLUNA_DESCRICAO_ITEM_CESTA
-                    + ", " + COLUNA_QUANTIDADE_ITEM_CESTA
-                    + ", " + COLUNA_UNIDADE_ITEM_CESTA
-                    + ", " + COLUNA_VALOR_ITEM_CESTA
+                    + TABELA_ITENS_CESTA + " SELECT " + ItensCesta._ID
+                    + ", " + ItensCesta.COLUNA_CODIGO_CESTA
+                    + ", " + ItensCesta.COLUNA_NOME_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_DESCRICAO_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_QUANTIDADE_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_UNIDADE_ITEM_CESTA
+                    + ", " + ItensCesta.COLUNA_VALOR_ITEM_CESTA
                     + ", preco_item_cesta FROM tabela_temporaria");
 
             pSQLiteDB.execSQL("DROP TABLE tabela_temporaria");

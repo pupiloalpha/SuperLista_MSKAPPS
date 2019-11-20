@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".db.EditaItem">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/aplBarra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
 
         <include layout="@layout/barra_titulo" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="10dp"
@@ -24,7 +24,7 @@
             android:paddingStart="10dp"
             android:theme="@style/TemaTexto">
 
-            <android.support.v7.widget.AppCompatAutoCompleteTextView
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/etNomeItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,9 +32,9 @@
                 android:hint="@string/outro_item"
                 android:inputType="textCapSentences|text|textAutoCorrect|textAutoComplete"
                 android:textColor="@color/branco" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,12 +47,12 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDescricaoItem"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -60,19 +60,19 @@
                     android:hint="@string/descricao_item"
                     android:inputType="textCapSentences|textMultiLine|textAutoCorrect|textAutoComplete"
                     android:minHeight="100dp" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:weightSum="2.0">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9">
 
-                    <android.support.v7.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/etQuantidadeItem"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -80,9 +80,9 @@
                         android:ems="10"
                         android:hint="@string/quantidade"
                         android:inputType="numberDecimal" />
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.v7.widget.AppCompatSpinner
+                <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/spUnidadeItem"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -91,21 +91,21 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <android.support.v7.widget.AppCompatEditText
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etValorItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/valor"
                     android:inputType="numberDecimal" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.v7.widget.AppCompatCheckBox
+            <androidx.appcompat.widget.AppCompatCheckBox
                 android:id="@+id/cbCalendario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:tint="@color/cinza"
                     mskapp:srcCompat="@drawable/ic_event_date" />
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/tvDataAlarme"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -150,7 +150,7 @@
                     android:tint="@color/cinza"
                     mskapp:srcCompat="@drawable/ic_event_time" />
 
-                <android.support.v7.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/tvHorarioAlarme"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"

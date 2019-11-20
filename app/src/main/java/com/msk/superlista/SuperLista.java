@@ -1,7 +1,6 @@
 package com.msk.superlista;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,6 +27,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -83,7 +83,7 @@ public class SuperLista extends AppCompatActivity {
         final AppCompatEditText localEditText = new AppCompatEditText(SuperLista.this);
         // localEditText.setText(listaFeita);
         localEditText.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
-        new AlertDialog.Builder(this)
+        new AlertDialog.Builder(this, R.style.TemaDialogo)
                 .setTitle(R.string.cria_lista)
                 .setMessage(R.string.texto_edita_nome)
                 .setView(localEditText)

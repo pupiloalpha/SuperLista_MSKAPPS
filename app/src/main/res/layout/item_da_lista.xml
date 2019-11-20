@@ -36,8 +36,8 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:text="@string/item"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/preto" />
+            android:textAppearance="?android:attr/textAppearance"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tvDescricaoItemEscolhido"
