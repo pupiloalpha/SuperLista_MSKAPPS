@@ -12,7 +12,7 @@
         <item name="colorPrimary">@color/azul_escuro</item>
         <item name="colorPrimaryDark">@color/preto</item>
         <item name="colorAccent">@color/azul_escuro</item>
-        <item name="android:alertDialogTheme">@style/TemaDialogo</item>
+        <item name="android:popupMenuStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
     </style>
 
     <!-- Tema das telas do aplicativo -->

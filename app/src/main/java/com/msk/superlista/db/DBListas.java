@@ -18,6 +18,11 @@ import java.nio.channels.FileChannel;
 
 public final class DBListas {
 
+    // Nome das tabelas criadas no banco de dados
+    private static final String TABELA_LISTAS = "listas";
+    private static final String TABELA_ITENS_LISTA = "itens_da_lista";
+    private static final String TABELA_ITENS_CESTA = "itens_da_cesta";
+    
     // Comandos SQL para criar as Tabelas do Banco de Dados
     private static final String CRIA_TABELA_LISTA = "CREATE TABLE "
             + TABELA_LISTAS + " (" + Listas.COLUNA_ID_LISTA
@@ -25,10 +30,6 @@ public final class DBListas {
             + " TEXT NOT NULL, UNIQUE (" + Listas.COLUNA_NOME_LISTA
             + ") ON CONFLICT REPLACE)";
 
-    // Nome das tabelas criadas no banco de dados
-    private static final String TABELA_LISTAS = "listas";
-    private static final String TABELA_ITENS_LISTA = "itens_da_lista";
-    private static final String TABELA_ITENS_CESTA = "itens_da_cesta";
     private static final String CRIA_TABELA_ITENS_LISTA = "CREATE TABLE "
             + TABELA_ITENS_LISTA + " ( " + ItensLista.COLUNA_ID_ITEM_LISTA
             + " INTEGER PRIMARY KEY AUTOINCREMENT, " + ItensLista.COLUNA_CODIGO_LISTA

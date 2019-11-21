@@ -2,7 +2,6 @@ package com.msk.superlista.info;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -45,11 +44,7 @@ public class EscolhePasta extends ListActivity {
                 dir = new File(preferredStartDir);
             }
         } else {
-            if (Build.VERSION.SDK_INT >= 23) {
-                dir = new File("/");
-            } else {
                 dir = Environment.getExternalStorageDirectory();
-            }
         }
 
         setContentView(R.layout.lista_pastas);

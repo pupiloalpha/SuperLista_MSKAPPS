@@ -275,7 +275,7 @@ public class Ajustes extends PreferenceActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-            case 111:
+            case ABRE_PASTA:
 
                 if (resultCode == RESULT_OK) {
 
@@ -316,7 +316,7 @@ public class Ajustes extends PreferenceActivity implements
                 }
 
                 break;
-            case 222:
+            case ABRE_ARQUIVO:
 
                 if (resultCode == RESULT_OK) {
 
