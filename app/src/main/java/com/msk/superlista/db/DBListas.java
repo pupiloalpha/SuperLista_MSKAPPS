@@ -49,7 +49,7 @@ public final class DBListas {
             + " TEXT, " + ItensCesta.COLUNA_VALOR_ITEM_CESTA
             + " REAL, " + ItensCesta.COLUNA_PRECO_ITEM_CESTA + " TXT)";
     // Valores para criar o Banco de Dados
-    private static final String BANCO_DE_DADOS = "super_lista.db";
+    private static final String BANCO_DE_DADOS = "super_lista";
     // Titulos das colunas das Tabelas do Banco de Dados
     private static String[] colunas_listas = {Listas.COLUNA_ID_LISTA, Listas.COLUNA_NOME_LISTA};
     private static final int VERSAO_BANCO_DE_DADOS = 3; // NOVA VERSAO FOI CRIADA
@@ -398,7 +398,7 @@ public final class DBListas {
             if (sd.canWrite()) {
 
                 File currentDB = contexto.getDatabasePath(BANCO_DE_DADOS);
-                File backupDB = new File(sd, BANCO_DE_DADOS);
+                File backupDB = new File(sd, "super_lista.db");
 
                 if (currentDB.exists()) {
                     FileChannel src = new FileInputStream(currentDB)

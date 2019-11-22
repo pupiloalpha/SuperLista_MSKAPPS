@@ -15,6 +15,7 @@
         <item name="colorAccent">@color/branco</item>
         <item name="actionBarTabStyle">@style/ActionBarTab</item>
         <item name="actionBarTabTextStyle">@style/ActionBarTabText</item>
+        <item name="android:popupMenuStyle">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
     </style>
 
 </resources>
