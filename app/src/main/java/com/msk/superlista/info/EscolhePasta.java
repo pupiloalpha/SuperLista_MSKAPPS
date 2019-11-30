@@ -44,7 +44,7 @@ public class EscolhePasta extends ListActivity {
                 dir = new File(preferredStartDir);
             }
         } else {
-                dir = Environment.getExternalStorageDirectory();
+            dir = Environment.getExternalStorageDirectory();
         }
 
         setContentView(R.layout.lista_pastas);
